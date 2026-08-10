@@ -20,6 +20,24 @@
         <meta property="og:title" content="gamingland">
         <meta property="og:type" content="website">
         <meta property="og:description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
+        <style>
+  /* 1. Target your specific navigation/action buttons. 
+        Replace '.btn-class' with the actual class name of your buttons if they have one. */
+  .games-btn, .apps-btn, .options-btn, button {
+      /* Smoothly animates the size change over 0.25 seconds */
+      transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out; 
+      /* Ensures the button renders nicely during scaling */
+      will-change: transform; 
+  }
+
+  /* 2. Enlarge the buttons by 8% when the cursor hovers over them */
+  .games-btn:hover, .apps-btn:hover, .options-btn:hover, button:hover {
+      /* 1.08 scales up the element smoothly */
+      transform: scale(1.08); 
+      /* Optional: Adds a slight shadow effect to make it pop visually */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+  }
+</style>
   </head>
   <body>
     
