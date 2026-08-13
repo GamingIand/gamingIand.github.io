@@ -34,6 +34,55 @@
                 right: 5px; 
                 z-index: 2; 
             }
+            .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .button {
+            width: 120px !important;
+            height: 120px !important;
+            background-size: cover;
+            background-position: center;
+            border-radius: 25px !important;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            transition: transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+        }
+
+        .button h2 {
+            font-size: 11px !important;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            padding: 5px 0;
+        }
+
+        .pin-button {
+            position: absolute !important;
+            top: 5px !important;
+            right: 5px !important;
+        }
+
+        .download-button {
+            position: absolute !important;
+            top: 5px !important;
+            left: 5px !important;
+        }
         </style>
 
         <script>
