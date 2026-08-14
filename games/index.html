@@ -117,6 +117,9 @@
             <option value="puzzle">puzzle</option>
             <option value="simulation">simulation</option>
         </select>
+      <button id="random-game-btn" style="padding: 10px 20px; cursor: pointer;">
+    Play Random Game
+</button>
         
         <p class="linkp"><a href="../index.html">homepage</a> •  <a href="https://github.com/GamingIand" target="_blank">github</a> •  <a href="https://discord.gg/aZJyeDMXuy" target="_blank">discord</a> •  <a id="openBlankLink">open blank</a></p>
         
@@ -3867,6 +3870,22 @@
         <script src="/storage/js/theme.js"></script>
         <script src="/storage/js/cookie.js"></script>
         <script src="/storage/js/games.js"></script>
+      
+      <script>
+    document.getElementById('random-game-btn').addEventListener('click', function() {
+        // This finds all <a> tags that lead to a game
+        const games = document.querySelectorAll('.button-container a');
+        
+        if (games.length > 0) {
+            // Pick a random index
+            const randomIndex = Math.floor(Math.random() * games.length);
+            // Get the URL from that random game
+            const randomGameUrl = games[randomIndex].href;
+            // Open it
+            window.open(randomGameUrl, '_blank');
+        }
+    });
+</script>
 
         
 
