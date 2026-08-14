@@ -1,171 +1,192 @@
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FN7LEVWXD"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-7FN7LEVWXD');
-        </script>
-
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="../images/ico.ico" type="image/x-icon">
-        <link rel="stylesheet" href="/storage/css/apps.css">
-        <title>Apps | Seraph</title>
-
-        <meta name="description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
-        <meta property="og:site_name" content="Gamingland">
-        <meta property="og:title" content="Gamingland">
-        <meta property="og:type" content="website">
-        <meta property="og:description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
-
-        <script>
-            if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
-                    console.log('service worker initalised! scope:', registration.scope);
-        
-                    navigator.serviceWorker.addEventListener('message', function(event) {
-                        if (event.data === 'cached') {
-                            document.getElementById('cache-status').style.display = 'block';
-                        }
-                    });
-                }, function(error) {
-                    console.log('ack, error with serviceworker! ', error);
-                });
-            });
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        </script>
-    </head>
 
-    <body>
-        <h1>apps</h1>
-        <input type="text" id="search" placeholder="⌕ search" autocomplete="off">
-        <p class="linkp"><a href="/index.html">homepage</a> •  <a href="https://github.com/a456pur/seraph" target="_blank">github</a> •  <a href="https://discord.gg/ZyZDmx3zuQ" target="_blank">discord</a> •  <a id="openBlankLink">open blank</a></p>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0d0f12;
+            color: #f3f4f6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
 
-        <div class="button-container">
-            <a target="_blank" href="ruffle/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/ruffle.jpg');">
-                    <h2>ruffle</h2>
-                    <p>emulate thousands of flash games with ruffle! upload a file here and run it directly inside seraph</p>
-                </div>
-            </a>   
+        /* Background Glow Effects */
+        .glow-orb {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            filter: blur(120px);
+            opacity: 0.15;
+            z-index: 1;
+            border-radius: 50%;
+        }
 
-            <a target="_blank" href="emulatorjs/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/emulatorjs.jpg');">
-                    <h2>emulatorjs</h2>
-                    <p>run hundreds of roms from popular retro game consoles (for example: game boy advance, snes, game boy, nes, atari, nintendo ds, n64, atari 2600)</p>
-                </div>
-            </a>  
-            <a target="_blank" href="fluidsim/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/fluidsim.jpg');">
-                    <h2>webgl fluids</h2>
-                    <p>a full fluid simulation ran entirely in webgl with support for mobile devices</p>
-                </div>
-            </a> 
+        .orb-1 {
+            top: -100px;
+            left: -100px;
+        }
 
-            <a target="_blank" href="thirtydollarwebsite/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/thirtydollarwebsite.jpg');">
-                    <h2>thirty dollar website</h2>
-                    <p>a tool which can be used to make music entirely through meme sound effects and simple instruments</p>
-                </div>
-            </a> 
+        .orb-2 {
+            bottom: -100px;
+            right: -100px;
+        }
 
-            <a target="_blank" href="windows11/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/windows11.jpg');">
-                    <h2>windows 11</h2>
-                    <p>a recreation of windows 11 inside of react, which can be run through a web browwser</p>
-                </div>
-            </a> 
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 650px;
+            width: 100%;
+        }
 
-            <a target="_blank" href="turbowarp/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/turbowarp.jpg');">
-                    <h2>turbowarp</h2>
-                    <p>a scratch mod which introduces lots of quality of life changes + compiles projects to javascript, making them run faster</p>
-                </div>
-            </a> 
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #a855f7;
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+        }
 
-            <a target="_blank" href="turbowarppkg/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/turbowarppkg.jpg');">
-                    <h2>turbowarp packager</h2>
-                    <p>a tool that converts scratch projects into HTML files, zip archives, or applications for windows, macos, and linux.</p>
-                </div>
-            </a> 
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
 
-            <a target="_blank" href="turbowarpunpkg/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/turbowarpunpkg.jpg');">
-                    <h2>turbowarp unpackager</h2>
-                    <p>a tool that unpackages html/zip files generated by turbowarp's packager, forkphorous or htmlfier into their original scratch project.</p>
-                </div>
-            </a> 
+        h1 span {
+            background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-            <a target="_blank" href="weavesilk/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/weavesilk.jpg');">
-                    <h2>weavesilk</h2>
-                    <p>a web application allowing you to create beautiful flowing artwork</p>
-                </div>
-            </a> 
+        p {
+            font-size: 1.1rem;
+            color: #9ca3af;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
 
-            <a target="_blank" href="webretro/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/webretro.jpg');">
-                    <h2>webretro</h2>
-                    <p>upload roms/games directly to an assortment of older retro (1990-2000's) consoles</p>
-                </div>
-            </a> 
+        /* Subscription Form */
+        .form-group {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 450px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.4rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
 
-            <a target="_blank" href="htmlcoder/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/htmleditor.jpg');">
-                    <h2>html coder</h2>
-                    <p>a fully functioning html code editor! upload from your device, or create static html pages from scratch </p>
-                </div>
-            </a> 
+        input[type="email"] {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
 
-            <a target="_blank" href="v86/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/v86.jpg');">
-                    <h2>v86</h2>
-                    <p>online emulation of x86-compatible cpu's and hardware - translated to webassembly for optimal performance </p>
-                </div>
-            </a> 
+        input[type="email"]::placeholder {
+            color: #6b7280;
+        }
 
-            <a target="_blank" href="calculator/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/calculator.jpg');">
-                    <h2>calculator</h2>
-                    <p>a simple calculator, allowing you to perform simple addition, subtraction, multiplication and division </p>
-                </div>
-            </a> 
+        button {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white;
+            border: none;
+            outline: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            font-family: 'Space Grotesk', sans-serif;
+        }
 
-            <a target="_blank" href="etchasketch/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/etchasketch.jpg');">
-                    <h2>etch a sketch</h2>
-                    <p>create digital pixel drawings - mimicking the experience of an etch-a-sketch with quality of life features </p>
-                </div>
-            </a> 
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
 
-            <a target="_blank" href="zipopener/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/zipopener.jpg');">
-                    <h2>zip opener</h2>
-                    <p>directly upload and view/download individual files inside a zip archive </p>
-                </div>
-            </a> 
+        /* Footer / Socials Placeholder */
+        .footer {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
 
-            <a target="_blank" href="godoblocks/index.html">
-                <div class="button" style="background-image: url('../images/thumbnails/godoblocks.jpg');">
-                    <h2>godoblocks</h2>
-                    <p>a mimick of the 2005 roblox beta era - recreated entirely in godot  </p>
-                </div>
-            </a> 
+        @media (max-width: 480px) {
+            .form-group {
+                flex-direction: column;
+                background: transparent;
+                border: none;
+                padding: 0;
+                gap: 1rem;
+            }
 
+            input[type="email"] {
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <div class="container">
+        <div class="badge">Launching Soon</div>
+        <h1>Something awesome is <span>in the works.</span></h1>
+        <p>We're building something exceptional. Drop your email below to be the first to know when we go live.</p>
+        
+        <form onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+            <div class="form-group">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Notify Me</button>
+            </div>
+        </form>
+
+        <div class="footer">
+            &copy; 2026 GAMINGLAND.
         </div>
+    </div>
 
-        <p> // all apps hosted on this website are complete copyright & property of their respective owners \\</p>
-
-        
-        
-        <script src="/storage/js/cloak.js"></script>
-        <script src="/storage/js/theme.js"></script>
-        <script src="/storage/js/cookie.js"></script>
-        <script src="/storage/js/apps.js"></script>
-    </body>
+</body>
 </html>
