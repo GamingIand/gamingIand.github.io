@@ -20,7 +20,7 @@
         <meta property="og:title" content="seraph">
         <meta property="og:type" content="website">
         <meta property="og:description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
-        
+
         <style>
             .pinned-container {
                 display: flex;
@@ -90,7 +90,7 @@
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
                     console.log('service worker initalised! scope:', registration.scope);
-        
+
                     navigator.serviceWorker.addEventListener('message', function(event) {
                         if (event.data === 'cached') {
                             document.getElementById('cache-status').style.display = 'block';
@@ -104,7 +104,7 @@
         </script>
   </head>
   <body>
-    
+
         <h1 class="typewriter"><span id="cursor"></span></h1>
 
         <input type="text" id="search" placeholder="⌕ search" autocomplete="off">
@@ -120,9 +120,9 @@
       <button id="random-game-btn" style="padding: 10px 20px; cursor: pointer;">
     Play Random Game
 </button>
-        
+
         <p class="linkp"><a href="../index.html">homepage</a> •  <a href="https://github.com/GamingIand" target="_blank">github</a> •  <a href="https://discord.gg/aZJyeDMXuy" target="_blank">discord</a> •  <a id="openBlankLink">open blank</a></p>
-        
+
         <br>
         <h2 class="pinned-header">starred games</h2>
         <div class="pinned-container">
@@ -145,14 +145,14 @@
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="flappy/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/flappybird.jpg');" data-genre="mobile">
                     <h2>flappy bird</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-        
+
             <a target="_blank" href="papaspizzaria/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/papaspizzeria.jpg');" data-genre="simulation">
                     <h2>papa's pizzaria</h2>
@@ -199,7 +199,7 @@
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="mc/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/mc.jpg');" data-genre="minecraft">
                     <h2>minecraft [v1.5.2]</h2>
@@ -207,21 +207,21 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="cookieclicker/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/cookieclick.jpg');" data-genre="arcade"> 
                     <h2>cookie clicker</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="templerun2/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/templerun2.jpg');" data-genre="platformer">
                     <h2>temple run 2</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="ducklife4/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/ducklife4.jpg');" data-genre="simulation">
                     <h2>duck life 4</h2>
@@ -229,7 +229,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="dinogame/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/chromedino.jpg');" data-genre="arcade">
                     <h2>chrome dino game</h2>
@@ -237,7 +237,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="jetpackjoyride/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/jetpackjoyride.jpg');" data-genre="arcade">
                     <h2>jetpack joyride</h2>
@@ -245,21 +245,21 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="retrobowl/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/retrobowl.jpg');" data-genre="arcade">
                     <h2>retro bowl</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="fruitninja/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/fruitninja.jpg');" data-genre="arcade"> 
                     <h2>fruit ninja</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="doodlejump/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/doodlejump.jpg');" data-genre="platformer">
                     <h2>doodle jump</h2>
@@ -274,14 +274,14 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="tetris/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/tetris.jpg');" data-genre="tetris">
                     <h2>tetris</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="fancypantsadventure/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/fancypantsadventure.jpg');" data-genre="platformer">
                     <h2>fancy pants adventure</h2>
@@ -289,14 +289,14 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="happywheels/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/happywheels.jpg');" data-genre="arcade">
                     <h2>happy wheels</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="papashotdoggeria/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/papashotdoggeria.jpg');" data-genre="simulation">
                     <h2>papa's hotdoggeria</h2>
@@ -304,14 +304,14 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="paperio2/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/paperio2.jpg');" data-genre="arcade">
                     <h2>paperio2</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="superhot/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/superhot.jpg');" data-genre="adventure">
                     <h2>super hot</h2>
@@ -319,7 +319,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="thebindingofisaac/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/thebindingofisaac.jpg');" data-genre="adventure">
                     <h2>the binding of isaac</h2>
@@ -327,14 +327,14 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="townscaper/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/townscaper.jpg');" data-genre="simulator">
                     <h2>townscaper</h2>                   
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="tunnelrush/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/tunnelrush.jpg');" data-genre="arcade">
                     <h2>tunnel rush</h2>
@@ -349,7 +349,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="escapingtheprison/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/escapingtheprison.jpg');" data-genre="adventure">
                     <h2>escaping the prison</h2>
@@ -357,7 +357,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="stealingthediamond/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/stealingthediamond.jpg');" data-genre="adventure">
                     <h2>stealing the diamond</h2>
@@ -365,7 +365,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="infiltratingtheairship/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/infiltratingtheairship.jpg');" data-genre="adventure">
                     <h2>infiltrating the airship</h2>
@@ -373,7 +373,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="fleeingthecomplex/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/fleeingthecomplex.jpg');" data-genre="adventure">
                     <h2>fleeing the complex</h2>
@@ -381,7 +381,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="theimpossiblequiz/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/theimpossiblequiz.jpg');" data-genre="arcade">
                     <h2>the impossible quiz</h2>
@@ -389,7 +389,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="solitaire/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/solitaire.jpg');" data-genre="puzzle">
                     <h2>solitaire</h2>
@@ -397,21 +397,21 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="drifthunters/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/drifthunters.jpg');" data-genre="adventure">
                     <h2>drift hunters</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="vex6/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/vex6.jpg');" data-genre="platformer">
                     <h2>vex 6</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="amongus/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/amongus.jpg');" data-genre="arcade">
                     <h2>among us fangame</h2>
@@ -425,14 +425,14 @@
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="motox3m/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/motox3m.jpeg');" data-genre="platformer">
                     <h2>motox3m</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="fnaf/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/fnaf.jpg');" data-genre="adventure">
                     <h2>fnaf 1</h2>
@@ -440,7 +440,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="fnaf-2/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/fnaf2.jpg');" data-genre="adventure">
                     <h2>fnaf 2</h2>
@@ -448,7 +448,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="fnaf-3/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/fnaf3.jpg');" data-genre="adventure">
                     <h2>fnaf 3</h2>
@@ -456,7 +456,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="fnaf-4/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/fnaf4.jpg');" data-genre="adventure">
                     <h2>fnaf 4</h2>
@@ -464,7 +464,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="riddleschool/riddleschool1/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/riddleschool.jpg');" data-genre="puzzle"> 
                     <h2>riddle school</h2>
@@ -472,7 +472,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="riddleschool/riddleschool2/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/riddleschool2.jpg');" data-genre="puzzle">
                     <h2>riddle school 2</h2>
@@ -480,7 +480,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="riddleschool/riddleschool3/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/riddleschool3.jpg');" data-genre="puzzle">
                     <h2>riddle school 3</h2>
@@ -488,7 +488,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="riddleschool/riddleschool4/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/riddleschool4.jpg');" data-genre="puzzle">
                     <h2>riddle school 4</h2>
@@ -504,7 +504,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="riddleschool/riddletransfer/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/riddletransfer.jpg');" data-genre="puzzle">
                     <h2>riddle transfer</h2>
@@ -512,7 +512,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="riddleschool/riddletransfer2/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/riddletransfer2.jpg');" data-genre="puzzle">
                     <h2>riddle transfer 2</h2>
@@ -520,28 +520,28 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="driftboss/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/driftboss.jpg');" data-genre="mobile">
                     <h2>drift boss</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="fnf/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/fnf.jpg');" data-genre="arcade">
                     <h2>friday night funkin</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="pacman/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/pacman.jpg');" data-genre="arcade">
                     <h2>pacman</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="papaspancakeria/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/papaspancakeria.jpg');" data-genre="simulation">
                     <h2>papa's pancakeria</h2>
@@ -549,7 +549,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="rooftop/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/rooftopsnipers.jpg');" data-genre="arcade">
                     <h2>rooftop snipers</h2>
@@ -557,7 +557,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="baldisbasics/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/baldisbasics.jpg');" data-genre="adventure">
                     <h2>baldi's basics</h2>
@@ -565,7 +565,7 @@
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="bobtherobber2/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/bobtherobber2.jpg');" data-genre="adventure">
                     <h2>bob the robber 2</h2>
@@ -579,28 +579,49 @@
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="pokemonemerald/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/pokemonemerald.jpg');" data-genre="adventure">
                     <h2>pokemon emerald</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="pokemonfirered/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/pokemonfirered.jpg');" data-genre="adventure">
                     <h2>pokemon fire red</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
+            <a target="_blank" href="supermariobros/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/supermariobros.jpg');" data-genre="platformer">
+                    <h2>super mario bros</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="supermariokart/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/supermariokart.jpg');" data-genre="arcade">
+                    <h2>super mario kart</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="supermarioworld/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/supermarioworld.jpg');" data-genre="platformer">
+                    <h2>super mario world</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
             <a target="_blank" href="thereisnogame/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/thereisnogame.jpg');" data-genre="mobile">
                     <h2>there is no game</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="worldshardestgame/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/worldshardestgame.jpg');" data-genre="puzzle">
                     <h2>world's hardest game</h2>
@@ -623,18 +644,72 @@
                 </div>
             </a>
 
+            <a target="_blank" href="drmario/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/drmario.jpg');" data-genre="puzzle">
+                    <h2>dr mario</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
             <a target="_blank" href="metroid/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/metroid.jpg');" data-genre="adventure">
                     <h2>metroid</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
-            </a
+            </a>
 
-         
-        
+            <a target="_blank" href="supermariobros2/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/supermariobros2.jpg');" data-genre="platformer">
+                    <h2>super mario bros 2</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="supermariobros3/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/supermariobros3.jpg');" data-genre="platformer">
+                    <h2>super mario bros 3</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="thelegendofzelda/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/thelegendofzelda.jpg');" data-genre="adventure">
+                    <h2>the legend of zelda</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
             <a target="_blank" href="warioware/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/warioware.jpg');" data-genre="arcade">
                     <h2>warioware</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="yoshisisland/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/yoshisisland.jpg');" data-genre="platformer">
+                    <h2>yoshi's island</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="donkeykongland/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/donkeykongland.jpg');" data-genre="platformer">
+                    <h2>donkey kong land</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="kirbysdreamland/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/kirbysdreamland.jpg');" data-genre="platformer">
+                    <h2>kirby's dream land</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="supermarioland/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/supermarioland.jpg');" data-genre="platformer">
+                    <h2>super mario land</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
@@ -730,6 +805,13 @@
                 </div>
             </a>
 
+            <a target="_blank" href="mariokartsupercircuit/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/mariokartsupercircuit.jpg');" data-genre="arcade">
+                    <h2>mario kart super circuit</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
             <a target="_blank" href="pokemonleafgreen/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/pokemonleafgreen.jpg');" data-genre="adventure">
                     <h2>pokemon leaf green</h2>
@@ -758,7 +840,7 @@
                 </div>
             </a>
 
-            
+
             <a target="_blank" href="adofai/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/adofai.jpg');" data-genre="arcade">
                     <h2>adofai</h2>
@@ -876,6 +958,13 @@
                 </div>
             </a>
 
+            <a target="_blank" href="mariocombat/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/mariocombat.jpg');" data-genre="platformer">
+                    <h2>mario combat</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                    <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
+                </div>
+            </a>
 
             <a target="_blank" href="raftwars2/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/raftwars2.jpg');" data-genre="arcade">
@@ -900,6 +989,19 @@
                 </div>
             </a>
 
+            <a target="_blank" href="mariokartds/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/mariokartds.jpg');" data-genre="arcade">
+                    <h2>mario kart ds</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="newsupermariobros/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/newsupermariobros.jpg');" data-genre="platformer">
+                    <h2>new super mario bros</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
 
             <a target="_blank" href="nintendogs/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/nintendogs.jpg');" data-genre="simulation">
@@ -1010,6 +1112,14 @@
                 </div>
             </a>
 
+            <a target="_blank" href="unfairmario/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/unfairmario.jpg');" data-genre="platformer">
+                    <h2>unfair mario</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                    <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
             <a target="_blank" href="boxingphysics2/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/boxingphysics2.jpg');" data-genre="arcade">
                     <h2>boxing physics 2</h2>
@@ -1107,6 +1217,7 @@
             <a target="_blank" href="tinyfishing/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/tinyfishing.jpg');" data-genre="arcade">
                     <h2>tiny fishing</h2>
+                    <h2>tiny fishing devgab</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
@@ -1155,7 +1266,7 @@
                 </div>
             </a>
 
-            
+
             <a target="_blank" href="badicecream2/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/badicecream2.jpg');" data-genre="arcade">
                     <h2>bad ice cream 2</h2>
@@ -1183,7 +1294,7 @@
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
-            
+
             <a target="_blank" href="doom64/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/doom64.jpg');" data-genre="adventure">
                     <h2>doom 64</h2>
@@ -1198,6 +1309,12 @@
                 </div>
             </a>
 
+            <a target="_blank" href="donkeykong64/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/donkeykong64.jpg');" data-genre="platformer">
+                    <h2>donkey kong 64</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
 
             <a target="_blank" href="fzerox/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/fzerox.jpg');" data-genre="arcade">
@@ -1209,6 +1326,27 @@
             <a target="_blank" href="kirby64/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/kirby64.jpg');" data-genre="platformer">
                     <h2>kirby 64</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="mariokart64/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/mariokart64.jpg');" data-genre="arcade">
+                    <h2>mario kart 64</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="marioparty/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/marioparty.jpg');" data-genre="arcade">
+                    <h2>mario party</h2>                    
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="marioparty2/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/marioparty2.jpg');" data-genre="arcade">
+                    <h2>mario party 2</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
@@ -1399,6 +1537,14 @@
                 </div>
             </a>
 
+            <a target="_blank" href="supermarioflash/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/supermarioflash.jpg');" data-genre="platformer">
+                    <h2>super mario flash</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                    <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
             <a target="_blank" href="goldensun/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/goldensun.jpg');" data-genre="adventure">
                     <h2>golden sun</h2>
@@ -1581,6 +1727,13 @@
                 </div>
             </a>
 
+            <a target="_blank" href="marioparty3/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/marioparty3.jpg');" data-genre="arcade">
+                    <h2>mario party 3</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
             <a target="_blank" href="sonicadvance2/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/sonicadvance2.jpg');" data-genre="platformer">
                     <h2>sonic advance 2</h2>
@@ -1654,6 +1807,20 @@
             <a target="_blank" href="dukenukemadvance/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/dukenukemadvance.jpg');" data-genre="arcade">
                     <h2>duke nukem advance</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="mariopartyadvance/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/mariopartyadvance.jpg');" data-genre="arcade">
+                    <h2>mario party advance</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="mariopinballland/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/mariopinballland.jpg');" data-genre="arcade">
+                    <h2>mario pinball land</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
@@ -1738,6 +1905,14 @@
             <a target="_blank" href="badpiggies/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/badpiggies.jpg');" data-genre="arcade">
                     <h2>bad piggies</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                    <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="supermarioflash2/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/supermarioflash2.jpg');" data-genre="platformer">
+                    <h2>super mario flash 2</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                     <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
                 </div>
@@ -1854,7 +2029,7 @@
                 </div>
             </a>
 
-            
+
             <a target="_blank" href="mariopaint/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/mariopaint.jpg');" data-genre="arcade">
                     <h2>mario paint</h2>
@@ -1862,7 +2037,7 @@
                 </div>
             </a>
 
-            
+
             <a target="_blank" href="megamanx/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/megamanx.jpg');" data-genre="platformer">
                     <h2>mega man x</h2>
@@ -3643,6 +3818,29 @@
                 </div>
             </a>
 
+            <a target="_blank" href="papalouie/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/papalouie.jpg');" data-genre="platformer">
+                    <h2>papa louie</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                    <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="papalouie2/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/papalouie2.jpg');" data-genre="platformer">
+                    <h2>papa louie 2</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                    <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
+                </div>
+            </a>
+
+            <a target="_blank" href="papalouie3/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/papalouie3.jpg');" data-genre="platformer">
+                    <h2>papa louie 3</h2>
+                    <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
+                    <span class="download-button"><img src="/images/other/download.png" width="25px" height="25px"></span>
+                </div>
+            </a>
 
             <a target="_blank" href="steakandjake/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/steakandjake.jpg');" data-genre="platformer">
@@ -3664,7 +3862,7 @@
             <br>
             <br>
 
-            
+
         </div>
         <p> // all games playable on this website are complete copyright & property of their respective owners \\</p>
 
@@ -3673,12 +3871,12 @@
         <script src="/storage/js/theme.js"></script>
         <script src="/storage/js/cookie.js"></script>
         <script src="/storage/js/games.js"></script>
-      
+
       <script>
     document.getElementById('random-game-btn').addEventListener('click', function() {
         // This finds all <a> tags that lead to a game
         const games = document.querySelectorAll('.button-container a');
-        
+
         if (games.length > 0) {
             // Pick a random index
             const randomIndex = Math.floor(Math.random() * games.length);
@@ -3690,7 +3888,7 @@
     });
 </script>
 
-        
+
 
   </body>
 </html>
