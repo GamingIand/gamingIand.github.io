@@ -20,35 +20,169 @@
         <meta property="og:title" content="gamingland">
         <meta property="og:type" content="website">
         <meta property="og:description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
+        
         <style>
-  /* 1. Target your specific navigation/action buttons. 
-        Replace '.btn-class' with the actual class name of your buttons if they have one. */
-  .games-btn, .apps-btn, .options-btn, button {
-      /* Smoothly animates the size change over 0.25 seconds */
-      transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out; 
-      /* Ensures the button renders nicely during scaling */
-      will-change: transform; 
-  }
+            /* Modern Hammer / Hexagon Theme Additions */
+            :root {
+                --hex-bg: rgba(20, 20, 30, 0.75);
+                --hex-border: rgba(0, 242, 254, 0.4);
+                --hex-glow: rgba(0, 242, 254, 0.6);
+            }
 
-  /* 2. Enlarge the buttons by 8% when the cursor hovers over them */
-  .games-btn:hover, .apps-btn:hover, .options-btn:hover, button:hover {
-      /* 1.08 scales up the element smoothly */
-      transform: scale(1.08); 
-      /* Optional: Adds a slight shadow effect to make it pop visually */
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
-  }
-</style>
-  </head>
-  <body>
+            body {
+                background-color: #0d0e15;
+                color: #ffffff;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            }
 
-     <div id="blackout"></div>
-     <div id="updPopup">
-        <img src="/images/other/v10image.jpg" style="width: 90%;">
-        <br><br>
-        <h2 style="font-size: 28px; text-decoration: underline;">version 26 / patch notes</h2>
+            /* Hexagon Button Grid Layout */
+            .button-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 25px;
+                flex-wrap: wrap;
+                margin: 30px 0;
+            }
 
-        <div id="updContent">
-            <ul style="text-align: left;">
+            /* Sleek Hexagon Card Styling */
+            .gamesbutton {
+                position: relative;
+                width: 130px;
+                height: 150px;
+                background: var(--hex-bg);
+                clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+                border: none;
+                padding: 10px;
+            }
+
+            .gamesbutton::before {
+                content: "";
+                position: absolute;
+                inset: 2px;
+                background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(0,0,0,0.4));
+                clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+                z-index: 1;
+                pointer-events: none;
+            }
+
+            .gamesbutton img, .gamesbutton .button-text {
+                z-index: 2;
+            }
+
+            .gamesbutton img {
+                width: 40px;
+                height: 40px;
+                object-fit: contain;
+                margin-bottom: 8px;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            }
+
+            .gamesbutton a {
+                text-decoration: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .button-text p {
+                margin: 0;
+                font-size: 14px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #e0e0e0;
+            }
+
+            /* Hexagon Hover Glow & Lift */
+            .gamesbutton:hover {
+                transform: translateY(-6px) scale(1.05);
+                background: rgba(30, 30, 45, 0.9);
+                box-shadow: 0 0 20px var(--hex-glow);
+            }
+
+            /* Blackout & Popup Modernisation */
+            #blackout {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(5px);
+                z-index: 999;
+            }
+
+            #updPopup {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 90%;
+                max-width: 600px;
+                max-height: 85vh;
+                background: #151621;
+                border: 1px solid var(--hex-border);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                border-radius: 12px;
+                padding: 25px;
+                z-index: 1000;
+                overflow-y: auto;
+                box-sizing: border-box;
+            }
+
+            #updConfirm {
+                background: #00f2fe;
+                color: #0d0e15;
+                border: none;
+                padding: 10px 25px;
+                font-weight: bold;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+
+            #updConfirm:hover {
+                background: #4facfe;
+            }
+
+            /* Layout container re-centering */
+            .content-side {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .linkp a, .content-side > a {
+                color: #00f2fe;
+                transition: color 0.2s;
+            }
+
+            .linkp a:hover, .content-side > a:hover {
+                color: #4facfe;
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+
+       <div id="blackout"></div>
+       <div id="updPopup">
+          <img src="/images/other/v10image.jpg" style="width: 90%; border-radius: 8px;">
+          <br><br>
+          <h2 style="font-size: 28px; text-decoration: underline;">version 26 / patch notes</h2>
+
+          <div id="updContent">
+              <ul style="text-align: left;">
                 <li>offline mode
                   <ul>
                     <li>download 200+ games from the site by clicking the download button to the left of them</li>
@@ -154,51 +288,52 @@
                   </ul>
                 </li>
               </ul>        
-        </div>
-        <div id="updConfirmFrame"><button id="updConfirm">okay</button></div>
-      </div>
-
-
-      <div class="content-side">
-          <h1 class="typewriter"><span id="cursor"></span></h1>
-          <h2>version 26.0.3</h2>
-          <h2>New games!</h2>
-          <br>
-
-          <div class="button-container">
-              <div class="gamesbutton" onclick="window.location='games/index.html';">
-                  <img src="images/other/controller.png">
-                  <div class="button-text">
-                      <p>games</p>
-                  </div>
-              </div>
-
-              <div class="gamesbutton" onclick="window.location='apps/index.html';">
-                  <a href="apps/index.html"><img src="images/other/apps.png"></a>
-                  <div class="button-text">
-                      <p>Events!</p>
-                  </div>
-              </div>
-
-              <div class="gamesbutton" onclick="window.location='settings.html';">
-                <a href="settings.html"><img src="images/other/settings.png"></a>
-                <div class="button-text">
-                    <p>options</p>
-                </div>
-            </div>
           </div>
-
-
           <br>
+          <div id="updConfirmFrame"><button id="updConfirm">okay</button></div>
+       </div>
 
-          <p class="linkp"><a href="/seraphim/index.html">mobile</a> • <a id="openBlankLink">Account!</a></p>
-              
-          <br>
-          <a href="https://discord.gg/AaqVn9jTg" target="_blank" style="text-decoration: none;">Credit to a456pur for design, made by louie! </a>
 
-      </div>
+       <div class="content-side">
+           <h1 class="typewriter"><span id="cursor"></span></h1>
+           <h2>version 26.0.3</h2>
+           <h2>New games!</h2>
+           <br>
 
-      <script>
+           <!-- Modern Hexagon Grid Navigation -->
+           <div class="button-container">
+               <div class="gamesbutton" onclick="window.location='games/index.html';">
+                   <img src="images/other/controller.png" alt="Games">
+                   <div class="button-text">
+                       <p>games</p>
+                   </div>
+               </div>
+
+               <div class="gamesbutton" onclick="window.location='apps/index.html';">
+                   <img src="images/other/apps.png" alt="Apps/Events">
+                   <div class="button-text">
+                       <p>Events!</p>
+                   </div>
+               </div>
+
+               <div class="gamesbutton" onclick="window.location='settings.html';">
+                   <img src="images/other/settings.png" alt="Settings">
+                   <div class="button-text">
+                       <p>options</p>
+                   </div>
+               </div>
+           </div>
+
+           <br>
+
+           <p class="linkp"><a href="/seraphim/index.html">mobile</a> • <a id="openBlankLink" href="#">Account!</a></p>
+               
+           <br>
+           <a href="https://discord.gg/AaqVn9jTg" target="_blank" style="text-decoration: none;">Credit to a456pur for design, made by louie!</a>
+
+       </div>
+
+       <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
@@ -214,10 +349,9 @@
                 });
             });
         }
+       </script>
 
-      </script>
-
-      <script>
+       <script>
         document.addEventListener('DOMContentLoaded', function () {
             if (!localStorage.getItem('v10-update')) {
                 document.getElementById('blackout').style.display = 'block';
@@ -229,8 +363,9 @@
                 document.getElementById('updPopup').style.display = 'none';
             });
         });
-      </script>
-      <script>
+       </script>
+
+       <script>
         const text = "Gamingland";
         const typingDelay = 500; 
         const initialDelay = 100; 
@@ -251,9 +386,9 @@
         }
 
         type();
-      </script>
+       </script>
 
-    <script>
+       <script>
         document.addEventListener('DOMContentLoaded', function() {
             var openBlankLink = document.getElementById('openBlankLink');
 
@@ -290,10 +425,10 @@
                 }
             });
         });
-        </script>    
+       </script>    
 
-      <script src="storage/js/cloak.js"></script>
-      <script src="storage/js/theme.js"></script>
-      <script src="storage/js/cookie.js"></script>
-  </body>
+       <script src="storage/js/cloak.js"></script>
+       <script src="storage/js/theme.js"></script>
+       <script src="storage/js/cookie.js"></script>
+   </body>
 </html>
