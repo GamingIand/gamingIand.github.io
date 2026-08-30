@@ -5,7 +5,6 @@
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', 'G-7FN7LEVWXD');
         </script>
 
@@ -22,113 +21,243 @@
         <meta property="og:description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
 
         <style>
-            .pinned-container {
+            :root {
+                --bg-color: #0d1117;
+                --panel-bg: rgba(22, 27, 34, 0.7);
+                --accent-color: #58a6ff;
+                --accent-gradient: linear-gradient(135deg, #238636 0%, #2ea043 100%);
+                --text-main: #c9d1d9;
+                --text-muted: #8b949e;
+                --border-color: rgba(240, 246, 252, 0.1);
+            }
+
+            body {
+                background-color: var(--bg-color);
+                color: var(--text-main);
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* Controls Bar */
+            .controls-wrapper {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px;
+                width: 100%;
+                max-width: 800px;
+            }
+
+            #search {
+                background: var(--panel-bg);
+                border: 1px solid var(--border-color);
+                color: var(--text-main);
+                padding: 10px 16px;
+                border-radius: 12px;
+                font-size: 14px;
+                outline: none;
+                width: 240px;
+                transition: border-color 0.2s, box-shadow 0.2s;
+            }
+
+            #search:focus {
+                border-color: var(--accent-color);
+                box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+            }
+
+            #genreDropdown {
+                background: var(--panel-bg);
+                border: 1px solid var(--border-color);
+                color: var(--text-main);
+                padding: 10px 16px;
+                border-radius: 12px;
+                font-size: 14px;
+                outline: none;
+                cursor: pointer;
+            }
+
+            #random-game-btn {
+                background: var(--accent-gradient);
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 12px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: transform 0.2s, opacity 0.2s;
+                box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
+            }
+
+            #random-game-btn:hover {
+                transform: translateY(-2px);
+                opacity: 0.9;
+            }
+
+            /* Navigation Links */
+            .linkp {
+                margin: 15px 0 30px 0;
+                color: var(--text-muted);
+                font-size: 14px;
+            }
+
+            .linkp a {
+                color: var(--accent-color);
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+            .linkp a:hover {
+                text-decoration: underline;
+            }
+
+            /* Section Headers */
+            h2.pinned-header, h2.allgames-header {
+                font-size: 18px;
+                font-weight: 600;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin: 20px 0;
+                width: 100%;
+                max-width: 1200px;
+                text-align: left;
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 8px;
+            }
+
+            .pinned-container, .button-container {
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
+                gap: 20px;
+                padding: 10px;
+                max-width: 1200px;
+            }
+
+            /* Game Card Styling */
+            .button-container a {
+                text-decoration: none;
+            }
+
+            .button {
+                width: 130px !important;
+                height: 130px !important;
+                background-size: cover;
+                background-position: center;
+                border-radius: 20px !important;
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: center;
+                transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
+                box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+                border: 1px solid var(--border-color);
+            }
+
+            .button:hover {
+                transform: translateY(-6px) scale(1.03);
+                box-shadow: 0 12px 25px rgba(0,0,0,0.6);
+                border-color: var(--accent-color);
+            }
+
+            .button h2 {
+                font-size: 11px !important;
+                background: rgba(13, 17, 23, 0.85);
+                backdrop-filter: blur(4px);
+                color: var(--text-main);
+                width: 100%;
+                text-align: center;
+                margin: 0;
+                padding: 8px 0;
+                font-weight: 600;
+                letter-spacing: 0.3px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .pin-button {
-                position: absolute;
-                top: 5px;
-                right: 5px; 
-                z-index: 2; 
+                position: absolute !important;
+                top: 8px !important;
+                right: 8px !important;
+                z-index: 2;
+                background: rgba(0, 0, 0, 0.5);
+                border-radius: 50%;
+                padding: 3px;
+                display: flex;
+                backdrop-filter: blur(2px);
             }
-            .button-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-        }
 
-        .button {
-            width: 120px !important;
-            height: 120px !important;
-            background-size: cover;
-            background-position: center;
-            border-radius: 25px !important;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            transition: transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
-        .button:hover {
-            transform: scale(1.05);
-        }
-
-        .button h2 {
-            font-size: 11px !important;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            width: 100%;
-            text-align: center;
-            margin: 0;
-            padding: 5px 0;
-        }
-
-        .pin-button {
-            position: absolute !important;
-            top: 5px !important;
-            right: 5px !important;
-        }
-
-        .download-button {
-            position: absolute !important;
-            top: 5px !important;
-            left: 5px !important;
-        }
+            .download-button {
+                position: absolute !important;
+                top: 8px !important;
+                left: 8px !important;
+                z-index: 2;
+                background: rgba(0, 0, 0, 0.5);
+                border-radius: 50%;
+                padding: 3px;
+                display: flex;
+                backdrop-filter: blur(2px);
+            }
         </style>
 
         <script>
             if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
-                    console.log('service worker initalised! scope:', registration.scope);
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
+                        console.log('service worker initalised! scope:', registration.scope);
 
-                    navigator.serviceWorker.addEventListener('message', function(event) {
-                        if (event.data === 'cached') {
-                            document.getElementById('cache-status').style.display = 'block';
-                        }
+                        navigator.serviceWorker.addEventListener('message', function(event) {
+                            if (event.data === 'cached') {
+                                document.getElementById('cache-status').style.display = 'block';
+                            }
+                        });
+                    }, function(error) {
+                        console.log('ack, error with serviceworker! ', error);
                     });
-                }, function(error) {
-                    console.log('ack, error with serviceworker! ', error);
                 });
-            });
-        }
+            }
         </script>
-  </head>
-  <body>
+    </head>
+    <body>
 
         <h1 class="typewriter"><span id="cursor"></span></h1>
 
-        <input type="text" id="search" placeholder="⌕ search" autocomplete="off">
-        <select id="genreDropdown" style="margin-top: 5px; margin-left: 5px;">
-            <option value="all">all</option>
-            <option value="adventure">adventure</option>
-            <option value="arcade">arcade</option>
-            <option value="mobile">mobile friendly</option>
-            <option value="platformer">platformer</option>
-            <option value="puzzle">puzzle</option>
-            <option value="simulation">simulation</option>
-        </select>
-      <button id="random-game-btn" style="padding: 10px 20px; cursor: pointer;">
-    Play Random Game
-</button>
-
-        <p class="linkp"><a href="../index.html">homepage</a> •  <a href="https://github.com/GamingIand" target="_blank">github</a> •  <a href="https://discord.gg/aZJyeDMXuy" target="_blank">discord</a> •  <a id="openBlankLink">open blank</a></p>
-
-        <br>
-        <h2 class="pinned-header">starred games</h2>
-        <div class="pinned-container">
-
+        <div class="controls-wrapper">
+            <input type="text" id="search" placeholder="⌕ Search games..." autocomplete="off">
+            <select id="genreDropdown">
+                <option value="all">All Genres</option>
+                <option value="adventure">Adventure</option>
+                <option value="arcade">Arcade</option>
+                <option value="mobile">Mobile Friendly</option>
+                <option value="platformer">Platformer</option>
+                <option value="puzzle">Puzzle</option>
+                <option value="simulation">Simulation</option>
+            </select>
+            <button id="random-game-btn">Play Random Game</button>
         </div>
 
+        <p class="linkp">
+            <a href="../index.html">homepage</a> • 
+            <a href="https://github.com/GamingIand" target="_blank">github</a> • 
+            <a href="https://discord.gg/aZJyeDMXuy" target="_blank">discord</a> • 
+            <a id="openBlankLink" style="cursor: pointer;">open blank</a>
+        </p>
+
+        <h2 class="pinned-header">Starred Games</h2>
+        <div class="pinned-container">
+            </div>
+
+        <h2 class="allgames-header">All Games</h2>
+              
         <h2 class="allgames-header"></h2>
         <div class="button-container">
             <a target="_blank" href="slope/index.html">
