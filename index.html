@@ -37,33 +37,47 @@
                 padding: 0;
             }
 
-            /* Top Right Settings Icon Styling */
-            .top-right-settings {
+            /* Top Right Topbar Button Group */
+            .top-right-bar {
                 position: fixed;
                 top: 25px;
                 right: 25px;
-                width: 45px;
+                display: flex;
+                gap: 12px;
+                z-index: 100;
+            }
+
+            .topbar-btn {
                 height: 45px;
+                padding: 0 16px;
                 background: var(--card-bg);
                 border: 1px solid var(--card-border);
-                border-radius: 50%;
+                border-radius: 22.5px;
                 display: flex;
                 align-items: center;
-                justify-content: center;
+                gap: 8px;
                 cursor: pointer;
-                z-index: 100;
+                text-decoration: none;
                 transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             }
 
-            .top-right-settings img {
+            .topbar-btn img {
                 width: 20px;
                 height: 20px;
                 object-fit: contain;
                 filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
             }
 
-            .top-right-settings:hover {
-                transform: scale(1.1);
+            .topbar-btn span {
+                font-size: 13px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: #e0e0e0;
+            }
+
+            .topbar-btn:hover {
+                transform: scale(1.05);
                 background: rgba(30, 30, 45, 0.95);
                 border-color: #00f2fe;
                 box-shadow: 0 0 15px var(--card-glow);
@@ -266,8 +280,15 @@
     </head>
     <body>
 
-       <div class="top-right-settings" onclick="window.location='settings.html';" title="Settings">
-           <img src="images/other/settings.png" alt="Settings">
+       <div class="top-right-bar">
+           <a id="openBlankLink" class="topbar-btn" href="#" title="Account">
+               <img src="images/other/controller.png" alt="Account">
+               <span>Account</span>
+           </a>
+           <a class="topbar-btn" href="settings.html" title="Settings">
+               <img src="images/other/settings.png" alt="Settings">
+               <span>Settings</span>
+           </a>
        </div>
 
        <div id="blackout"></div>
@@ -389,12 +410,13 @@
 
        <div class="content-side">
             <h1 class="typewriter"><span id="cursor"></span></h1>
-            <h2>version 27.2.4</h2>
-            <h2>New games!</h2>
+            <h2>version 27.0.1</h2>
+            <h2>Event soon!</h2>
             <br>
 
             <div class="button-container">
                <div class="gamesbutton" onclick="window.location='games/index.html';">
+                   <img src="images/other/controller.png" alt="Games">
                    <div class="button-text">
                        <p>Games</p>
                    </div>
@@ -412,22 +434,22 @@
                     <div class="trending-card" onclick="window.location='games/snowrider3d/index.html';">
                         <div class="trending-thumb" style="background: linear-gradient(135deg, #2b1055, #7597de);"></div>
                         <div class="trending-info">
-                            <h3 class="trending-title">Snow rider</h3>
-                            <p class="trending-desc">Endless action</p>
+                            <h3 class="trending-title">snow rider 3d</h3>
+                            <p class="trending-desc">Endless runner</p>
                         </div>
                     </div>
                     <div class="trending-card" onclick="window.location='games/drivemad/index.html';">
                         <div class="trending-thumb" style="background: linear-gradient(135deg, #1f4068, #162447);"></div>
                         <div class="trending-info">
                             <h3 class="trending-title">Drive mad</h3>
-                            <p class="trending-desc">Slow-paced driving game</p>
+                            <p class="trending-desc">This game makes me rage!</p>
                         </div>
                     </div>
                     <div class="trending-card" onclick="window.location='games/bitlife/index.html';">
                         <div class="trending-thumb" style="background: linear-gradient(135deg, #e43a15, #e65245);"></div>
                         <div class="trending-info">
                             <h3 class="trending-title">Bitlife</h3>
-                            <p class="trending-desc">Life simulator</p>
+                            <p class="trending-desc">What more then a life sim</p>
                         </div>
                     </div>
                 </div>
@@ -435,7 +457,7 @@
 
             <br><br>
 
-            <p class="linkp"><a href="/seraphim/index.html">mobile</a> • <a id="openBlankLink" href="#">Account!</a></p>
+            <p class="linkp"><a href="/seraphim/index.html">mobile</a></p>
 
        </div>
 
