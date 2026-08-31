@@ -1,0 +1,377 @@
+<html lang="en">
+    <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FN7LEVWXD"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-7FN7LEVWXD');
+        </script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="images/ico.ico" type="image/x-icon">
+        <link rel="stylesheet" href="storage/css/settings.css">
+        <title>Account & Cloud Save | gamingland</title>
+
+        <meta name="description" content="Manage your account and sync game progress across devices">
+
+        <style>
+            :root {
+                --bg-color: #0d1117;
+                --panel-bg: rgba(22, 27, 34, 0.75);
+                --accent-color: #58a6ff;
+                --accent-gradient: linear-gradient(135deg, #238636 0%, #2ea043 100%);
+                --danger-gradient: linear-gradient(135deg, #da3633 0%, #f85149 100%);
+                --text-main: #c9d1d9;
+                --text-muted: #8b949e;
+                --border-color: rgba(240, 246, 252, 0.12);
+            }
+
+            body {
+                background-color: var(--bg-color);
+                color: var(--text-main);
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                margin: 0;
+                padding: 40px 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                overflow-x: hidden;
+            }
+
+            #content-side {
+                background: var(--panel-bg);
+                backdrop-filter: blur(12px);
+                border: 1px solid var(--border-color);
+                border-radius: 24px;
+                padding: 40px;
+                width: 100%;
+                max-width: 550px;
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            h1 {
+                margin: 0 0 5px 0;
+                font-size: 28px;
+                font-weight: 800;
+                letter-spacing: -0.5px;
+                color: #ffffff;
+                background: linear-gradient(135deg, #ffffff 30%, #8b949e 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            h2 {
+                font-size: 14px !important;
+                font-weight: 700 !important;
+                color: var(--text-muted) !important;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                margin: 15px 0 8px 0 !important;
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 6px;
+            }
+
+            a {
+                color: var(--accent-color);
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+            a:hover {
+                text-decoration: underline;
+                color: #79c0ff;
+            }
+
+            input[type="email"], input[type="password"] {
+                background: rgba(13, 17, 23, 0.6);
+                border: 1px solid var(--border-color);
+                color: var(--text-main);
+                padding: 12px 16px;
+                border-radius: 12px;
+                font-size: 14px;
+                outline: none;
+                width: 100%;
+                box-sizing: border-box;
+                transition: all 0.25s ease;
+                margin-bottom: 10px;
+            }
+
+            input[type="email"]:focus, input[type="password"]:focus {
+                border-color: var(--accent-color);
+                box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2);
+                background: rgba(13, 17, 23, 0.9);
+            }
+
+            button {
+                background: rgba(33, 38, 45, 0.8);
+                border: 1px solid var(--border-color);
+                color: var(--text-main);
+                padding: 10px 18px;
+                border-radius: 12px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+                width: 100%;
+                margin-top: 5px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            button:hover {
+                transform: translateY(-2px);
+                background: rgba(48, 54, 61, 0.9);
+                border-color: var(--accent-color);
+                color: #ffffff;
+            }
+
+            button:active {
+                transform: scale(0.96);
+            }
+
+            .btn-primary {
+                background: var(--accent-gradient) !important;
+                border: none !important;
+                color: white !important;
+            }
+
+            .btn-danger {
+                background: var(--danger-gradient) !important;
+                border: none !important;
+                color: white !important;
+            }
+
+            .auth-view {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hidden {
+                display: none !important;
+            }
+
+            .status-box {
+                background: rgba(35, 134, 54, 0.15);
+                border: 1px solid rgba(46, 160, 67, 0.4);
+                color: #7ee787;
+                padding: 12px;
+                border-radius: 12px;
+                font-size: 13px;
+                text-align: center;
+            }
+
+            .error-box {
+                background: rgba(218, 54, 51, 0.15);
+                border: 1px solid rgba(248, 81, 73, 0.4);
+                color: #f85149;
+                padding: 10px;
+                border-radius: 8px;
+                font-size: 13px;
+                margin-top: 8px;
+            }
+
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.35);
+                transform: scale(0);
+                animation: ripple-effect 0.5s linear;
+                pointer-events: none;
+            }
+
+            @keyframes ripple-effect {
+                to { transform: scale(4); opacity: 0; }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content-side">
+            <div>
+                <h1>cloud sync</h1>
+                <a href="index.html" style="font-size: 14px;">← back to homepage</a>
+            </div>
+
+            <!-- LOGGED OUT VIEW -->
+            <div id="logged-out-view" class="auth-view">
+                <h2>Account Sign In / Up</h2>
+                <p style="font-size: 13px; color: var(--text-muted);">Sign in to save your game progress, starred games, and custom theme settings across devices.</p>
+                
+                <input type="email" id="email" placeholder="Email address">
+                <input type="password" id="password" placeholder="Password">
+                
+                <button class="btn-primary" id="login-btn">Log In</button>
+                <button id="signup-btn">Create Account</button>
+                
+                <div id="auth-error" class="error-box hidden"></div>
+            </div>
+
+            <!-- LOGGED IN VIEW -->
+            <div id="logged-in-view" class="auth-view hidden">
+                <h2>Welcome Back</h2>
+                <div class="status-box">
+                    Logged in as: <strong id="user-email-display"></strong>
+                </div>
+
+                <button class="btn-primary" id="save-progress-btn">☁️ Save Progress to Cloud</button>
+                <button id="load-progress-btn">🔄 Load Progress from Cloud</button>
+                <button class="btn-danger" id="logout-btn" style="margin-top: 15px;">Log Out</button>
+                
+                <div id="sync-status" class="status-box hidden" style="margin-top: 10px;"></div>
+            </div>
+        </div>
+
+        <!-- Firebase App SDK Scripts -->
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+            import { 
+                getAuth, 
+                createUserWithEmailAndPassword, 
+                signInWithEmailAndPassword, 
+                signOut, 
+                onAuthStateChanged 
+            } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+            import { 
+                getFirestore, 
+                doc, 
+                setDoc, 
+                getDoc 
+            } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+            // TODO: Replace with your actual Firebase project configuration details (from Firebase Console)
+            const firebaseConfig = {
+                apiKey: "YOUR_API_KEY",
+                authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+                projectId: "YOUR_PROJECT_ID",
+                storageBucket: "YOUR_PROJECT_ID.appspot.com",
+                messagingSenderId: "YOUR_SENDER_ID",
+                appId: "YOUR_APP_ID"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            const db = getFirestore(app);
+
+            // UI Elements
+            const loggedOutView = document.getElementById('logged-out-view');
+            const loggedInView = document.getElementById('logged-in-view');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const errorBox = document.getElementById('auth-error');
+            const userEmailDisplay = document.getElementById('user-email-display');
+            const syncStatus = document.getElementById('sync-status');
+
+            // Track Auth State Changes
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    loggedOutView.classList.add('hidden');
+                    loggedInView.classList.remove('hidden');
+                    userEmailDisplay.textContent = user.email;
+                } else {
+                    loggedInView.classList.add('hidden');
+                    loggedOutView.classList.remove('hidden');
+                }
+            });
+
+            // Sign Up
+            document.getElementById('signup-btn').addEventListener('click', async () => {
+                errorBox.classList.add('hidden');
+                try {
+                    await createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+                } catch (error) {
+                    errorBox.textContent = error.message;
+                    errorBox.classList.remove('hidden');
+                }
+            });
+
+            // Log In
+            document.getElementById('login-btn').addEventListener('click', async () => {
+                errorBox.classList.add('hidden');
+                try {
+                    await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+                } catch (error) {
+                    errorBox.textContent = error.message;
+                    errorBox.classList.remove('hidden');
+                }
+            });
+
+            // Log Out
+            document.getElementById('logout-btn').addEventListener('click', () => {
+                signOut(auth);
+            });
+
+            // Save Progress (Pulls local settings/localStorage data and saves to Firestore database)
+            document.getElementById('save-progress-btn').addEventListener('click', async () => {
+                const user = auth.currentUser;
+                if (!user) return;
+
+                try {
+                    // Gather all custom localStorage items you want to sync (starred games, settings, themes, etc.)
+                    const userDataToSave = {
+                        savedSettings: localStorage.getItem('settings') || '{}',
+                        starredGames: localStorage.getItem('starredGames') || '[]',
+                        customTheme: localStorage.getItem('customTheme') || '{}',
+                        lastUpdated: new Date().toISOString()
+                    };
+
+                    await setDoc(doc(db, "users", user.uid), userDataToSave);
+                    
+                    syncStatus.textContent = "✅ Progress successfully saved to the cloud!";
+                    syncStatus.classList.remove('hidden');
+                    setTimeout(() => syncStatus.classList.add('hidden'), 4000);
+                } catch (error) {
+                    alert("Error saving data: " + error.message);
+                }
+            });
+
+            // Load Progress (Pulls Firestore database data and writes it back to browser localStorage)
+            document.getElementById('load-progress-btn').addEventListener('click', async () => {
+                const user = auth.currentUser;
+                if (!user) return;
+
+                try {
+                    const docRef = doc(db, "users", user.uid);
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        if (data.savedSettings) localStorage.setItem('settings', data.savedSettings);
+                        if (data.starredGames) localStorage.setItem('starredGames', data.starredGames);
+                        if (data.customTheme) localStorage.setItem('customTheme', data.customTheme);
+
+                        syncStatus.textContent = "🔄 Progress loaded! Refreshing page...";
+                        syncStatus.classList.remove('hidden');
+                        setTimeout(() => location.reload(), 1500);
+                    } else {
+                        alert("No cloud save data found for this account yet.");
+                    }
+                } catch (error) {
+                    alert("Error loading data: " + error.message);
+                }
+            });
+
+            // Button click ripple feedback effect
+            document.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const ripple = document.createElement('span');
+                    ripple.classList.add('ripple');
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    btn.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 500);
+                });
+            });
+        </script>
+    </body>
+</html>
