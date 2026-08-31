@@ -1,7 +1,7 @@
 @import url('/storage/css/themes.css');
 
 :root {
-    --background-image: url('/images/backgrounds/seraph/gamebg.jpg');
+    --background-image: url('/images/backgrounds/seraph/gamesbg.jpg');
     --border-color1: #a19b9b;
 }
 :root.theme-azurite {
