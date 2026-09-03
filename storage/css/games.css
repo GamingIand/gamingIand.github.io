@@ -112,6 +112,15 @@ h1 {
     position: relative;
 }
 
+.custom-star-icon {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    display: inline-block;
+    object-fit: contain;
+    margin: 0 2px;
+}
+
 .button:hover {
     background-color: var(--background-color);
     border: 3.2px solid var(--border-color1);
