@@ -146,6 +146,15 @@ a {
     z-index: 10000;
 }
 
+.custom-star-icon {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    display: inline-block;
+    object-fit: contain;
+    margin: 0 2px;
+}
+
 #blackout {
     display: none; 
     position: fixed;
