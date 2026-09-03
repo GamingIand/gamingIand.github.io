@@ -548,7 +548,7 @@
                 }
             });
         });
-       </script>    
+       </script> 
 
        <script src="storage/js/cloak.js"></script>
        <script src="storage/js/theme.js"></script>
@@ -599,7 +599,9 @@
         }
     });
 </script>
-        document.addEventListener("DOMContentLoaded", () => {
+        
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
     // Function to replace text nodes containing '✪' with an image
     function replaceStarWithImage(node) {
         if (node.nodeType === Node.TEXT_NODE) {
@@ -633,5 +635,7 @@
     // Run across the whole body content
     replaceStarWithImage(document.body);
 });
+</script>        
+       
     </body>
 </html>
