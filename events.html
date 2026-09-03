@@ -1,0 +1,122 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamingland - Events</title>
+    <link rel="stylesheet" href="storage/css/index.css">
+    <style>
+        .custom-star-icon {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            display: inline-block;
+            object-fit: contain;
+            margin: 0 3px;
+        }
+
+        .events-container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 40px;
+            background: rgba(20, 20, 25, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+        }
+
+        .events-container h1 {
+            font-size: 2.3rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .events-subtitle {
+            font-size: 1.1rem;
+            color: #b3b3b3;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .badge-box {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 15px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+            color: #ffd700;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="events-container">
+        <h1>No Active Events ✪</h1>
+        <p class="events-subtitle">There are currently no live events running right now. Check back soon for community tournaments, point multipliers, and special challenges!</p>
+
+        <div class="badge-box">
+            Want early access to future events? Keep an eye out for ✪ Premium perks!
+        </div>
+
+        <div>
+            <a href="index.html" class="back-btn">← Back to Homepage</a>
+        </div>
+    </div>
+
+    <!-- Universal Star Icon Replacement Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            function replaceStarWithImage(node) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    if (node.textContent.includes('✪')) {
+                        const fragment = document.createDocumentFragment();
+                        const parts = node.textContent.split('✪');
+                        
+                        parts.forEach((part, index) => {
+                            if (part) {
+                                fragment.appendChild(document.createTextNode(part));
+                            }
+                            if (index < parts.length - 1) {
+                                const img = document.createElement('img');
+                                img.src = '/images/icons/star.png';
+                                img.className = 'custom-star-icon';
+                                img.alt = '★';
+                                fragment.appendChild(img);
+                            }
+                        });
+                        
+                        node.parentNode.replaceChild(fragment, node);
+                    }
+                } else {
+                    if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
+                        node.childNodes.forEach(child => replaceStarWithImage(child));
+                    }
+                }
+            }
+
+            replaceStarWithImage(document.body);
+        });
+    </script>
+</body>
+</html>
