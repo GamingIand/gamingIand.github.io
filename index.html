@@ -553,5 +553,51 @@
        <script src="storage/js/cloak.js"></script>
        <script src="storage/js/theme.js"></script>
        <script src="storage/js/cookie.js"></script>
+        <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT_ID.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    onAuthStateChanged(auth, async (user) => {
+        // Find your account link/button in your navbar. 
+        // (Make sure your account link in index.html has an id like id="account-nav-link" or adjust the selector)
+        const accountLink = document.querySelector('a[href="account.html"]') || document.getElementById('account-nav-link');
+        
+        if (user && accountLink) {
+            // Check if we have a saved username in localStorage, otherwise fallback to email/display name
+            let displayName = localStorage.getItem('username');
+            
+            if (!displayName) {
+                try {
+                    const docSnap = await getDoc(doc(db, "users", user.uid));
+                    if (docSnap.exists() && docSnap.data().username) {
+                        displayName = docSnap.data().username;
+                        localStorage.setItem('username', displayName);
+                    } else {
+                        displayName = user.displayName || user.email.split('@')[0];
+                    }
+                } catch (e) {
+                    displayName = user.email ? user.email.split('@')[0] : "Account";
+                }
+            }
+
+            // Replace "Account" text with the user's username
+            accountLink.textContent = `👤 ${displayName}`;
+        }
+    });
+</script>
     </body>
 </html>
