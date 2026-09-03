@@ -421,5 +421,43 @@
         <script src="storage/js/cloak.js"></script>
         <script src="storage/js/data.js"></script>
         <script src="/storage/js/settings.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    // Function to replace text nodes containing '✪' with an image
+    function replaceStarWithImage(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            if (node.textContent.includes('✪')) {
+                const fragment = document.createDocumentFragment();
+                const parts = node.textContent.split('✪');
+                
+                parts.forEach((part, index) => {
+                    if (part) {
+                        fragment.appendChild(document.createTextNode(part));
+                    }
+                    if (index < parts.length - 1) {
+                        const img = document.createElement('img');
+                        img.src = 'images/icons/star.png'; // Path to your star image
+                        img.className = 'custom-star-icon';
+                        img.alt = '★';
+                        fragment.appendChild(img);
+                    }
+                });
+                
+                node.parentNode.replaceChild(fragment, node);
+            }
+        } else {
+            // Skip script and style tags to avoid breaking code
+            if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
+                node.childNodes.forEach(child => replaceStarWithImage(child));
+            }
+        }
+    }
+
+    // Run across the whole body content
+    replaceStarWithImage(document.body);
+});
+</script>
+        
     </body>
 </html>
