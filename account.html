@@ -1,445 +1,170 @@
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FN7LEVWXD"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-7FN7LEVWXD');
-        </script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamingland - Account & Cloud Sync</title>
+    <link rel="stylesheet" href="storage/css/index.css">
+    <style>
+        .custom-star-icon {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            display: inline-block;
+            object-fit: contain;
+            margin: 0 3px;
+        }
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="images/ico.ico" type="image/x-icon">
-        <link rel="stylesheet" href="storage/css/settings.css">
-        <title>Account & Cloud Save | gamingland</title>
+        .account-container {
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 30px;
+            background: rgba(20, 20, 25, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            text-align: center;
+        }
 
-        <meta name="description" content="Manage your account and sync game progress across devices">
+        .account-container h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, #ffffff 0%, #b3b3b3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-        <style>
-            :root {
-                --bg-color: #0d1117;
-                --panel-bg: rgba(22, 27, 34, 0.85);
-                --accent-color: #58a6ff;
-                --accent-gradient: linear-gradient(135deg, #238636 0%, #2ea043 100%);
-                --danger-gradient: linear-gradient(135deg, #da3633 0%, #f85149 100%);
-                --text-main: #c9d1d9;
-                --text-muted: #8b949e;
-                --border-color: rgba(240, 246, 252, 0.12);
-            }
+        .back-link {
+            display: inline-block;
+            color: #4da6ff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
 
-            body {
-                background-color: var(--bg-color);
-                color: var(--text-main);
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                margin: 0;
-                padding: 40px 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                box-sizing: border-box;
-            }
+        .back-link:hover {
+            text-decoration: underline;
+        }
 
-            #content-side {
-                background: var(--panel-bg);
-                backdrop-filter: blur(12px);
-                border: 1px solid var(--border-color);
-                border-radius: 24px;
-                padding: 40px;
-                width: 100%;
-                max-width: 550px;
-                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
-                box-sizing: border-box;
-                display: flex;
-                flex-direction: column;
-                gap: 16px;
-            }
+        .section-title {
+            text-align: left;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: #8c8c8c;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
 
-            h1 {
-                margin: 0 0 5px 0;
-                font-size: 28px;
-                font-weight: 800;
-                letter-spacing: -0.5px;
-                color: #ffffff;
-                background: linear-gradient(135deg, #ffffff 30%, #8b949e 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-            }
+        .status-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.95krem;
+            text-align: left;
+        }
 
-            h2 {
-                font-size: 14px !important;
-                font-weight: 700 !important;
-                color: var(--text-muted) !important;
-                text-transform: uppercase;
-                letter-spacing: 1.5px;
-                margin: 15px 0 8px 0 !important;
-                border-bottom: 1px solid var(--border-color);
-                padding-bottom: 6px;
-            }
+        .input-field {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 1rem;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
 
-            a {
-                color: var(--accent-color);
-                text-decoration: none;
-                transition: color 0.2s;
-            }
+        .input-field:focus {
+            outline: none;
+            border-color: #4da6ff;
+        }
 
-            a:hover {
-                text-decoration: underline;
-                color: #79c0ff;
-            }
+        /* Uniform Full-Width Buttons */
+        .account-btn {
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            cursor: pointer;
+            box-sizing: border-box;
+            display: block;
+            text-align: center;
+            margin-bottom: 12px;
+            transition: background 0.2s ease, transform 0.1s ease, border-color 0.2s ease;
+        }
 
-            input[type="email"], input[type="password"], input[type="text"] {
-                background: rgba(13, 17, 23, 0.7);
-                border: 1px solid var(--border-color);
-                color: var(--text-main);
-                padding: 12px 16px;
-                border-radius: 12px;
-                font-size: 14px;
-                outline: none;
-                width: 100%;
-                box-sizing: border-box;
-                transition: all 0.25s ease;
-                margin-bottom: 8px;
-            }
+        .account-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
 
-            input:focus {
-                border-color: var(--accent-color);
-                box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2);
-                background: rgba(13, 17, 23, 0.95);
-            }
+        .account-btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
 
-            /* FORCE ALL BUTTONS TO STRETCH FULL WIDTH AND ALIGN PROPERLY */
-            button {
-                background: rgba(33, 38, 45, 0.85);
-                border: 1px solid var(--border-color);
-                color: var(--text-main);
-                padding: 12px 18px;
-                border-radius: 12px;
-                font-size: 14px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-                width: 100% !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                gap: 8px;
-                box-sizing: border-box;
-                margin-top: 6px;
-            }
+    <div class="account-container">
+        <h1>Cloud Sync ✪</h1>
+        <a href="index.html" class="back-link">← back to homepage</a>
 
-            button:hover {
-                transform: translateY(-2px);
-                background: rgba(48, 54, 61, 0.95);
-                border-color: var(--accent-color);
-                color: #ffffff;
-            }
+        <div class="section-title">Logged In As</div>
+        <div id="user-status" class="status-box">Loading account status...</div>
 
-            button:active {
-                transform: scale(0.98);
-            }
+        <div class="section-title">Your Username</div>
+        <input type="text" id="username-input" class="input-field" placeholder="Enter your username">
 
-            .btn-primary {
-                background: var(--accent-gradient) !important;
-                border: none !important;
-                color: white !important;
-            }
+        <!-- All action buttons sharing the same color and full width -->
+        <button id="save-username-btn" class="account-btn">Save Username</button>
+        <button id="save-progress-btn" class="account-btn">☁ Save Progress to Cloud</button>
+        <button id="load-progress-btn" class="account-btn">🔄 Load Progress from Cloud</button>
+        <button id="logout-btn" class="account-btn">Log Out</button>
+    </div>
 
-            .btn-provider {
-                background: rgba(255, 255, 255, 0.05);
-                border: 1px solid var(--border-color);
-                color: white;
-            }
-
-            .btn-provider:hover {
-                background: rgba(255, 255, 255, 0.1);
-                border-color: var(--text-muted);
-            }
-
-            .btn-danger {
-                background: var(--danger-gradient) !important;
-                border: none !important;
-                color: white !important;
-            }
-
-            .divider {
-                display: flex;
-                align-items: center;
-                text-align: center;
-                color: var(--text-muted);
-                font-size: 12px;
-                margin: 14px 0;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                width: 100%;
-            }
-
-            .divider::before, .divider::after {
-                content: '';
-                flex: 1;
-                border-bottom: 1px solid var(--border-color);
-            }
-
-            .divider::before { margin-right: 10px; }
-            .divider::after { margin-left: 10px; }
-
-            .auth-view {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .hidden {
-                display: none !important;
-            }
-
-            .status-box {
-                background: rgba(35, 134, 54, 0.15);
-                border: 1px solid rgba(46, 160, 67, 0.4);
-                color: #7ee787;
-                padding: 12px;
-                border-radius: 12px;
-                font-size: 13px;
-                text-align: center;
-                box-sizing: border-box;
-                width: 100%;
-            }
-
-            .error-box {
-                background: rgba(218, 54, 51, 0.15);
-                border: 1px solid rgba(248, 81, 73, 0.4);
-                color: #f85149;
-                padding: 10px;
-                border-radius: 8px;
-                font-size: 13px;
-                margin-top: 10px;
-                box-sizing: border-box;
-                width: 100%;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="content-side">
-            <div>
-                <h1>cloud sync</h1>
-                <a href="index.html" style="font-size: 14px;">← back to homepage</a>
-            </div>
-
-            <div id="logged-out-view" class="auth-view">
-                <h2>Account Sign In / Up</h2>
-                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Sign in to save your game progress, starred games, and custom theme settings across devices.</p>
-                
-                <button class="btn-provider" id="google-login-btn">
-                    <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.1 9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/><path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.8s.2-2.1.4-2.8L1.9 6.3C.7 8.7 0 10.3 0 12s.7 3.3 1.9 5.7l3.7-2.9z"/><path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.1-6.4-5.2L1.9 16C3.7 19.7 7.5 23 12 23z"/></svg>
-                    Continue with Google
-                </button>
-
-                <div class="divider">or email</div>
-
-                <input type="email" id="email" placeholder="Email address">
-                <input type="password" id="password" placeholder="Password">
-                
-                <button class="btn-primary" id="login-btn">Log In with Email</button>
-                <button id="signup-btn">Create Account with Email</button>
-                
-                <div id="auth-error" class="error-box hidden"></div>
-            </div>
-
-            <div id="logged-in-view" class="auth-view hidden">
-                <h2>Welcome Back</h2>
-                <div class="status-box">
-                    Logged in as: <strong id="user-email-display"></strong>
-                </div>
-
-                <div style="margin-top: 10px; width: 100%;">
-                    <label style="font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 4px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Your Username</label>
-                    <input type="text" id="username-input" placeholder="Enter your display name">
-                    <button id="save-username-btn">Save Username</button>
-                </div>
-
-                <button class="btn-primary" id="save-progress-btn" style="margin-top: 15px;">☁️ Save Progress to Cloud</button>
-                <button id="load-progress-btn">🔄 Load Progress from Cloud</button>
-                <button class="btn-danger" id="logout-btn" style="margin-top: 10px;">Log Out</button>
-                
-                <div id="sync-status" class="status-box hidden" style="margin-top: 10px;"></div>
-            </div>
-        </div>
-
-        <script type="module">
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-            import { 
-                getAuth, 
-                createUserWithEmailAndPassword, 
-                signInWithEmailAndPassword, 
-                signInWithPopup,
-                GoogleAuthProvider,
-                signOut, 
-                onAuthStateChanged 
-            } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-            import { 
-                getFirestore, 
-                doc, 
-                setDoc, 
-                getDoc 
-            } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-            const firebaseConfig = {
-  apiKey: "AIzaSyA1dyRxFsWoDP_IJ1jYg8Cst0TCR_nlPy8",
-  authDomain: "gamingland-net.firebaseapp.com",
-  projectId: "gamingland-net",
-  storageBucket: "gamingland-net.firebasestorage.app",
-  messagingSenderId: "511326840492",
-  appId: "1:511326840492:web:972797366ebc3c1db46109"
-};
-
-            const app = initializeApp(firebaseConfig);
-            const auth = getAuth(app);
-            const db = getFirestore(app);
-
-            const loggedOutView = document.getElementById('logged-out-view');
-            const loggedInView = document.getElementById('logged-in-view');
-            const emailInput = document.getElementById('email');
-            const passwordInput = document.getElementById('password');
-            const usernameInput = document.getElementById('username-input');
-            const errorBox = document.getElementById('auth-error');
-            const userEmailDisplay = document.getElementById('user-email-display');
-            const syncStatus = document.getElementById('sync-status');
-
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    loggedOutView.classList.add('hidden');
-                    loggedInView.classList.remove('hidden');
-                    userEmailDisplay.textContent = user.email || user.displayName;
-
-                    // Fetch custom username if stored
-                    try {
-                        const docRef = doc(db, "users", user.uid);
-                        const docSnap = await getDoc(docRef);
-                        if (docSnap.exists() && docSnap.data().username) {
-                            usernameInput.value = docSnap.data().username;
-                            localStorage.setItem('username', docSnap.data().username);
-                        }
-                    } catch (e) {
-                        console.error("Error fetching username:", e);
+    <!-- Universal Star Icon Replacement Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            function replaceStarWithImage(node) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    if (node.textContent.includes('✪')) {
+                        const fragment = document.createDocumentFragment();
+                        const parts = node.textContent.split('✪');
+                        
+                        parts.forEach((part, index) => {
+                            if (part) {
+                                fragment.appendChild(document.createTextNode(part));
+                            }
+                            if (index < parts.length - 1) {
+                                const img = document.createElement('img');
+                                img.src = '/images/icons/star.png';
+                                img.className = 'custom-star-icon';
+                                img.alt = '★';
+                                fragment.appendChild(img);
+                            }
+                        });
+                        
+                        node.parentNode.replaceChild(fragment, node);
                     }
                 } else {
-                    loggedInView.classList.add('hidden');
-                    loggedOutView.classList.remove('hidden');
-                    localStorage.removeItem('username');
-                }
-            });
-
-            // Google Login Popup
-            document.getElementById('google-login-btn').addEventListener('click', async () => {
-                errorBox.classList.add('hidden');
-                try {
-                    const provider = new GoogleAuthProvider();
-                    await signInWithPopup(auth, provider);
-                } catch (error) {
-                    errorBox.textContent = error.message;
-                    errorBox.classList.remove('hidden');
-                }
-            });
-
-            // Email Sign Up
-            document.getElementById('signup-btn').addEventListener('click', async () => {
-                errorBox.classList.add('hidden');
-                try {
-                    await createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
-                } catch (error) {
-                    errorBox.textContent = error.message;
-                    errorBox.classList.remove('hidden');
-                }
-            });
-
-            // Email Log In
-            document.getElementById('login-btn').addEventListener('click', async () => {
-                errorBox.classList.add('hidden');
-                try {
-                    await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
-                } catch (error) {
-                    errorBox.textContent = error.message;
-                    errorBox.classList.remove('hidden');
-                }
-            });
-
-            // Save Username Button
-            document.getElementById('save-username-btn').addEventListener('click', async () => {
-                const user = auth.currentUser;
-                if (!user) return;
-
-                const newUsername = usernameInput.value.trim();
-                if (!newUsername) {
-                    alert("Please enter a valid username.");
-                    return;
-                }
-
-                try {
-                    await setDoc(doc(db, "users", user.uid), { 
-                        username: newUsername,
-                        email: user.email || "" 
-                    }, { merge: true });
-
-                    localStorage.setItem('username', newUsername);
-                    alert("✅ Username saved successfully!");
-                } catch (error) {
-                    alert("❌ Error saving username: " + error.message);
-                }
-            });
-
-            // Log Out
-            document.getElementById('logout-btn').addEventListener('click', () => {
-                signOut(auth);
-            });
-
-            // Save Progress
-            document.getElementById('save-progress-btn').addEventListener('click', async () => {
-                const user = auth.currentUser;
-                if (!user) return;
-
-                try {
-                    const userDataToSave = {
-                        savedSettings: localStorage.getItem('settings') || '{}',
-                        starredGames: localStorage.getItem('starredGames') || '[]',
-                        customTheme: localStorage.getItem('customTheme') || '{}',
-                        lastUpdated: new Date().toISOString()
-                    };
-
-                    await setDoc(doc(db, "users", user.uid), userDataToSave, { merge: true });
-                    syncStatus.textContent = "✅ Progress successfully saved to the cloud!";
-                    syncStatus.classList.remove('hidden');
-                    setTimeout(() => syncStatus.classList.add('hidden'), 4000);
-                } catch (error) {
-                    alert("Error saving data: " + error.message);
-                }
-            });
-
-            // Load Progress
-            document.getElementById('load-progress-btn').addEventListener('click', async () => {
-                const user = auth.currentUser;
-                if (!user) return;
-
-                try {
-                    const docRef = doc(db, "users", user.uid);
-                    const docSnap = await getDoc(docRef);
-
-                    if (docSnap.exists()) {
-                        const data = docSnap.data();
-                        if (data.savedSettings) localStorage.setItem('settings', data.savedSettings);
-                        if (data.starredGames) localStorage.setItem('starredGames', data.starredGames);
-                        if (data.customTheme) localStorage.setItem('customTheme', data.customTheme);
-
-                        syncStatus.textContent = "🔄 Progress loaded! Refreshing page...";
-                        syncStatus.classList.remove('hidden');
-                        setTimeout(() => location.reload(), 1500);
-                    } else {
-                        alert("No cloud save data found for this account yet.");
+                    if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
+                        node.childNodes.forEach(child => replaceStarWithImage(child));
                     }
-                } catch (error) {
-                    alert("Error loading data: " + error.message);
                 }
-            });
-        </script>
-    </body>
+            }
+
+            replaceStarWithImage(document.body);
+        });
+    </script>
+</body>
 </html>
