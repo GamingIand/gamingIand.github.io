@@ -805,14 +805,14 @@
 
             <a target="_blank" href="drivemad/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/drivemad.jpeg');" data-genre="platformer">
-                    <h2>drive mad</h2>
+                    <h2>✪drive mad</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
 
             <a target="_blank" href="escaperoad/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/escaperoad.jpeg');" data-genre="arcade">
-                    <h2>escape road city 2</h2>
+                    <h2>✪escape road city 2</h2>
                     <span class="pin-button"><img src="/images/other/star.png" width="25px" height="25px"></span>
                 </div>
             </a>
@@ -4099,5 +4099,39 @@
 
 
 
+        document.addEventListener("DOMContentLoaded", () => {
+    // Function to replace text nodes containing '✪' with an image
+    function replaceStarWithImage(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            if (node.textContent.includes('✪')) {
+                const fragment = document.createDocumentFragment();
+                const parts = node.textContent.split('✪');
+                
+                parts.forEach((part, index) => {
+                    if (part) {
+                        fragment.appendChild(document.createTextNode(part));
+                    }
+                    if (index < parts.length - 1) {
+                        const img = document.createElement('img');
+                        img.src = 'images/icons/star.png'; // Path to your star image
+                        img.className = 'custom-star-icon';
+                        img.alt = '★';
+                        fragment.appendChild(img);
+                    }
+                });
+                
+                node.parentNode.replaceChild(fragment, node);
+            }
+        } else {
+            // Skip script and style tags to avoid breaking code
+            if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
+                node.childNodes.forEach(child => replaceStarWithImage(child));
+            }
+        }
+    }
+
+    // Run across the whole body content
+    replaceStarWithImage(document.body);
+});
   </body>
 </html>
