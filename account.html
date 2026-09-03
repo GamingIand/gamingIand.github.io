@@ -428,6 +428,50 @@
                     setTimeout(() => ripple.remove(), 500);
                 });
             });
+            // Elements
+const usernameInput = document.getElementById('username-input');
+
+// When user logs in, fetch their username from Firestore
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        loggedOutView.classList.add('hidden');
+        loggedInView.classList.remove('hidden');
+        userEmailDisplay.textContent = user.email || user.phoneNumber || user.displayName;
+
+        // Fetch user document from Firestore
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists() && docSnap.data().username) {
+            usernameInput.value = docSnap.data().username;
+            localStorage.setItem('username', docSnap.data().username);
+        }
+    } else {
+        loggedInView.classList.add('hidden');
+        loggedOutView.classList.remove('hidden');
+        localStorage.removeItem('username');
+    }
+});
+
+// Save Username button logic
+document.getElementById('save-username-btn').addEventListener('click', async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const newUsername = usernameInput.value.trim();
+    if (!newUsername) {
+        alert("Please enter a valid username.");
+        return;
+    }
+
+    try {
+        // Save to Firestore and local storage
+        await setDoc(doc(db, "users", user.uid), { username: newUsername }, { merge: true });
+        localStorage.setItem('username', newUsername);
+        alert("Username saved successfully!");
+    } catch (error) {
+        alert("Error saving username: " + error.message);
+    }
+});
         </script>
     </body>
 </html>
