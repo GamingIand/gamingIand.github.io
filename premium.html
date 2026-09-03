@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamingland - Premium Coming Soon</title>
+    <link rel="stylesheet" href="storage/css/index.css">
+    <style>
+        .custom-star-icon {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            display: inline-block;
+            object-fit: contain;
+            margin: 0 3px;
+        }
+
+        .premium-container {
+            max-width: 650px;
+            margin: 80px auto;
+            padding: 40px;
+            background: rgba(20, 20, 25, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.1);
+            color: #ffffff;
+        }
+
+        .premium-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffd700 0%, #ff8f00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .premium-subtitle {
+            font-size: 1.1rem;
+            color: #b3b3b3;
+            margin-bottom: 30px;
+        }
+
+        .perks-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            text-align: left;
+            margin-bottom: 35px;
+        }
+
+        .perk-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .perk-item:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #ffd700 0%, #ff8f00 100%);
+            color: #121212;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255, 143, 0, 0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="premium-container">
+        <h1>Gamingland ✪ Premium</h1>
+        <p class="premium-subtitle">Unlock the ultimate gaming experience. Coming soon!</p>
+
+        <div class="perks-grid">
+            <div class="perk-item">✪ &nbsp; 3 extra save slots</div>
+            <div class="perk-item">✪ &nbsp; Access to beta features</div>
+            <div class="perk-item">✪ &nbsp; Exclusive in-game chat</div>
+            <div class="perk-item">✪ &nbsp; 10 free credits a day</div>
+            <div class="perk-item">✪ &nbsp; Custom ✪ premium badge next to your name</div>
+        </div>
+
+        <a href="index.html" class="back-btn">← Back to Homepage</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            function replaceStarWithImage(node) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    if (node.textContent.includes('✪')) {
+                        const fragment = document.createDocumentFragment();
+                        const parts = node.textContent.split('✪');
+                        
+                        parts.forEach((part, index) => {
+                            if (part) {
+                                fragment.appendChild(document.createTextNode(part));
+                            }
+                            if (index < parts.length - 1) {
+                                const img = document.createElement('img');
+                                img.src = '/images/icons/star.png';
+                                img.className = 'custom-star-icon';
+                                img.alt = '★';
+                                fragment.appendChild(img);
+                            }
+                        });
+                        
+                        node.parentNode.replaceChild(fragment, node);
+                    }
+                } else {
+                    if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
+                        node.childNodes.forEach(child => replaceStarWithImage(child));
+                    }
+                }
+            }
+
+            replaceStarWithImage(document.body);
+        });
+    </script>
+</body>
+</html>
