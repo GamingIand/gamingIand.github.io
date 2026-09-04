@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -63,8 +63,9 @@
             padding: 12px 15px;
             border-radius: 10px;
             margin-bottom: 20px;
-            font-size: 0.95krem;
+            font-size: 0.95rem;
             text-align: left;
+            word-break: break-all;
         }
 
         .input-field {
@@ -84,7 +85,6 @@
             border-color: #4da6ff;
         }
 
-        /* Uniform Full-Width Buttons */
         .account-btn {
             width: 100%;
             padding: 12px 20px;
@@ -107,10 +107,6 @@
             border-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-1px);
         }
-
-        .account-btn:active {
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body>
@@ -120,17 +116,133 @@
         <a href="index.html" class="back-link">← back to homepage</a>
 
         <div class="section-title">Logged In As</div>
-        <div id="user-status" class="status-box">Loading account status...</div>
+        <div id="user-status" class="status-box">Checking authentication...</div>
 
         <div class="section-title">Your Username</div>
         <input type="text" id="username-input" class="input-field" placeholder="Enter your username">
 
-        <!-- All action buttons sharing the same color and full width -->
         <button id="save-username-btn" class="account-btn">Save Username</button>
         <button id="save-progress-btn" class="account-btn">☁ Save Progress to Cloud</button>
         <button id="load-progress-btn" class="account-btn">🔄 Load Progress from Cloud</button>
         <button id="logout-btn" class="account-btn">Log Out</button>
     </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Your Firebase configuration (Ensure these match your project keys)
+        const firebaseConfig = {
+  apiKey: "AIzaSyA1dyRxFsWoDP_IJ1jYg8Cst0TCR_nlPy8",
+  authDomain: "gamingland-net.firebaseapp.com",
+  projectId: "gamingland-net",
+  storageBucket: "gamingland-net.firebasestorage.app",
+  messagingSenderId: "511326840492",
+  appId: "1:511326840492:web:972797366ebc3c1db46109"
+};
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const userStatusDiv = document.getElementById("user-status");
+        const usernameInput = document.getElementById("username-input");
+        const saveUsernameBtn = document.getElementById("save-username-btn");
+        const saveProgressBtn = document.getElementById("save-progress-btn");
+        const loadProgressBtn = document.getElementById("load-progress-btn");
+        const logoutBtn = document.getElementById("logout-btn");
+
+        let currentUser = null;
+
+        // Monitor Auth State
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUser = user;
+                userStatusDiv.innerHTML = `Logged in as: <b>${user.email}</b>`;
+                
+                // Fetch saved username from Firestore if it exists
+                try {
+                    const docRef = doc(db, "users", user.uid);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists() && docSnap.data().username) {
+                        usernameInput.value = docSnap.data().username;
+                    }
+                } catch (error) {
+                    console.error("Error loading user data:", error);
+                }
+            } else {
+                currentUser = null;
+                userStatusDiv.innerHTML = "Not logged in. <a href='index.html' style='color:#4da6ff;'>Return home to sign in</a>";
+            }
+        });
+
+        // Save Username
+        saveUsernameBtn.addEventListener("click", async () => {
+            if (!currentUser) {
+                alert("You must be logged in to save your username.");
+                return;
+            }
+            try {
+                await setDoc(doc(db, "users", currentUser.uid), {
+                    username: usernameInput.value,
+                    email: currentUser.email
+                }, { merge: true });
+                alert("Username saved successfully!");
+            } catch (error) {
+                alert("Error saving username: " + error.message);
+            }
+        });
+
+        // Save Progress to Cloud
+        saveProgressBtn.addEventListener("click", async () => {
+            if (!currentUser) {
+                alert("You must be logged in to save progress.");
+                return;
+            }
+            try {
+                const gameData = localStorage.getItem("gameProgress") || "{}";
+                await setDoc(doc(db, "users", currentUser.uid), {
+                    progress: JSON.parse(gameData),
+                    lastSaved: new Date().toISOString()
+                }, { merge: true });
+                alert("Progress saved to cloud successfully!");
+            } catch (error) {
+                alert("Error saving progress: " + error.message);
+            }
+        });
+
+        // Load Progress from Cloud
+        loadProgressBtn.addEventListener("click", async () => {
+            if (!currentUser) {
+                alert("You must be logged in to load progress.");
+                return;
+            }
+            try {
+                const docRef = doc(db, "users", currentUser.uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists() && docSnap.data().progress) {
+                    localStorage.setItem("gameProgress", JSON.stringify(docSnap.data().progress));
+                    alert("Progress loaded from cloud successfully!");
+                } else {
+                    alert("No cloud save data found.");
+                }
+            } catch (error) {
+                alert("Error loading progress: " + error.message);
+            }
+        });
+
+        // Log Out
+        logoutBtn.addEventListener("click", async () => {
+            try {
+                await signOut(auth);
+                alert("Logged out successfully.");
+                window.location.href = "index.html";
+            } catch (error) {
+                alert("Error logging out: " + error.message);
+            }
+        });
+    </script>
 
     <!-- Universal Star Icon Replacement Script -->
     <script>
