@@ -107,6 +107,10 @@
             border-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-1px);
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -115,26 +119,40 @@
         <h1>Cloud Sync ✪</h1>
         <a href="index.html" class="back-link">← back to homepage</a>
 
-        <div class="section-title">Logged In As</div>
-        <div id="user-status" class="status-box">Checking authentication...</div>
+        <!-- LOGGED OUT VIEW: Login & Signup Form -->
+        <div id="logged-out-section" class="hidden">
+            <div class="section-title">Sign In or Create Account</div>
+            
+            <input type="email" id="auth-email" class="input-field" placeholder="Email address">
+            <input type="password" id="auth-password" class="input-field" placeholder="Password">
 
-        <div class="section-title">Your Username</div>
-        <input type="text" id="username-input" class="input-field" placeholder="Enter your username">
+            <button id="login-btn" class="account-btn">Log In</button>
+            <button id="signup-btn" class="account-btn">Create Account</button>
+        </div>
 
-        <button id="save-username-btn" class="account-btn">Save Username</button>
-        <button id="save-progress-btn" class="account-btn">☁ Save Progress to Cloud</button>
-        <button id="load-progress-btn" class="account-btn">🔄 Load Progress from Cloud</button>
-        <button id="logout-btn" class="account-btn">Log Out</button>
+        <!-- LOGGED IN VIEW: Profile, Username & Cloud Sync Actions -->
+        <div id="logged-in-section" class="hidden">
+            <div class="section-title">Logged In As</div>
+            <div id="user-status" class="status-box"></div>
+
+            <div class="section-title">Your Username</div>
+            <input type="text" id="username-input" class="input-field" placeholder="Enter your username">
+
+            <button id="save-username-btn" class="account-btn">Save Username</button>
+            <button id="save-progress-btn" class="account-btn">☁ Save Progress to Cloud</button>
+            <button id="load-progress-btn" class="account-btn">🔄 Load Progress from Cloud</button>
+            <button id="logout-btn" class="account-btn">Log Out</button>
+        </div>
     </div>
 
-    <!-- Firebase SDKs -->
+    <!-- Firebase SDKs & Authentication Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         // Your Firebase configuration (Ensure these match your project keys)
-        const firebaseConfig = {
+       const firebaseConfig = {
   apiKey: "AIzaSyA1dyRxFsWoDP_IJ1jYg8Cst0TCR_nlPy8",
   authDomain: "gamingland-net.firebaseapp.com",
   projectId: "gamingland-net",
@@ -142,11 +160,20 @@
   messagingSenderId: "511326840492",
   appId: "1:511326840492:web:972797366ebc3c1db46109"
 };
+
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
+        // Elements
+        const loggedOutSection = document.getElementById("logged-out-section");
+        const loggedInSection = document.getElementById("logged-in-section");
         const userStatusDiv = document.getElementById("user-status");
+        const authEmailInput = document.getElementById("auth-email");
+        const authPasswordInput = document.getElementById("auth-password");
+        const loginBtn = document.getElementById("login-btn");
+        const signupBtn = document.getElementById("signup-btn");
+
         const usernameInput = document.getElementById("username-input");
         const saveUsernameBtn = document.getElementById("save-username-btn");
         const saveProgressBtn = document.getElementById("save-progress-btn");
@@ -155,11 +182,13 @@
 
         let currentUser = null;
 
-        // Monitor Auth State
+        // Monitor Auth State and toggle views dynamically
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentUser = user;
-                userStatusDiv.innerHTML = `Logged in as: <b>${user.email}</b>`;
+                loggedOutSection.classList.add("hidden");
+                loggedInSection.classList.remove("hidden");
+                userStatusDiv.innerHTML = `<b>${user.email}</b>`;
                 
                 // Fetch saved username from Firestore if it exists
                 try {
@@ -173,16 +202,46 @@
                 }
             } else {
                 currentUser = null;
-                userStatusDiv.innerHTML = "Not logged in. <a href='index.html' style='color:#4da6ff;'>Return home to sign in</a>";
+                loggedInSection.classList.add("hidden");
+                loggedOutSection.classList.remove("hidden");
+            }
+        });
+
+        // Handle Login
+        loginBtn.addEventListener("click", async () => {
+            const email = authEmailInput.value.trim();
+            const password = authPasswordInput.value;
+            if (!email || !password) {
+                alert("Please enter both email and password.");
+                return;
+            }
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                alert("Logged in successfully!");
+            } catch (error) {
+                alert("Login failed: " + error.message);
+            }
+        });
+
+        // Handle Signup / Create Account
+        signupBtn.addEventListener("click", async () => {
+            const email = authEmailInput.value.trim();
+            const password = authPasswordInput.value;
+            if (!email || !password) {
+                alert("Please enter both email and password.");
+                return;
+            }
+            try {
+                await createUserWithEmailAndPassword(auth, email, password);
+                alert("Account created successfully!");
+            } catch (error) {
+                alert("Registration failed: " + error.message);
             }
         });
 
         // Save Username
         saveUsernameBtn.addEventListener("click", async () => {
-            if (!currentUser) {
-                alert("You must be logged in to save your username.");
-                return;
-            }
+            if (!currentUser) return;
             try {
                 await setDoc(doc(db, "users", currentUser.uid), {
                     username: usernameInput.value,
@@ -196,10 +255,7 @@
 
         // Save Progress to Cloud
         saveProgressBtn.addEventListener("click", async () => {
-            if (!currentUser) {
-                alert("You must be logged in to save progress.");
-                return;
-            }
+            if (!currentUser) return;
             try {
                 const gameData = localStorage.getItem("gameProgress") || "{}";
                 await setDoc(doc(db, "users", currentUser.uid), {
@@ -214,10 +270,7 @@
 
         // Load Progress from Cloud
         loadProgressBtn.addEventListener("click", async () => {
-            if (!currentUser) {
-                alert("You must be logged in to load progress.");
-                return;
-            }
+            if (!currentUser) return;
             try {
                 const docRef = doc(db, "users", currentUser.uid);
                 const docSnap = await getDoc(docRef);
@@ -237,7 +290,6 @@
             try {
                 await signOut(auth);
                 alert("Logged out successfully.");
-                window.location.href = "index.html";
             } catch (error) {
                 alert("Error logging out: " + error.message);
             }
@@ -280,3 +332,5 @@
     </script>
 </body>
 </html>
+
+```
