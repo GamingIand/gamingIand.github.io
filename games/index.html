@@ -176,47 +176,35 @@
                 max-width: 1300px;
             }
 
-            /* Dynamic Auto-Mosaic Grid System */
+            /* Flexbox Container that handles natural mixed-size cards smoothly */
             .button-container {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                grid-auto-rows: 140px;
-                grid-auto-flow: dense;
-                gap: 20px;
-                width: 100%;
-                max-width: 1300px;
-                padding: 15px;
+                display: flex;
+                flex-wrap: wrap;
                 justify-content: center;
+                gap: 20px;
+                padding: 15px;
+                max-width: 1300px;
+                width: 100%;
             }
 
             .button-container a {
                 text-decoration: none;
                 perspective: 1000px;
-                display: block;
+                display: inline-block;
             }
 
-            /* Automated Sizing Classes Applied via Script */
-            .button-container a.size-sm {
-                grid-column: span 1;
-                grid-row: span 1;
+            /* Automatically assigned sizes by script */
+            .button-container a.size-standard {
+                width: 200px;
             }
-            .button-container a.size-md {
-                grid-column: span 2;
-                grid-row: span 2;
-            }
+
             .button-container a.size-wide {
-                grid-column: span 2;
-                grid-row: span 1;
-            }
-            .button-container a.size-tall {
-                grid-column: span 1;
-                grid-row: span 2;
+                width: 420px;
             }
 
             /* Base Game Card Style */
             .button {
                 width: 100% !important;
-                height: 100% !important;
                 background-size: cover;
                 background-position: center;
                 border-radius: 22px !important;
@@ -233,7 +221,7 @@
 
             /* Hover Zoom + Lift Effect */
             .button:hover {
-                transform: translateY(-8px) scale(1.04);
+                transform: translateY(-8px) scale(1.03);
                 box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(88, 166, 255, 0.3);
                 border-color: var(--accent-color);
                 z-index: 10;
@@ -333,17 +321,14 @@
                 });
             }
 
-            // Automatically mix up game icon sizes so you don't have to edit thousands of links manually!
+            // Automatically mix up game widths without changing your HTML files
             document.addEventListener('DOMContentLoaded', () => {
                 const gameLinks = document.querySelectorAll('.button-container > a');
-                
-                // Distribution weights for different sizes (mostly standard, with some medium, wide, and tall mixed in)
-                const sizes = ['size-sm', 'size-sm', 'size-sm', 'size-md', 'size-wide', 'size-tall'];
+                const layoutOptions = ['size-standard', 'size-standard', 'size-standard', 'size-standard', 'size-wide'];
 
                 gameLinks.forEach((link, index) => {
-                    // Pick a size pseudo-randomly based on index or random math
-                    const randomSize = sizes[Math.floor(Math.sin(index * 999) * sizes.length + sizes.length) % sizes.length];
-                    link.classList.add(randomSize);
+                    const randomLayout = layoutOptions[Math.abs(Math.sin(index * 13.37) * layoutOptions.length) | 0];
+                    link.classList.add(randomLayout);
                 });
 
                 // Ripple effect generator for click satisfaction
@@ -399,7 +384,7 @@
         <div class="pinned-container">
             <!-- Pinned items go here -->
         </div>
-
+        
         <h2 class="allgames-header">All Games</h2>
               
         <h2 class="allgames-header"></h2>
