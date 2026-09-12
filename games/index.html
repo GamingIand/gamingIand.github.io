@@ -22,17 +22,21 @@
 
         <style>
             :root {
-                --bg-color: #0b0f17;
-                --panel-bg: rgba(20, 29, 45, 0.75);
-                --accent-color: #70a5ff;
-                --accent-gradient: linear-gradient(135deg, #3875ef 0%, #1f50c9 100%);
-                --text-main: #e2e8f0;
-                --text-muted: #8899ac;
-                --border-color: rgba(112, 165, 255, 0.2);
+                --bg-color: #07090e;
+                --liquid-glass-bg: rgba(255, 255, 255, 0.04);
+                --liquid-glass-border: rgba(255, 255, 255, 0.12);
+                --liquid-glass-shine: rgba(255, 255, 255, 0.25);
+                --accent-color: #38bdf8;
+                --accent-gradient: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+                --text-main: #f8fafc;
+                --text-muted: #94a3b8;
             }
 
             body {
                 background-color: var(--bg-color);
+                background-image: 
+                    radial-gradient(circle at 15% 20%, rgba(14, 165, 233, 0.12) 0%, transparent 40%),
+                    radial-gradient(circle at 85% 80%, rgba(37, 99, 235, 0.12) 0%, transparent 40%);
                 color: var(--text-main);
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 margin: 0;
@@ -45,55 +49,61 @@
                 overflow-x: hidden;
             }
 
-            /* Main Header Title Styling */
+            /* Main Header Title */
             .main-title {
-                font-size: 32px;
+                font-size: 28px;
                 font-weight: 800;
-                letter-spacing: 3px;
+                letter-spacing: 4px;
                 color: #ffffff;
                 text-transform: uppercase;
-                margin: 10px 0 20px 0;
-                text-shadow: 0 0 20px rgba(112, 165, 255, 0.4);
+                margin: 5px 0 15px 0;
+                text-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
             }
 
-            /* Controls Bar */
+            /* Controls Bar - Liquid Glass */
             .controls-wrapper {
                 display: flex;
                 flex-wrap: wrap;
                 gap: 12px;
                 justify-content: center;
                 align-items: center;
-                margin-bottom: 10px;
+                margin-bottom: 5px;
                 width: 100%;
                 max-width: 800px;
             }
 
             #search {
-                background: var(--panel-bg);
-                border: 1px solid var(--border-color);
+                background: var(--liquid-glass-bg);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid var(--liquid-glass-border);
                 color: var(--text-main);
                 padding: 10px 16px;
-                border-radius: 12px;
+                border-radius: 14px;
                 font-size: 14px;
                 outline: none;
                 width: 220px;
+                box-shadow: inset 0 1px 1px var(--liquid-glass-shine), 0 8px 32px rgba(0, 0, 0, 0.3);
                 transition: all 0.3s ease;
             }
 
             #search:focus {
                 border-color: var(--accent-color);
-                box-shadow: 0 0 0 3px rgba(112, 165, 255, 0.25);
+                box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 0 0 3px rgba(56, 189, 248, 0.25);
             }
 
             #genreDropdown {
-                background: var(--panel-bg);
-                border: 1px solid var(--border-color);
+                background: var(--liquid-glass-bg);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid var(--liquid-glass-border);
                 color: var(--text-main);
                 padding: 10px 16px;
-                border-radius: 12px;
+                border-radius: 14px;
                 font-size: 14px;
                 outline: none;
                 cursor: pointer;
+                box-shadow: inset 0 1px 1px var(--liquid-glass-shine), 0 8px 32px rgba(0, 0, 0, 0.3);
                 transition: all 0.2s ease;
             }
 
@@ -103,20 +113,20 @@
 
             #random-game-btn {
                 background: var(--accent-gradient);
-                border: none;
+                border: 1px solid rgba(255, 255, 255, 0.2);
                 color: white;
                 padding: 10px 20px;
-                border-radius: 12px;
+                border-radius: 14px;
                 font-weight: 600;
                 font-size: 14px;
                 cursor: pointer;
+                box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 8px 20px rgba(14, 165, 233, 0.35);
                 transition: all 0.25s ease;
-                box-shadow: 0 4px 15px rgba(56, 117, 239, 0.35);
             }
 
             #random-game-btn:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(56, 117, 239, 0.5);
+                box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 0 12px 25px rgba(14, 165, 233, 0.5);
             }
 
             /* Sketch Layout: Carousel Showcase Arena */
@@ -124,26 +134,25 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 40px;
+                gap: 25px;
                 width: 100%;
-                max-width: 1100px;
-                margin: 20px 0;
+                max-width: 1050px;
+                margin: 15px 0;
             }
 
-            /* Side Scroller Preview Cards (Previous / Next) */
+            /* Side Scroller Preview Cards */
             .side-preview {
-                width: 180px;
-                height: 240px;
-                border-radius: 16px;
+                width: 160px;
+                height: 220px;
+                border-radius: 20px;
                 background-size: cover;
                 background-position: center;
-                opacity: 0.35;
-                filter: blur(2px) grayscale(40%);
+                opacity: 0.3;
+                filter: blur(3px) grayscale(50%);
                 transform: scale(0.9);
                 transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                position: relative;
-                border: 1px solid var(--border-color);
-                display: none; /* Enabled on desktop via media query or JS if desired */
+                border: 1px solid var(--liquid-glass-border);
+                display: none;
             }
 
             @media (min-width: 850px) {
@@ -152,31 +161,32 @@
                 }
             }
 
-            /* Navigation Arrows */
+            /* Navigation Arrows - Liquid Glass */
             .carousel-arrow {
-                background: var(--panel-bg);
-                border: 1px solid var(--border-color);
+                background: var(--liquid-glass-bg);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid var(--liquid-glass-border);
                 color: var(--text-main);
-                width: 60px;
-                height: 60px;
+                width: 55px;
+                height: 55px;
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 26px;
+                font-size: 24px;
                 cursor: pointer;
+                box-shadow: inset 0 1px 1px var(--liquid-glass-shine), 0 10px 30px rgba(0, 0, 0, 0.5);
                 transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-                backdrop-filter: blur(6px);
                 user-select: none;
             }
 
             .carousel-arrow:hover {
                 background: var(--accent-color);
-                color: #0b0f17;
+                color: #07090e;
                 border-color: var(--accent-color);
                 transform: scale(1.1);
-                box-shadow: 0 0 20px rgba(112, 165, 255, 0.6);
+                box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), 0 0 25px rgba(56, 189, 248, 0.6);
             }
 
             .carousel-arrow:active {
@@ -185,13 +195,13 @@
 
             /* Center Featured Game Card */
             .featured-game-card {
-                width: 380px;
-                height: 380px;
+                width: 360px;
+                height: 360px;
                 background-size: cover;
                 background-position: center;
-                border-radius: 24px;
-                border: 2px solid var(--border-color);
-                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(112, 165, 255, 0.15);
+                border-radius: 28px;
+                border: 1px solid var(--liquid-glass-border);
+                box-shadow: inset 0 1px 2px var(--liquid-glass-shine), 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.15);
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
@@ -203,32 +213,50 @@
             .featured-game-card:hover {
                 transform: translateY(-6px) scale(1.02);
                 border-color: var(--accent-color);
-                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(112, 165, 255, 0.3);
+                box-shadow: inset 0 1px 2px rgba(255,255,255,0.4), 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 45px rgba(56, 189, 248, 0.3);
             }
 
-            /* Bottom Action Bar inside the Featured Card */
+            /* Game Title Banner inside the card */
+            .card-title-banner {
+                background: rgba(7, 9, 14, 0.65);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                padding: 10px 15px;
+                font-size: 14px;
+                font-weight: 700;
+                color: #ffffff;
+                text-align: center;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            /* Bottom Action Bar inside the Featured Card - Liquid Glass */
             .card-action-bar {
-                background: rgba(11, 15, 23, 0.85);
-                backdrop-filter: blur(10px);
+                background: rgba(7, 9, 14, 0.8);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
                 padding: 12px;
                 display: flex;
                 align-items: center;
                 gap: 10px;
-                border-top: 1px solid var(--border-color);
+                border-top: 1px solid var(--liquid-glass-border);
             }
 
             .card-play-btn {
                 flex: 1;
                 background: var(--accent-gradient);
+                border: 1px solid rgba(255, 255, 255, 0.2);
                 color: white;
                 text-decoration: none;
                 text-align: center;
                 padding: 10px 0;
-                border-radius: 10px;
+                border-radius: 12px;
                 font-weight: 700;
                 font-size: 15px;
                 letter-spacing: 0.5px;
-                box-shadow: 0 4px 15px rgba(56, 117, 239, 0.4);
+                box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 4px 15px rgba(14, 165, 233, 0.4);
                 transition: filter 0.2s, transform 0.2s;
             }
 
@@ -238,29 +266,40 @@
             }
 
             .card-icon-btn {
-                background: rgba(255, 255, 255, 0.08);
-                border: 1px solid var(--border-color);
+                background: var(--liquid-glass-bg);
+                backdrop-filter: blur(10px);
+                border: 1px solid var(--liquid-glass-border);
                 color: var(--text-main);
                 width: 42px;
                 height: 42px;
-                border-radius: 10px;
+                border-radius: 12px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                font-size: 16px;
                 transition: all 0.2s ease;
                 text-decoration: none;
+                box-shadow: inset 0 1px 1px var(--liquid-glass-shine);
+            }
+
+            .card-icon-btn img {
+                width: 20px;
+                height: 20px;
+                filter: invert(1);
+                opacity: 0.9;
             }
 
             .card-icon-btn:hover {
                 background: var(--accent-color);
-                color: #0b0f17;
                 border-color: var(--accent-color);
                 transform: scale(1.08);
             }
 
-            /* Bottom Navigation Buttons Bar (Account, Settings, Charts) */
+            .card-icon-btn:hover img {
+                filter: invert(0);
+            }
+
+            /* Bottom Navigation Buttons Bar (Account, Settings, Charts) - Liquid Glass */
             .bottom-nav-bar {
                 display: flex;
                 gap: 15px;
@@ -269,30 +308,31 @@
             }
 
             .nav-pill-btn {
-                background: var(--panel-bg);
-                border: 1px solid var(--border-color);
+                background: var(--liquid-glass-bg);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid var(--liquid-glass-border);
                 padding: 10px 24px;
                 border-radius: 30px;
                 font-size: 14px;
                 font-weight: 600;
                 color: var(--text-main) !important;
                 text-decoration: none !important;
-                backdrop-filter: blur(6px);
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                box-shadow: inset 0 1px 1px var(--liquid-glass-shine), 0 8px 25px rgba(0, 0, 0, 0.3);
                 transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
             }
 
             .nav-pill-btn:hover {
                 border-color: var(--accent-color);
-                background: rgba(112, 165, 255, 0.15);
+                background: rgba(56, 189, 248, 0.15);
                 transform: translateY(-3px);
-                box-shadow: 0 6px 20px rgba(112, 165, 255, 0.25);
+                box-shadow: inset 0 1px 1px rgba(255,255,255,0.5), 0 10px 25px rgba(56, 189, 248, 0.3);
                 color: #ffffff !important;
             }
 
-            /* Hidden containers for script compatibility */
-            .pinned-container, .button-container {
-                display: none;
+            /* Hide raw buttons list since carousel handles the view */
+            .button-container {
+                display: none !important;
             }
         </style>
 
@@ -305,6 +345,120 @@
                         console.log('ack, error with serviceworker! ', error);
                     });
                 });
+            }
+
+            let gamesList = [];
+            let filteredGames = [];
+            let currentIndex = 0;
+
+            document.addEventListener('DOMContentLoaded', () => {
+                // Automatically scrape your 1k+ games from the page container
+                const rawGameElements = document.querySelectorAll('.button-container > a');
+                
+                rawGameElements.forEach(a => {
+                    const btn = a.querySelector('.button');
+                    if (btn) {
+                        gamesList.push({
+                            href: a.getAttribute('href') || '#',
+                            target: a.getAttribute('target') || '_self',
+                            title: btn.querySelector('h2') ? btn.querySelector('h2').innerText : 'Game',
+                            bg: btn.style.backgroundImage || '',
+                            genre: btn.getAttribute('data-genre') || 'all'
+                        });
+                    }
+                });
+
+                // Fallback if container is empty or still loading externally
+                if (gamesList.length === 0) {
+                    gamesList.push({
+                        href: '#',
+                        target: '_self',
+                        title: 'Gamingland Ready',
+                        bg: 'url(\'../images/ico.ico\')',
+                        genre: 'all'
+                    });
+                }
+
+                filteredGames = [...gamesList];
+                updateCarousel();
+
+                // Arrow Listeners
+                document.getElementById('prev-btn').addEventListener('click', () => {
+                    if (filteredGames.length === 0) return;
+                    currentIndex = (currentIndex - 1 + filteredGames.length) % filteredGames.length;
+                    updateCarousel();
+                });
+
+                document.getElementById('next-btn').addEventListener('click', () => {
+                    if (filteredGames.length === 0) return;
+                    currentIndex = (currentIndex + 1) % filteredGames.length;
+                    updateCarousel();
+                });
+
+                // Random Game Button
+                document.getElementById('random-game-btn').addEventListener('click', () => {
+                    if (filteredGames.length === 0) return;
+                    currentIndex = Math.floor(Math.random() * filteredGames.length);
+                    updateCarousel();
+                });
+
+                // Search Filter Handler
+                const searchInput = document.getElementById('search');
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase();
+                    filterGames(query, document.getElementById('genreDropdown').value);
+                });
+
+                // Genre Filter Handler
+                const genreDropdown = document.getElementById('genreDropdown');
+                genreDropdown.addEventListener('change', (e) => {
+                    const genre = e.target.value;
+                    filterGames(document.getElementById('search').value.toLowerCase(), genre);
+                });
+            });
+
+            function filterGames(query, genre) {
+                filteredGames = gamesList.filter(g => {
+                    const matchesQuery = g.title.toLowerCase().includes(query);
+                    const matchesGenre = genre === 'all' || g.genre === genre;
+                    return matchesQuery && matchesGenre;
+                });
+                currentIndex = 0;
+                updateCarousel();
+            }
+
+            function updateCarousel() {
+                const featuredCard = document.getElementById('featured-card');
+                const titleEl = document.getElementById('card-title');
+                const playLink = document.getElementById('play-link');
+                const prevPreview = document.getElementById('prev-preview');
+                const nextPreview = document.getElementById('next-preview');
+
+                if (filteredGames.length === 0) {
+                    titleEl.innerText = 'No games found';
+                    featuredCard.style.backgroundImage = 'none';
+                    playLink.setAttribute('href', '#');
+                    prevPreview.style.backgroundImage = 'none';
+                    nextPreview.style.backgroundImage = 'none';
+                    return;
+                }
+
+                const prevIndex = (currentIndex - 1 + filteredGames.length) % filteredGames.length;
+                const nextIndex = (currentIndex + 1) % filteredGames.length;
+
+                const currentGame = filteredGames[currentIndex];
+                const prevGame = filteredGames[prevIndex];
+                const nextGame = filteredGames[nextIndex];
+
+                // Update center card
+                featuredCard.style.backgroundImage = currentGame.bg;
+                titleEl.innerText = currentGame.title;
+                playLink.setAttribute('href', currentGame.href);
+                playLink.setAttribute('target', currentGame.target);
+
+                // Update scroller previews
+                prevPreview.style.backgroundImage = prevGame.bg;
+                nextPreview.style.backgroundImage = nextGame.bg;
             }
         </script>
     </head>
@@ -331,17 +485,22 @@
         <!-- Sketch Scroller Showcase Arena -->
         <div class="showcase-arena">
             <!-- Previous Game Side Scroller Preview -->
-            <div class="side-preview" id="prev-preview" style="background-image: url('../images/placeholder1.jpg');"></div>
+            <div class="side-preview" id="prev-preview"></div>
 
             <!-- Left Arrow -->
             <div class="carousel-arrow" id="prev-btn">‹</div>
 
             <!-- Center Active Featured Game Card -->
-            <div class="featured-game-card" id="featured-card" style="background-image: url('../images/placeholder2.jpg');">
+            <div class="featured-game-card" id="featured-card">
+                <div class="card-title-banner" id="card-title">Game Title</div>
                 <div class="card-action-bar">
-                    <a href="#" id="play-link" class="card-play-btn">play</a>
-                    <button id="star-btn" class="card-icon-btn" title="Star Game">*</button>
-                    <a href="#" id="download-link" class="card-icon-btn" title="Download">↓</a>
+                    <a href="#" id="play-link" target="_blank" class="card-play-btn">play</a>
+                    <button id="star-btn" class="card-icon-btn" title="Star Game">
+                        <img src="/images/other/star.png" alt="Star">
+                    </button>
+                    <a href="#" id="download-link" class="card-icon-btn" title="Download">
+                        <img src="/images/other/download.png" alt="Download">
+                    </a>
                 </div>
             </div>
 
@@ -349,7 +508,7 @@
             <div class="carousel-arrow" id="next-btn">›</div>
 
             <!-- Next Game Side Scroller Preview -->
-            <div class="side-preview" id="next-preview" style="background-image: url('../images/placeholder3.jpg');"></div>
+            <div class="side-preview" id="next-preview"></div>
         </div>
 
         <!-- Bottom Navigation Buttons (Account, Settings, Charts) -->
@@ -359,12 +518,9 @@
             <a href="charts.html" class="nav-pill-btn">Charts</a>
         </div>
 
-        <!-- Hidden structures so any existing game scraper scripts won't break -->
-        <div class="pinned-container"></div>
-        <div class="button-container"></div>
-              
-        <h2 class="allgames-header"></h2>
+        <!-- Keep your original button container structure intact so your 1k+ games load properly -->
         <div class="button-container">
+            
             <a target="_blank" href="slope/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/slope.jpg');" data-genre="platformer">
                     <h2>slope</h2>
@@ -4098,6 +4254,7 @@
 
 
         </div>
+        <div class="pinned-container" style="display:none;"></div>
         <p> // all games playable on this website are complete copyright & property of their respective owners \\</p>
 
         <br>
