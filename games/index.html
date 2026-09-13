@@ -199,7 +199,6 @@
                 box-shadow: 0 15px 35px rgba(0,0,0,0.7);
             }
 
-            /* Side covers (Wii Coverflow angled appearance) */
             .cover-card.side-far {
                 width: 130px;
                 height: 190px;
@@ -222,7 +221,6 @@
                 filter: blur(0px);
             }
 
-            /* Center Active Cover */
             .cover-card.active-center {
                 width: 320px;
                 height: 320px;
@@ -237,7 +235,6 @@
                 z-index: 20;
             }
 
-            /* Center Card Overlays */
             .card-title-banner {
                 background: rgba(4, 6, 9, 0.8);
                 backdrop-filter: blur(12px);
@@ -426,8 +423,9 @@
                 color: #ffffff !important;
             }
 
+            /* CRITICAL: Hides your raw game list so it doesn't show up below the carousel */
             .button-container {
-                display: none;
+                display: none !important;
             }
         </style>
 
@@ -448,7 +446,7 @@
             let favorites = JSON.parse(localStorage.getItem('gamingland_favorites') || '[]');
 
             document.addEventListener('DOMContentLoaded', () => {
-                // Scrape games from container
+                // Scrape all your real games from your button-container
                 const rawGameElements = document.querySelectorAll('.button-container a');
                 
                 rawGameElements.forEach((a, index) => {
@@ -465,13 +463,12 @@
                     }
                 });
 
-                // Fallback demo games if container is empty
+                // Fallback demo games only if your button-container is truly empty
                 if (gamesList.length === 0) {
                     gamesList = [
                         { id: 'g_1', href: 'papasburgeria/index.html', target: '_blank', title: "papa's burgeria", bg: 'url(\'../images/thumbnails/papasburgeria.jpg\')', genre: 'simulation' },
-                        { id: 'g_2', href: '#', target: '_self', title: 'Cyber Runner 2077', bg: 'url(\'../images/ico.ico\')', genre: 'arcade' },
-                        { id: 'g_3', href: '#', target: '_self', title: 'Slope Neon', bg: 'url(\'../images/ico.ico\')', genre: 'arcade' },
-                        { id: 'g_4', href: '#', target: '_self', title: 'Moto X3M', bg: 'url(\'../images/ico.ico\')', genre: 'platformer' }
+                        { id: 'g_2', href: 'slope/index.html', target: '_blank', title: 'slope', bg: 'url(\'../images/ico.ico\')', genre: 'arcade' },
+                        { id: 'g_3', href: 'subwaysurfers/index.html', target: '_blank', title: 'subway surfers', bg: 'url(\'../images/ico.ico\')', genre: 'arcade' }
                     ];
                 }
 
@@ -503,21 +500,6 @@
                 document.getElementById('search').addEventListener('input', applyFilters);
                 document.getElementById('genreDropdown').addEventListener('change', applyFilters);
 
-                // Star/Favorite Toggle Listener
-                document.getElementById('star-btn').addEventListener('click', () => {
-                    if (filteredGames.length === 0) return;
-                    const current = filteredGames[currentIndex];
-                    const idx = favorites.findIndex(f => f.title === current.title);
-                    if (idx > -1) {
-                        favorites.splice(idx, 1);
-                    } else {
-                        favorites.push(current);
-                    }
-                    localStorage.setItem('gamingland_favorites', JSON.stringify(favorites));
-                    updateCoverflow();
-                    renderFavorites();
-                });
-
                 // Cursor Magnet/Tilt Effect on Interactive Elements
                 document.addEventListener('mousemove', (e) => {
                     const x = (window.innerWidth / 2 - e.clientX) / 40;
@@ -528,7 +510,6 @@
                         centerCard.style.transform = `scale(1) translateZ(0) rotateY(${x}deg) rotateX(${-y}deg)`;
                     }
 
-                    // Magnetic tilt on buttons
                     document.querySelectorAll('.carousel-arrow, #random-game-btn, .nav-pill-btn').forEach(btn => {
                         const rect = btn.getBoundingClientRect();
                         const btnX = e.clientX - (rect.left + rect.width / 2);
@@ -565,7 +546,6 @@
                     return;
                 }
 
-                // Calculate indices for 5-card Wii USB Loader GX view (Far Left, Near Left, Center, Near Right, Far Right)
                 const len = filteredGames.length;
                 const idxMinus2 = (currentIndex - 2 + len) % len;
                 const idxMinus1 = (currentIndex - 1 + len) % len;
@@ -580,20 +560,18 @@
                     { index: idxPlus2, class: 'cover-card side-far' }
                 ];
 
-                displayIndices.forEach((item, pos) => {
+                displayIndices.forEach((item) => {
                     const game = filteredGames[item.index];
                     const card = document.createElement('div');
                     card.className = item.class;
                     card.style.backgroundImage = game.bg;
                     if (item.id) card.id = item.id;
 
-                    // Clicking side cards switches to them instantly
                     card.addEventListener('click', () => {
                         currentIndex = item.index;
                         updateCoverflow();
                     });
 
-                    // If center card, build full UI
                     if (item.class.includes('active-center')) {
                         const isFav = favorites.some(f => f.title === game.title);
                         const starBtnClass = isFav ? 'card-icon-btn favorited' : 'card-icon-btn';
@@ -615,7 +593,6 @@
                     track.appendChild(card);
                 });
 
-                // Re-bind star button event since it's dynamically generated
                 const starBtn = document.getElementById('star-btn');
                 if (starBtn) {
                     starBtn.addEventListener('click', (e) => {
@@ -705,7 +682,8 @@
             <a href="charts.html" class="nav-pill-btn">Charts</a>
         </div>
 
-        <div class="button-container"></div>
+        <!-- Your game list container (hidden automatically by CSS so it feeds the coverflow cleanly) -->
+        <div class="button-container">
             
             <a target="_blank" href="slope/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/slope.jpg');" data-genre="platformer">
@@ -4438,8 +4416,7 @@
             <br>
             <br>
 
-
-       
+            </div>
         <div class="pinned-container" style="display:none;"></div>
         
         <p> // all games playable on this website are complete copyright & property of their respective owners \\</p>
