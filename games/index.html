@@ -313,11 +313,11 @@
                 transform: scale(1.1);
             }
 
-            /* Favorited Games Section Underneath */
-            .favorites-section {
+            /* Horizontal Game Sections (Featured, New, Starred) */
+            .game-section {
                 width: 100%;
                 max-width: 1000px;
-                margin: 5px 0;
+                margin: 8px 0;
                 background: var(--liquid-glass-bg);
                 backdrop-filter: blur(16px);
                 border: 1px solid var(--liquid-glass-border);
@@ -326,7 +326,7 @@
                 box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             }
 
-            .favorites-header {
+            .section-header {
                 font-size: 13px;
                 font-weight: 700;
                 text-transform: uppercase;
@@ -338,6 +338,77 @@
                 gap: 8px;
             }
 
+            .game-horizontal-grid {
+                display: flex;
+                gap: 12px;
+                overflow-x: auto;
+                padding-bottom: 5px;
+                scrollbar-width: thin;
+                scrollbar-color: var(--accent-color) rgba(255,255,255,0.05);
+            }
+
+            .game-horizontal-grid::-webkit-scrollbar {
+                height: 6px;
+            }
+
+            .game-horizontal-grid::-webkit-scrollbar-thumb {
+                background: var(--accent-color);
+                border-radius: 4px;
+            }
+
+            .game-card-item {
+                flex: 0 0 auto;
+                width: 160px;
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid var(--liquid-glass-border);
+                border-radius: 14px;
+                overflow: hidden;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                text-decoration: none;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .game-card-item:hover {
+                background: rgba(56, 189, 248, 0.15);
+                border-color: var(--accent-color);
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            }
+
+            .game-card-thumb {
+                width: 100%;
+                height: 100px;
+                background-size: cover;
+                background-position: center;
+            }
+
+            .game-card-info {
+                padding: 8px 10px;
+                background: rgba(4, 6, 9, 0.6);
+                border-top: 1px solid var(--liquid-glass-border);
+            }
+
+            .game-card-title {
+                font-size: 13px;
+                font-weight: 700;
+                color: #ffffff;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .game-card-sub {
+                font-size: 11px;
+                color: var(--text-muted);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-top: 2px;
+            }
+
+            /* Favorite chip view for the Starred section */
             .favorites-grid {
                 display: flex;
                 gap: 12px;
@@ -423,7 +494,7 @@
                 color: #ffffff !important;
             }
 
-            /* CRITICAL: Hides your raw game list so it doesn't show up below the carousel */
+            /* CRITICAL: Hides your raw game list so it doesn't clutter the UI */
             .button-container {
                 display: none !important;
             }
@@ -446,7 +517,7 @@
             let favorites = JSON.parse(localStorage.getItem('gamingland_favorites') || '[]');
 
             document.addEventListener('DOMContentLoaded', () => {
-                // Scrape all your real games from your button-container
+                // Scrapes your actual games directly from the .button-container markup below
                 const rawGameElements = document.querySelectorAll('.button-container a');
                 
                 rawGameElements.forEach((a, index) => {
@@ -463,7 +534,7 @@
                     }
                 });
 
-                // Fallback demo games only if your button-container is truly empty
+                // Fallback demo games only if the container is empty
                 if (gamesList.length === 0) {
                     gamesList = [
                         { id: 'g_1', href: 'papasburgeria/index.html', target: '_blank', title: "papa's burgeria", bg: 'url(\'../images/thumbnails/papasburgeria.jpg\')', genre: 'simulation' },
@@ -474,6 +545,8 @@
 
                 filteredGames = [...gamesList];
                 updateCoverflow();
+                renderFeaturedGames();
+                renderNewGames();
                 renderFavorites();
 
                 // Arrow Listeners
@@ -611,6 +684,58 @@
                 }
             }
 
+            function renderFeaturedGames() {
+                const grid = document.getElementById('featured-grid');
+                grid.innerHTML = '';
+                
+                const featured = gamesList.slice(0, 4);
+                if (featured.length === 0) {
+                    grid.innerHTML = '<span style="font-size: 12px; color: var(--text-muted); font-style: italic;">No featured games available.</span>';
+                    return;
+                }
+
+                featured.forEach(game => {
+                    const item = document.createElement('a');
+                    item.className = 'game-card-item';
+                    item.href = game.href;
+                    item.target = game.target;
+                    item.innerHTML = `
+                        <div class="game-card-thumb" style="background-image: ${game.bg}"></div>
+                        <div class="game-card-info">
+                            <div class="game-card-title">${game.title}</div>
+                            <div class="game-card-sub">Featured Game</div>
+                        </div>
+                    `;
+                    grid.appendChild(item);
+                });
+            }
+
+            function renderNewGames() {
+                const grid = document.getElementById('new-grid');
+                grid.innerHTML = '';
+                
+                const newItems = gamesList.slice(1, 5);
+                if (newItems.length === 0) {
+                    grid.innerHTML = '<span style="font-size: 12px; color: var(--text-muted); font-style: italic;">No new games available.</span>';
+                    return;
+                }
+
+                newItems.forEach(game => {
+                    const item = document.createElement('a');
+                    item.className = 'game-card-item';
+                    item.href = game.href;
+                    item.target = game.target;
+                    item.innerHTML = `
+                        <div class="game-card-thumb" style="background-image: ${game.bg}"></div>
+                        <div class="game-card-info">
+                            <div class="game-card-title">${game.title}</div>
+                            <div class="game-card-sub">Newly Added</div>
+                        </div>
+                    `;
+                    grid.appendChild(item);
+                });
+            }
+
             function renderFavorites() {
                 const grid = document.getElementById('favorites-grid');
                 grid.innerHTML = '';
@@ -649,7 +774,7 @@
 
         <!-- Controls Bar -->
         <div class="controls-wrapper">
-            <input type="text" id="search" placeholder="⌕ Search 1,000+ games..." autocomplete="off">
+            <input type="text" id="search" placeholder="⌕ Search games..." autocomplete="off">
             <select id="genreDropdown">
                 <option value="all">All Genres</option>
                 <option value="adventure">Adventure</option>
@@ -669,9 +794,21 @@
             <div class="carousel-arrow" id="next-btn">›</div>
         </div>
 
-        <!-- Favorited Games Section -->
-        <div class="favorites-section">
-            <div class="favorites-header">★ Favorite Games Pinned</div>
+        <!-- Featured Games Section -->
+        <div class="game-section">
+            <div class="section-header">✦ Featured Games</div>
+            <div class="game-horizontal-grid" id="featured-grid"></div>
+        </div>
+
+        <!-- New Games Section -->
+        <div class="game-section">
+            <div class="section-header">🔥 New Games</div>
+            <div class="game-horizontal-grid" id="new-grid"></div>
+        </div>
+
+        <!-- Starred / Favorited Games Section -->
+        <div class="game-section">
+            <div class="section-header">★ Starred Games</div>
             <div class="favorites-grid" id="favorites-grid"></div>
         </div>
 
@@ -682,7 +819,7 @@
             <a href="charts.html" class="nav-pill-btn">Charts</a>
         </div>
 
-        <!-- Your game list container (hidden automatically by CSS so it feeds the coverflow cleanly) -->
+        <!-- Your game list container: paste your 1,000+ game anchor elements right in here! -->
         <div class="button-container">
             
             <a target="_blank" href="slope/index.html">
@@ -4416,7 +4553,7 @@
             <br>
             <br>
 
-            </div>
+           </div>
         <div class="pinned-container" style="display:none;"></div>
         
         <p> // all games playable on this website are complete copyright & property of their respective owners \\</p>
