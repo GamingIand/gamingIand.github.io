@@ -494,13 +494,31 @@
                 color: #ffffff !important;
             }
 
-            /* CRITICAL: Hides your raw game list so it doesn't clutter the UI */
+            /* Hides your raw game list container so it doesn't clutter the UI */
             .button-container {
                 display: none !important;
             }
         </style>
 
         <script>
+            // =========================================================================
+            // 🎮 EASY CUSTOMIZATION: TYPE THE EXACT TITLES OF YOUR FEATURED & NEW GAMES HERE
+            // =========================================================================
+            const FEATURED_TITLES = [
+                "Snow Rider 3D",
+                "Drive Mad",
+                "Escape Road",
+                "Papa's Burgeria"
+            ];
+
+            const NEW_TITLES = [
+                "Subway Surfers",
+                "Slope",
+                "space waves",
+                "townscaper"
+            ];
+            // =========================================================================
+
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', function() {
                     navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
@@ -537,9 +555,9 @@
                 // Fallback demo games only if the container is empty
                 if (gamesList.length === 0) {
                     gamesList = [
-                        { id: 'g_1', href: 'spacewaves/index.html', target: '_blank', title: "Space Waves", bg: 'url(\'../images/thumbnails/spacewaves.jpg\')', genre: 'simulation' },
-                        { id: 'g_2', href: 'escaperoad/index.html', target: '_blank', title: 'Escaperoad', bg: 'url(\'../images/thumbnails/escaperoad.jpg\')', genre: 'arcade' },
-                        { id: 'g_3', href: 'subwaysurfers/index.html', target: '_blank', title: 'subway surfers', bg: 'url(\'../images/thumbnails/subwaysurfers.jpg\')', genre: 'arcade' }
+                        { id: 'g_1', href: 'papasburgeria/index.html', target: '_blank', title: "Papa's Burgeria", bg: 'url(\'../images/thumbnails/papasburgeria.jpg\')', genre: 'simulation' },
+                        { id: 'g_2', href: 'slope/index.html', target: '_blank', title: 'Slope', bg: 'url(\'../images/ico.ico\')', genre: 'arcade' },
+                        { id: 'g_3', href: 'subwaysurfers/index.html', target: '_blank', title: 'Subway Surfers', bg: 'url(\'../images/ico.ico\')', genre: 'arcade' }
                     ];
                 }
 
@@ -646,7 +664,7 @@
                     });
 
                     if (item.class.includes('active-center')) {
-                        const isFav = favorites.some(f => f.title === game.title);
+                        const isFav = favorites.some(f => f.title.toLowerCase() === game.title.toLowerCase());
                         const starBtnClass = isFav ? 'card-icon-btn favorited' : 'card-icon-btn';
 
                         card.innerHTML = `
@@ -671,7 +689,7 @@
                     starBtn.addEventListener('click', (e) => {
                         e.stopPropagation();
                         const current = filteredGames[currentIndex];
-                        const idx = favorites.findIndex(f => f.title === current.title);
+                        const idx = favorites.findIndex(f => f.title.toLowerCase() === current.title.toLowerCase());
                         if (idx > -1) {
                             favorites.splice(idx, 1);
                         } else {
@@ -688,9 +706,13 @@
                 const grid = document.getElementById('featured-grid');
                 grid.innerHTML = '';
                 
-                const featured = gamesList.slice(0, 4);
+                // Matches titles from the FEATURED_TITLES array at the top
+                const featured = gamesList.filter(g => 
+                    FEATURED_TITLES.some(title => title.toLowerCase() === g.title.toLowerCase())
+                );
+
                 if (featured.length === 0) {
-                    grid.innerHTML = '<span style="font-size: 12px; color: var(--text-muted); font-style: italic;">No featured games available.</span>';
+                    grid.innerHTML = '<span style="font-size: 12px; color: var(--text-muted); font-style: italic;">No featured games matched your titles array.</span>';
                     return;
                 }
 
@@ -700,7 +722,7 @@
                     item.href = game.href;
                     item.target = game.target;
                     item.innerHTML = `
-                        <div class="game-card-thumb" style="background-image: ${game.jpg}"></div>
+                        <div class="game-card-thumb" style="background-image: ${game.bg}"></div>
                         <div class="game-card-info">
                             <div class="game-card-title">${game.title}</div>
                             <div class="game-card-sub">Featured Game</div>
@@ -714,9 +736,13 @@
                 const grid = document.getElementById('new-grid');
                 grid.innerHTML = '';
                 
-                const newItems = gamesList.slice(1, 5);
+                // Matches titles from the NEW_TITLES array at the top
+                const newItems = gamesList.filter(g => 
+                    NEW_TITLES.some(title => title.toLowerCase() === g.title.toLowerCase())
+                );
+
                 if (newItems.length === 0) {
-                    grid.innerHTML = '<span style="font-size: 12px; color: var(--text-muted); font-style: italic;">No new games available.</span>';
+                    grid.innerHTML = '<span style="font-size: 12px; color: var(--text-muted); font-style: italic;">No new games matched your titles array.</span>';
                     return;
                 }
 
@@ -753,7 +779,7 @@
                         <div class="favorite-title">${fav.title}</div>
                     `;
                     chip.addEventListener('click', () => {
-                        const targetIdx = filteredGames.findIndex(g => g.title === fav.title);
+                        const targetIdx = filteredGames.findIndex(g => g.title.toLowerCase() === fav.title.toLowerCase());
                         if (targetIdx !== -1) {
                             currentIndex = targetIdx;
                         } else {
