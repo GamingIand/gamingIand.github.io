@@ -22,783 +22,378 @@
 
         <style>
             :root {
-                --bg-color: #CCCCCC;
-                --liquid-glass-bg: rgba(14, 165, 233, 0.06);
-                --liquid-glass-border: rgba(56, 189, 248, 0.25);
-                --liquid-glass-shine: rgba(56, 189, 248, 0.45);
-                --accent-color: #CCCCCC;
-                --accent-glow: rgba(56, 189, 248, 0.6);
-                --accent-gradient: linear-gradient(135deg, #CCCCCC 0%, #2563eb 100%);
-                --text-main: #CCCCCC;
-                --text-muted: #CCCCCC;
+                --bg-color: #ffe894; /* Roblox-inspired warm yellow background from your image */
+                --panel-bg: #23272a;
+                --accent-color: #000000;
+                --accent-gradient: linear-gradient(135deg, #238636 0%, #2ea043 100%);
+                --text-main: #111111;
+                --text-muted: #333333;
+                --border-color: rgba(0, 0, 0, 0.15);
             }
 
             body {
-                background-color: var(--bg-color) !important;
-                background-image: 
-                    radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.2) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.2) 0%, transparent 50%),
-                    linear-gradient(135deg, #CCCCCC 0%, #d4af37 100%) !important;
-                background-attachment: fixed;
+                background: linear-gradient(180deg, #ffe894 0%, #fbd063 100%);
                 color: var(--text-main);
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 margin: 0;
-                min-height: 100vh;
+                padding: 25px 40px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: space-between;
-                padding: 20px 15px;
                 overflow-x: hidden;
+                min-height: 100vh;
             }
 
-            /* Main Gamer Title */
-            .main-title {
-                font-size: 28px;
+            /* Top Navbar matching the reference image layout */
+            .top-navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                max-width: 1300px;
+                margin-bottom: 25px;
+            }
+
+            .brand-logo {
+                font-size: 32px;
                 font-weight: 900;
-                letter-spacing: 6px;
-                color: #ffffff;
+                letter-spacing: -1px;
+                color: #111111;
+                text-decoration: none;
                 text-transform: uppercase;
-                margin: 5px 0 10px 0;
-                text-shadow: 0 0 20px var(--accent-color), 0 0 40px rgba(14, 165, 233, 0.4);
-                text-align: center;
+                font-family: Impact, Haettenschweiler, 'Arial Black', sans-serif;
+            }
+
+            .top-nav-buttons {
+                display: flex;
+                gap: 12px;
+            }
+
+            /* Account & Settings Pill Buttons matching reference image */
+            .nav-pill-btn {
+                background: #111111 !important;
+                border: none;
+                padding: 10px 22px;
+                border-radius: 25px;
+                font-size: 15px;
+                font-weight: 600;
+                color: #ffffff !important;
+                text-decoration: none !important;
+                transition: all 0.2s ease;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .nav-pill-btn:hover {
+                background: #333333 !important;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
             }
 
             /* Controls Bar */
             .controls-wrapper {
                 display: flex;
                 flex-wrap: wrap;
-                gap: 12px;
+                gap: 15px;
                 justify-content: center;
                 align-items: center;
-                margin-bottom: 10px;
+                margin-bottom: 25px;
                 width: 100%;
-                max-width: 850px;
+                max-width: 800px;
             }
 
             #search {
-                background: var(--liquid-glass-bg);
-                backdrop-filter: blur(16px);
-                -webkit-backdrop-filter: blur(16px);
-                border: 1px solid var(--liquid-glass-border);
+                background: rgba(255, 255, 255, 0.8);
+                border: 1px solid var(--border-color);
                 color: var(--text-main);
                 padding: 12px 18px;
                 border-radius: 14px;
-                font-size: 14px;
+                font-size: 15px;
                 outline: none;
-                width: 240px;
-                box-shadow: inset 0 1px 2px var(--liquid-glass-shine), 0 8px 32px rgba(0, 0, 0, 0.5);
-                transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+                width: 260px;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
             #search:focus {
                 border-color: var(--accent-color);
-                box-shadow: inset 0 1px 2px var(--accent-color), 0 0 20px var(--accent-glow);
+                background: #ffffff;
+                box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+                transform: scale(1.02);
             }
 
             #genreDropdown {
-                background: var(--liquid-glass-bg);
-                backdrop-filter: blur(16px);
-                -webkit-backdrop-filter: blur(16px);
-                border: 1px solid var(--liquid-glass-border);
+                background: rgba(255, 255, 255, 0.8);
+                border: 1px solid var(--border-color);
                 color: var(--text-main);
                 padding: 12px 18px;
                 border-radius: 14px;
-                font-size: 14px;
+                font-size: 15px;
                 outline: none;
                 cursor: pointer;
-                box-shadow: inset 0 1px 2px var(--liquid-glass-shine), 0 8px 32px rgba(0, 0, 0, 0.5);
-                transition: transform 0.2s ease, border-color 0.2s ease;
+                transition: all 0.2s ease;
             }
 
             #genreDropdown:hover {
                 border-color: var(--accent-color);
+                background: #ffffff;
             }
 
             #random-game-btn {
-                background: var(--accent-gradient);
-                border: 1px solid rgba(255, 255, 255, 0.3);
+                background: #111111;
+                border: none;
                 color: white;
-                padding: 12px 22px;
+                padding: 12px 24px;
                 border-radius: 14px;
-                font-weight: 700;
-                font-size: 14px;
-                letter-spacing: 0.5px;
+                font-weight: 600;
+                font-size: 15px;
                 cursor: pointer;
-                box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6), 0 8px 25px rgba(14, 165, 233, 0.4);
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             }
 
             #random-game-btn:hover {
-                box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 25px var(--accent-color);
+                transform: translateY(-3px) scale(1.03);
+                background: #333333;
+                box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
             }
 
-            /* Wii USB Loader GX Coverflow Arena */
-            .showcase-arena {
+            #random-game-btn:active {
+                transform: scale(0.95);
+            }
+
+            /* Secondary Navigation Links */
+            .linkp {
+                margin: 10px 0 25px 0;
+                color: var(--text-muted);
+                font-size: 14px;
                 display: flex;
+                flex-wrap: wrap;
                 align-items: center;
                 justify-content: center;
-                gap: 15px;
+                gap: 10px;
+            }
+
+            .linkp a {
+                color: #111111;
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.2s;
+            }
+
+            .linkp a:hover {
+                text-decoration: underline;
+                color: #000000;
+            }
+
+            /* Section Headers matching reference style */
+            h2.pinned-header, h2.allgames-header {
+                font-size: 20px;
+                font-weight: 800;
+                color: #111111;
+                letter-spacing: -0.5px;
+                margin: 25px 0 15px 0;
                 width: 100%;
-                max-width: 1200px;
-                height: 380px;
-                margin: 5px 0;
-                position: relative;
-                perspective: 1200px;
+                max-width: 1300px;
+                text-align: left;
+                padding-bottom: 5px;
             }
 
-            /* Navigation Arrows */
-            .carousel-arrow {
-                background: var(--liquid-glass-bg);
-                backdrop-filter: blur(16px);
-                -webkit-backdrop-filter: blur(16px);
-                border: 1px solid var(--liquid-glass-border);
-                color: var(--text-main);
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
+            .pinned-container {
                 display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 26px;
-                cursor: pointer;
-                z-index: 50;
-                box-shadow: inset 0 1px 2px var(--liquid-glass-shine), 0 10px 30px rgba(0, 0, 0, 0.6);
-                transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s;
-                user-select: none;
-            }
-
-            .carousel-arrow:hover {
-                background: var(--accent-color);
-                color: #CCCCCC;
-                border-color: #ffffff;
-                transform: scale(1.15);
-                box-shadow: 0 0 25px var(--accent-color);
-            }
-
-            /* Coverflow Slots (Wii Style Multi-Card Fan Layout) */
-            .coverflow-track {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 15px;
-                height: 100%;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 20px;
+                padding: 0;
+                max-width: 1300px;
                 width: 100%;
-                position: relative;
             }
 
-            .cover-card {
+            /* Flexbox Container that handles natural mixed-size cards smoothly */
+            .button-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 20px;
+                padding: 0;
+                max-width: 1300px;
+                width: 100%;
+            }
+
+            .button-container a {
+                text-decoration: none;
+                perspective: 1000px;
+                display: inline-block;
+            }
+
+            /* Automatically assigned sizes by script */
+            .button-container a.size-standard {
+                width: 220px;
+            }
+
+            .button-container a.size-wide {
+                width: 460px;
+            }
+
+            /* Base Game Card Style - Roblox Rounded Rectangles */
+            .button {
+                width: 100% !important;
+                height: 160px;
                 background-size: cover;
                 background-position: center;
-                border-radius: 20px;
-                border: 1px solid var(--liquid-glass-border);
-                transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-                cursor: pointer;
+                border-radius: 24px !important;
                 position: relative;
                 overflow: hidden;
-                box-shadow: 0 15px 35px rgba(0,0,0,0.7);
-            }
-
-            .cover-card.side-far {
-                width: 130px;
-                height: 190px;
-                opacity: 0.3;
-                filter: blur(4px) grayscale(60%);
-                transform: scale(0.75) translateZ(-100px);
-                pointer-events: none;
-            }
-
-            .cover-card.side-near {
-                width: 180px;
-                height: 250px;
-                opacity: 0.7;
-                filter: blur(1px) grayscale(20%);
-                transform: scale(0.88) translateZ(-40px);
-            }
-
-            .cover-card.side-near:hover {
-                opacity: 0.95;
-                filter: blur(0px);
-            }
-
-            .cover-card.active-center {
-                width: 320px;
-                height: 320px;
-                opacity: 1;
-                filter: none;
-                transform: scale(1) translateZ(0);
-                border: 2px solid var(--accent-color);
-                box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 40px var(--accent-glow);
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
-                z-index: 20;
+                align-items: center;
+                transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+                border: 1px solid rgba(255, 255, 255, 0.4);
+                background-color: #3b4148; /* Fallback gray block matching wireframe */
             }
 
-            .card-title-banner {
-                background: rgba(4, 6, 9, 0.8);
-                backdrop-filter: blur(12px);
-                padding: 10px 15px;
-                font-size: 15px;
-                font-weight: 800;
+            /* Hover Zoom + Lift Effect */
+            .button:hover {
+                transform: translateY(-6px) scale(1.02);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+                z-index: 10;
+            }
+
+            .button:active {
+                transform: translateY(-2px) scale(0.97) !important;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            .button h2 {
+                font-size: 14px !important;
+                background: rgba(17, 17, 17, 0.85);
+                backdrop-filter: blur(6px);
                 color: #ffffff;
+                width: 100%;
                 text-align: center;
-                border-top: 1px solid rgba(56, 189, 248, 0.3);
+                margin: 0;
+                padding: 8px 0;
+                font-weight: 700;
+                letter-spacing: 0.3px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                transition: background 0.3s ease;
             }
 
-            .card-action-bar {
-                background: rgba(4, 6, 9, 0.9);
-                backdrop-filter: blur(16px);
-                padding: 10px 14px;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                border-top: 1px solid var(--liquid-glass-border);
+            .button:hover h2 {
+                background: rgba(0, 0, 0, 0.95);
             }
 
-            .card-play-btn {
-                flex: 1;
-                background: var(--accent-gradient);
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                color: white;
-                text-decoration: none;
-                text-align: center;
-                padding: 10px 0;
-                border-radius: 10px;
-                font-weight: 800;
-                font-size: 15px;
-                letter-spacing: 1px;
-                text-transform: uppercase;
-                box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.5), 0 4px 15px rgba(14, 165, 233, 0.5);
-                transition: filter 0.2s, transform 0.2s;
-            }
-
-            .card-play-btn:hover {
-                filter: brightness(1.2);
-                transform: scale(1.02);
-            }
-
-            .card-icon-btn {
-                background: var(--liquid-glass-bg);
-                backdrop-filter: blur(10px);
-                border: 1px solid var(--liquid-glass-border);
-                color: var(--text-main);
-                width: 38px;
-                height: 38px;
-                border-radius: 10px;
+            /* Interactive Badge Buttons */
+            .pin-button, .download-button {
+                position: absolute !important;
+                z-index: 3;
+                background: rgba(17, 17, 17, 0.6);
+                backdrop-filter: blur(4px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 50%;
+                padding: 6px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                cursor: pointer;
-                transition: all 0.2s ease;
-                text-decoration: none;
-            }
-
-            .card-icon-btn img {
-                width: 18px;
-                height: 18px;
-                filter: invert(1);
-            }
-
-            .card-icon-btn.favorited img {
-                filter: invert(0) sepia(1) saturate(5) hue-rotate(330deg);
-            }
-
-            .card-icon-btn:hover {
-                background: var(--accent-color);
-                border-color: #ffffff;
-                transform: scale(1.1);
-            }
-
-            /* Horizontal Game Sections (Featured, New, Starred) */
-            .game-section {
-                width: 100%;
-                max-width: 1000px;
-                margin: 8px 0;
-                background: var(--liquid-glass-bg);
-                backdrop-filter: blur(16px);
-                border: 1px solid var(--liquid-glass-border);
-                border-radius: 20px;
-                padding: 12px 20px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            }
-
-            .section-header {
-                font-size: 13px;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                color: var(--accent-color);
-                margin-bottom: 8px;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-            }
-
-            .game-horizontal-grid {
-                display: flex;
-                gap: 12px;
-                overflow-x: auto;
-                padding-bottom: 5px;
-                scrollbar-width: thin;
-                scrollbar-color: var(--accent-color) rgba(255,255,255,0.05);
-            }
-
-            .game-horizontal-grid::-webkit-scrollbar {
-                height: 6px;
-            }
-
-            .game-horizontal-grid::-webkit-scrollbar-thumb {
-                background: var(--accent-color);
-                border-radius: 4px;
-            }
-
-            .game-card-item {
-                flex: 0 0 auto;
-                width: 160px;
-                background: rgba(255, 255, 255, 0.04);
-                border: 1px solid var(--liquid-glass-border);
-                border-radius: 14px;
-                overflow: hidden;
-                cursor: pointer;
-                transition: all 0.2s ease;
-                text-decoration: none;
-                display: flex;
-                flex-direction: column;
-            }
-
-            .game-card-item:hover {
-                background: rgba(56, 189, 248, 0.15);
-                border-color: var(--accent-color);
-                transform: translateY(-3px);
-                box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            }
-
-            .game-card-thumb {
-                width: 100%;
-                height: 100px;
-                background-size: cover;
-                background-position: center;
-            }
-
-            .game-card-info {
-                padding: 8px 10px;
-                background: rgba(4, 6, 9, 0.6);
-                border-top: 1px solid var(--liquid-glass-border);
-            }
-
-            .game-card-title {
-                font-size: 13px;
-                font-weight: 700;
-                color: #ffffff;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .game-card-sub {
-                font-size: 11px;
-                color: var(--text-muted);
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                margin-top: 2px;
-            }
-
-            /* Favorite chip view for the Starred section */
-            .favorites-grid {
-                display: flex;
-                gap: 12px;
-                overflow-x: auto;
-                padding-bottom: 5px;
-                scrollbar-width: thin;
-                scrollbar-color: var(--accent-color) rgba(255,255,255,0.05);
-            }
-
-            .favorites-grid::-webkit-scrollbar {
-                height: 6px;
-            }
-
-            .favorites-grid::-webkit-scrollbar-thumb {
-                background: var(--accent-color);
-                border-radius: 4px;
-            }
-
-            .favorite-chip {
-                flex: 0 0 auto;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                background: rgba(255, 255, 255, 0.04);
-                border: 1px solid var(--liquid-glass-border);
-                padding: 6px 12px 6px 6px;
-                border-radius: 12px;
-                cursor: pointer;
-                transition: all 0.2s ease;
-            }
-
-            .favorite-chip:hover {
-                background: rgba(56, 189, 248, 0.15);
-                border-color: var(--accent-color);
-                transform: translateY(-2px);
-            }
-
-            .favorite-thumb {
-                width: 32px;
-                height: 32px;
-                border-radius: 8px;
-                background-size: cover;
-                background-position: center;
-            }
-
-            .favorite-title {
-                font-size: 13px;
-                font-weight: 600;
-                color: #ffffff;
-                max-width: 120px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            /* Bottom Navigation Bar */
-            .bottom-nav-bar {
-                display: flex;
-                gap: 15px;
-                justify-content: center;
-                margin-top: 5px;
-            }
-
-            .nav-pill-btn {
-                background: var(--liquid-glass-bg);
-                backdrop-filter: blur(16px);
-                border: 1px solid var(--liquid-glass-border);
-                padding: 8px 22px;
-                border-radius: 30px;
-                font-size: 13px;
-                font-weight: 700;
-                color: var(--text-main) !important;
-                text-decoration: none !important;
-                box-shadow: inset 0 1px 2px var(--liquid-glass-shine), 0 8px 25px rgba(0, 0, 0, 0.4);
                 transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s;
             }
 
-            .nav-pill-btn:hover {
-                border-color: var(--accent-color);
-                background: rgba(56, 189, 248, 0.2);
-                transform: translateY(-3px);
-                box-shadow: 0 0 20px var(--accent-glow);
-                color: #ffffff !important;
+            .pin-button {
+                top: 12px !important;
+                right: 12px !important;
             }
 
-            /* Hides your raw game list container so it doesn't clutter the UI */
-            .button-container {
-                display: none !important;
+            .download-button {
+                top: 12px !important;
+                left: 12px !important;
+            }
+
+            .pin-button:hover, .download-button:hover {
+                transform: scale(1.2) rotate(10deg);
+                background: rgba(0, 0, 0, 0.85);
+            }
+
+            /* Ripple Effect Element */
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.4);
+                transform: scale(0);
+                animation: ripple-effect 0.6s linear;
+                pointer-events: none;
+            }
+
+            @keyframes ripple-effect {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
             }
         </style>
 
         <script>
-            // =========================================================================
-            // 🎮 EASY CUSTOMIZATION: TYPE THE EXACT TITLES OF YOUR FEATURED & NEW GAMES HERE
-            // =========================================================================
-            const FEATURED_TITLES = [
-                "Snow Rider 3D",
-                "Drive Mad",
-                "Escape Road",
-                "Papa's Burgeria"
-            ];
-
-            const NEW_TITLES = [
-                "Subway Surfers",
-                "Slope",
-                "space waves",
-                "townscaper"
-            ];
-            // =========================================================================
-
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', function() {
                     navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
                         console.log('service worker initalised! scope:', registration.scope);
+
+                        navigator.serviceWorker.addEventListener('message', function(event) {
+                            if (event.data === 'cached') {
+                                document.getElementById('cache-status').style.display = 'block';
+                            }
+                        });
                     }, function(error) {
                         console.log('ack, error with serviceworker! ', error);
                     });
                 });
             }
 
-            let gamesList = [];
-            let filteredGames = [];
-            let currentIndex = 0;
-            let favorites = JSON.parse(localStorage.getItem('gamingland_favorites') || '[]');
-
+            // Automatically mix up game widths without changing your HTML files
             document.addEventListener('DOMContentLoaded', () => {
-                // Scrapes your actual games directly from the .button-container markup below
-                const rawGameElements = document.querySelectorAll('.button-container a');
-                
-                rawGameElements.forEach((a, index) => {
-                    const btn = a.querySelector('.button');
-                    if (btn) {
-                        gamesList.push({
-                            id: 'game_' + index,
-                            href: a.getAttribute('href') || '#',
-                            target: a.getAttribute('target') || '_self',
-                            title: btn.querySelector('h2') ? btn.querySelector('h2').innerText.trim() : 'Game',
-                            bg: btn.style.backgroundImage || '',
-                            genre: (btn.getAttribute('data-genre') || 'all').toLowerCase()
-                        });
-                    }
+                const gameLinks = document.querySelectorAll('.button-container > a');
+                const layoutOptions = ['size-standard', 'size-standard', 'size-standard', 'size-standard', 'size-wide'];
+
+                gameLinks.forEach((link, index) => {
+                    const randomLayout = layoutOptions[Math.abs(Math.sin(index * 13.37) * layoutOptions.length) | 0];
+                    link.classList.add(randomLayout);
                 });
 
-                // Fallback demo games only if the container is empty
-                if (gamesList.length === 0) {
-                    gamesList = [
-                        { id: 'g_1', href: 'papasburgeria/index.html', target: '_blank', title: "Papa's Burgeria", bg: 'url(\'../images/thumbnails/papasburgeria.jpg\')', genre: 'simulation' },
-                        { id: 'g_2', href: 'slope/index.html', target: '_blank', title: 'Slope', bg: 'url(\'../images/ico.ico\')', genre: 'arcade' },
-                        { id: 'g_3', href: 'subwaysurfers/index.html', target: '_blank', title: 'Subway Surfers', bg: 'url(\'../images/ico.ico\')', genre: 'arcade' }
-                    ];
-                }
-
-                filteredGames = [...gamesList];
-                updateCoverflow();
-                renderFeaturedGames();
-                renderNewGames();
-                renderFavorites();
-
-                // Arrow Listeners
-                document.getElementById('prev-btn').addEventListener('click', () => {
-                    if (filteredGames.length === 0) return;
-                    currentIndex = (currentIndex - 1 + filteredGames.length) % filteredGames.length;
-                    updateCoverflow();
-                });
-
-                document.getElementById('next-btn').addEventListener('click', () => {
-                    if (filteredGames.length === 0) return;
-                    currentIndex = (currentIndex + 1) % filteredGames.length;
-                    updateCoverflow();
-                });
-
-                // Random Game Button
-                document.getElementById('random-game-btn').addEventListener('click', () => {
-                    if (filteredGames.length === 0) return;
-                    currentIndex = Math.floor(Math.random() * filteredGames.length);
-                    updateCoverflow();
-                });
-
-                // Search & Filter Listeners
-                document.getElementById('search').addEventListener('input', applyFilters);
-                document.getElementById('genreDropdown').addEventListener('change', applyFilters);
-
-                // Cursor Magnet/Tilt Effect on Interactive Elements
-                document.addEventListener('mousemove', (e) => {
-                    const x = (window.innerWidth / 2 - e.clientX) / 40;
-                    const y = (window.innerHeight / 2 - e.clientY) / 40;
-                    
-                    const centerCard = document.getElementById('active-cover');
-                    if (centerCard) {
-                        centerCard.style.transform = `scale(1) translateZ(0) rotateY(${x}deg) rotateX(${-y}deg)`;
-                    }
-
-                    document.querySelectorAll('.carousel-arrow, #random-game-btn, .nav-pill-btn').forEach(btn => {
+                // Ripple effect generator for click satisfaction
+                const buttons = document.querySelectorAll('.button');
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', function(e) {
                         const rect = btn.getBoundingClientRect();
-                        const btnX = e.clientX - (rect.left + rect.width / 2);
-                        const btnY = e.clientY - (rect.top + rect.height / 2);
-                        if (Math.abs(btnX) < 100 && Math.abs(btnY) < 100) {
-                            btn.style.transform = `translate(${btnX * 0.15}px, ${btnY * 0.15}px)`;
-                        } else {
-                            btn.style.transform = 'translate(0px, 0px)';
-                        }
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+
+                        const ripple = document.createElement('span');
+                        ripple.classList.add('ripple');
+                        ripple.style.left = `${x}px`;
+                        ripple.style.top = `${y}px`;
+                        
+                        btn.appendChild(ripple);
+                        setTimeout(() => ripple.remove(), 600);
                     });
                 });
             });
-
-            function applyFilters() {
-                const query = document.getElementById('search').value.toLowerCase().trim();
-                const selectedGenre = document.getElementById('genreDropdown').value.toLowerCase();
-
-                filteredGames = gamesList.filter(g => {
-                    const matchesQuery = g.title.toLowerCase().includes(query);
-                    const matchesGenre = selectedGenre === 'all' || g.genre === selectedGenre;
-                    return matchesQuery && matchesGenre;
-                });
-
-                currentIndex = 0;
-                updateCoverflow();
-            }
-
-            function updateCoverflow() {
-                const track = document.getElementById('coverflow-track');
-                track.innerHTML = '';
-
-                if (filteredGames.length === 0) {
-                    track.innerHTML = '<div style="color: var(--text-muted); font-weight: 700;">No games found!</div>';
-                    return;
-                }
-
-                const len = filteredGames.length;
-                const idxMinus2 = (currentIndex - 2 + len) % len;
-                const idxMinus1 = (currentIndex - 1 + len) % len;
-                const idxPlus1 = (currentIndex + 1) % len;
-                const idxPlus2 = (currentIndex + 2) % len;
-
-                const displayIndices = [
-                    { index: idxMinus2, class: 'cover-card side-far' },
-                    { index: idxMinus1, class: 'cover-card side-near' },
-                    { index: currentIndex, class: 'cover-card active-center', id: 'active-cover' },
-                    { index: idxPlus1, class: 'cover-card side-near' },
-                    { index: idxPlus2, class: 'cover-card side-far' }
-                ];
-
-                displayIndices.forEach((item) => {
-                    const game = filteredGames[item.index];
-                    const card = document.createElement('div');
-                    card.className = item.class;
-                    card.style.backgroundImage = game.bg;
-                    if (item.id) card.id = item.id;
-
-                    card.addEventListener('click', () => {
-                        currentIndex = item.index;
-                        updateCoverflow();
-                    });
-
-                    if (item.class.includes('active-center')) {
-                        const isFav = favorites.some(f => f.title.toLowerCase() === game.title.toLowerCase());
-                        const starBtnClass = isFav ? 'card-icon-btn favorited' : 'card-icon-btn';
-
-                        card.innerHTML = `
-                            <div class="card-title-banner">${game.title}</div>
-                            <div class="card-action-bar">
-                                <a href="${game.href}" target="${game.target}" class="card-play-btn">Play</a>
-                                <button id="star-btn" class="${starBtnClass}" title="Favorite Game">
-                                    <img src="/images/other/star.png" alt="Star">
-                                </button>
-                                <a href="${game.href}" download class="card-icon-btn" title="Download">
-                                    <img src="/images/other/download.png" alt="Download">
-                                </a>
-                            </div>
-                        `;
-                    }
-
-                    track.appendChild(card);
-                });
-
-                const starBtn = document.getElementById('star-btn');
-                if (starBtn) {
-                    starBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const current = filteredGames[currentIndex];
-                        const idx = favorites.findIndex(f => f.title.toLowerCase() === current.title.toLowerCase());
-                        if (idx > -1) {
-                            favorites.splice(idx, 1);
-                        } else {
-                            favorites.push(current);
-                        }
-                        localStorage.setItem('gamingland_favorites', JSON.stringify(favorites));
-                        updateCoverflow();
-                        renderFavorites();
-                    });
-                }
-            }
-
-            function renderFeaturedGames() {
-                const grid = document.getElementById('featured-grid');
-                grid.innerHTML = '';
-                
-                // Matches titles from the FEATURED_TITLES array at the top
-                const featured = gamesList.filter(g => 
-                    FEATURED_TITLES.some(title => title.toLowerCase() === g.title.toLowerCase())
-                );
-
-                if (featured.length === 0) {
-                    grid.innerHTML = '<span style="font-size: 12px; color: var(--text-muted); font-style: italic;">No featured games matched your titles array.</span>';
-                    return;
-                }
-
-                featured.forEach(game => {
-                    const item = document.createElement('a');
-                    item.className = 'game-card-item';
-                    item.href = game.href;
-                    item.target = game.target;
-                    item.innerHTML = `
-                        <div class="game-card-thumb" style="background-image: ${game.bg}"></div>
-                        <div class="game-card-info">
-                            <div class="game-card-title">${game.title}</div>
-                            <div class="game-card-sub">Featured Game</div>
-                        </div>
-                    `;
-                    grid.appendChild(item);
-                });
-            }
-
-            function renderNewGames() {
-                const grid = document.getElementById('new-grid');
-                grid.innerHTML = '';
-                
-                // Matches titles from the NEW_TITLES array at the top
-                const newItems = gamesList.filter(g => 
-                    NEW_TITLES.some(title => title.toLowerCase() === g.title.toLowerCase())
-                );
-
-                if (newItems.length === 0) {
-                    grid.innerHTML = '<span style="font-size: 12px; color: var(--text-muted); font-style: italic;">No new games matched your titles array.</span>';
-                    return;
-                }
-
-                newItems.forEach(game => {
-                    const item = document.createElement('a');
-                    item.className = 'game-card-item';
-                    item.href = game.href;
-                    item.target = game.target;
-                    item.innerHTML = `
-                        <div class="game-card-thumb" style="background-image: ${game.bg}"></div>
-                        <div class="game-card-info">
-                            <div class="game-card-title">${game.title}</div>
-                            <div class="game-card-sub">Newly Added</div>
-                        </div>
-                    `;
-                    grid.appendChild(item);
-                });
-            }
-
-            function renderFavorites() {
-                const grid = document.getElementById('favorites-grid');
-                grid.innerHTML = '';
-
-                if (favorites.length === 0) {
-                    grid.innerHTML = '<span style="font-size: 12px; color: var(--text-muted); font-style: italic;">No favorited games yet. Click the star icon on any game to pin it here!</span>';
-                    return;
-                }
-
-                favorites.forEach((fav) => {
-                    const chip = document.createElement('div');
-                    chip.className = 'favorite-chip';
-                    chip.innerHTML = `
-                        <div class="favorite-thumb" style="background-image: ${fav.bg}"></div>
-                        <div class="favorite-title">${fav.title}</div>
-                    `;
-                    chip.addEventListener('click', () => {
-                        const targetIdx = filteredGames.findIndex(g => g.title.toLowerCase() === fav.title.toLowerCase());
-                        if (targetIdx !== -1) {
-                            currentIndex = targetIdx;
-                        } else {
-                            filteredGames.push(fav);
-                            currentIndex = filteredGames.length - 1;
-                        }
-                        updateCoverflow();
-                    });
-                    grid.appendChild(chip);
-                });
-            }
         </script>
     </head>
     <body>
 
-        <!-- Top Title -->
-        <h1 class="main-title">Gamingland [BETA]</h1>
+        <!-- Top Header Navigation (Roblox Style Layout) -->
+        <div class="top-navbar">
+            <a href="../index.html" class="brand-logo">GAMINGLAND</a>
+            <div class="top-nav-buttons">
+                <a href="settings.html" class="nav-pill-btn">Settings</a>
+                <a href="account.html" class="nav-pill-btn">Account</a>
+            </div>
+        </div>
 
-        <!-- Controls Bar -->
+        <h1 class="typewriter"><span id="cursor"></span></h1>
+
+        <!-- Controls Layout -->
         <div class="controls-wrapper">
             <input type="text" id="search" placeholder="⌕ Search games..." autocomplete="off">
             <select id="genreDropdown">
@@ -810,43 +405,22 @@
                 <option value="puzzle">Puzzle</option>
                 <option value="simulation">Simulation</option>
             </select>
-            <button id="random-game-btn">⚡ Play Random</button>
+            <button id="random-game-btn">Play Random Game</button>
         </div>
 
-        <!-- Wii USB Loader GX Style Coverflow Showcase Arena -->
-        <div class="showcase-arena">
-            <div class="carousel-arrow" id="prev-btn">‹</div>
-            <div class="coverflow-track" id="coverflow-track"></div>
-            <div class="carousel-arrow" id="next-btn">›</div>
-        </div>
+        <!-- Secondary Navigation Links -->
+        <p class="linkp">
+            <a href="https://github.com/GamingIand" target="_blank">github</a> • 
+            <a href="https://discord.gg/aZJyeDMXuy" target="_blank">discord</a> • 
+            <a id="openBlankLink" style="cursor: pointer;">open blank</a>
+        </p>
 
-        <!-- Featured Games Section -->
-        <div class="game-section">
-            <div class="section-header">✦ Featured Games</div>
-            <div class="game-horizontal-grid" id="featured-grid"></div>
+        <h2 class="pinned-header">Stared games</h2>
+        <div class="pinned-container">
+            <!-- Pinned items go here -->
         </div>
-
-        <!-- New Games Section -->
-        <div class="game-section">
-            <div class="section-header">🔥 New Games</div>
-            <div class="game-horizontal-grid" id="new-grid"></div>
-        </div>
-
-        <!-- Starred / Favorited Games Section -->
-        <div class="game-section">
-            <div class="section-header">★ Starred Games</div>
-            <div class="favorites-grid" id="favorites-grid"></div>
-        </div>
-
-        <!-- Bottom Navigation Bar -->
-        <div class="bottom-nav-bar">
-            <a href="account.html" class="nav-pill-btn">Account</a>
-            <a href="settings.html" class="nav-pill-btn">Settings</a>
-            <a href="charts.html" class="nav-pill-btn">Charts</a>
-        </div>
-
-        <!-- Your game list container: paste your 1,000+ game anchor elements right in here! -->
-        <div class="button-container">
+        
+        <h2 class="allgames-header">All games</h2>
             
             <a target="_blank" href="slope/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/slope.jpg');" data-genre="platformer">
