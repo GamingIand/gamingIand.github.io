@@ -1,418 +1,342 @@
 <html lang="en">
-    <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FN7LEVWXD"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-7FN7LEVWXD');
-        </script>
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FN7LEVWXD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7FN7LEVWXD');
+    </script>
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="../images/ico.ico" type="image/x-icon">
-        <link rel="stylesheet" href="/storage/css/games.css">
-        <title>Games | gamingland</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/ico.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/storage/css/games.css">
+    <title>Games | gamingland</title>
 
-        <meta name="description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
-        <meta property="og:site_name" content="seraph">
-        <meta property="og:title" content="seraph">
-        <meta property="og:type" content="website">
-        <meta property="og:description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
+    <meta name="description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
+    <meta property="og:site_name" content="seraph">
+    <meta property="og:title" content="seraph">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
 
-        <style>
-            :root {
-                --bg-color: #ffe894;
-                --panel-bg: #23272a;
-                --accent-color: #000000;
-                --accent-gradient: linear-gradient(135deg, #238636 0%, #2ea043 100%);
-                --text-main: #111111;
-                --text-muted: #333333;
-                --border-color: rgba(0, 0, 0, 0.15);
-            }
+    <style>
+        :root {
+            --bg-top: #ffe894;
+            --bg-bottom: #fbd063;
+            --text-main: #111111;
+            --border-color: rgba(0, 0, 0, 0.15);
+        }
 
-            body {
-                background: linear-gradient(180deg, #ffe894 0%, #fbd063 100%);
-                color: var(--text-main);
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                margin: 0;
-                padding: 25px 40px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                overflow-x: hidden;
-                min-height: 100vh;
-            }
+        * {
+            box-sizing: border-box;
+        }
 
-            /* Top Navbar matching the reference image layout */
-            .top-navbar {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-                max-width: 1300px;
-                margin-bottom: 20px;
-            }
+        body {
+            background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-            .brand-logo {
-                font-size: 32px;
-                font-weight: 900;
-                letter-spacing: -1px;
-                color: #111111;
-                text-decoration: none;
-                text-transform: uppercase;
-                font-family: Impact, Haettenschweiler, 'Arial Black', sans-serif;
-            }
+        /* Top Navbar Layout */
+        .top-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1300px;
+            margin-bottom: 25px;
+            box-sizing: border-box;
+        }
 
-            .top-nav-buttons {
-                display: flex;
-                gap: 12px;
-            }
+        .brand-logo {
+            font-size: 34px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: #111111;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-family: Impact, Haettenschweiler, 'Arial Black', sans-serif;
+        }
 
-            /* Account & Settings Pill Buttons */
-            .nav-pill-btn {
-                background: #111111 !important;
-                border: none;
-                padding: 10px 22px;
-                border-radius: 25px;
-                font-size: 15px;
-                font-weight: 600;
-                color: #ffffff !important;
-                text-decoration: none !important;
-                transition: all 0.2s ease;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            }
+        .top-nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
 
-            .nav-pill-btn:hover {
-                background: #333333 !important;
-                transform: translateY(-2px);
-                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-            }
+        .nav-pill-btn {
+            background: #111111 !important;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff !important;
+            text-decoration: none !important;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
 
-            /* Controls Bar */
-            .controls-wrapper {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 15px;
-                justify-content: center;
-                align-items: center;
-                margin-bottom: 20px;
-                width: 100%;
-                max-width: 800px;
-            }
+        .nav-pill-btn:hover {
+            background: #333333 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        }
 
-            #search {
-                background: rgba(255, 255, 255, 0.8);
-                border: 1px solid var(--border-color);
-                color: var(--text-main);
-                padding: 12px 18px;
-                border-radius: 14px;
-                font-size: 15px;
-                outline: none;
-                width: 260px;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            }
+        /* Controls Wrapper */
+        .controls-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            width: 100%;
+            max-width: 800px;
+        }
 
-            #search:focus {
-                border-color: var(--accent-color);
-                background: #ffffff;
-                box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
-                transform: scale(1.02);
-            }
+        #search {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 18px;
+            border-radius: 14px;
+            font-size: 15px;
+            outline: none;
+            width: 260px;
+            transition: all 0.3s ease;
+        }
 
-            #genreDropdown {
-                background: rgba(255, 255, 255, 0.8);
-                border: 1px solid var(--border-color);
-                color: var(--text-main);
-                padding: 12px 18px;
-                border-radius: 14px;
-                font-size: 15px;
-                outline: none;
-                cursor: pointer;
-                transition: all 0.2s ease;
-            }
+        #search:focus {
+            border-color: #000;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+            transform: scale(1.02);
+        }
 
-            #genreDropdown:hover {
-                border-color: var(--accent-color);
-                background: #ffffff;
-            }
+        #genreDropdown {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 18px;
+            border-radius: 14px;
+            font-size: 15px;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
 
-            #random-game-btn {
-                background: #111111;
-                border: none;
-                color: white;
-                padding: 12px 24px;
-                border-radius: 14px;
-                font-weight: 600;
-                font-size: 15px;
-                cursor: pointer;
-                transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            }
+        #genreDropdown:hover {
+            border-color: #000;
+            background: #ffffff;
+        }
 
-            #random-game-btn:hover {
-                transform: translateY(-3px) scale(1.03);
-                background: #333333;
-                box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
-            }
+        #random-game-btn {
+            background: #111111;
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
 
-            #random-game-btn:active {
-                transform: scale(0.95);
-            }
+        #random-game-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            background: #333333;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+        }
 
-            /* Secondary Navigation Links */
-            .linkp {
-                margin: 5px 0 25px 0;
-                color: var(--text-muted);
-                font-size: 14px;
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-            }
+        /* Secondary Links */
+        .linkp {
+            margin: 5px 0 35px 0;
+            color: #333333;
+            font-size: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
 
-            .linkp a {
-                color: #111111;
-                text-decoration: none;
-                font-weight: 500;
-                transition: color 0.2s;
-            }
+        .linkp a {
+            color: #111111;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
 
-            .linkp a:hover {
-                text-decoration: underline;
-                color: #000000;
-            }
+        .linkp a:hover {
+            text-decoration: underline;
+        }
 
-            /* Section Headers */
-            h2.pinned-header, h2.allgames-header {
-                font-size: 20px;
-                font-weight: 800;
-                color: #111111;
-                letter-spacing: -0.5px;
-                margin: 25px 0 15px 0;
-                width: 100%;
-                max-width: 1300px;
-                text-align: left;
-            }
+        /* Section Headings */
+        h2.pinned-header, h2.allgames-header {
+            font-size: 20px;
+            font-weight: 800;
+            color: #111111;
+            letter-spacing: -0.5px;
+            margin: 25px 0 15px 0;
+            width: 100%;
+            max-width: 1300px;
+            text-align: left;
+        }
 
-            .pinned-container {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: flex-start;
-                gap: 20px;
-                padding: 0;
-                max-width: 1300px;
-                width: 100%;
-            }
+        /* Game Containers */
+        .pinned-container, .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 20px;
+            width: 100%;
+            max-width: 1300px;
+            box-sizing: border-box;
+            padding: 0;
+        }
 
-            /* Game Grid Container */
-            .button-container {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: flex-start;
-                gap: 20px;
-                padding: 0;
-                max-width: 1300px;
-                width: 100%;
-            }
+        .button-container a, .pinned-container a {
+            text-decoration: none;
+            display: inline-block;
+        }
 
-            .button-container a {
-                text-decoration: none;
-                perspective: 1000px;
-                display: inline-block;
-            }
+        .button-container a.size-standard, .pinned-container a.size-standard {
+            width: 220px;
+        }
 
-            /* Card Widths */
-            .button-container a.size-standard {
-                width: 220px;
-            }
+        .button-container a.size-wide, .pinned-container a.size-wide {
+            width: 460px;
+        }
 
-            .button-container a.size-wide {
-                width: 460px;
-            }
+        /* Game Card Styles */
+        .button {
+            width: 100% !important;
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 24px !important;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background-color: #3b4148;
+        }
 
-            /* Base Game Card Style */
-            .button {
-                width: 100% !important;
-                height: 160px;
-                background-size: cover;
-                background-position: center;
-                border-radius: 24px !important;
-                position: relative;
-                overflow: hidden;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                align-items: center;
-                transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
-                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-                border: 1px solid rgba(255, 255, 255, 0.4);
-                background-color: #3b4148;
-            }
+        .button:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
 
-            .button:hover {
-                transform: translateY(-6px) scale(1.02);
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-                z-index: 10;
-            }
+        .button h2 {
+            font-size: 14px !important;
+            background: rgba(17, 17, 17, 0.85);
+            backdrop-filter: blur(6px);
+            color: #ffffff;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            padding: 8px 0;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-            .button:active {
-                transform: translateY(-2px) scale(0.97) !important;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            }
+        .pin-button, .download-button {
+            position: absolute !important;
+            z-index: 3;
+            background: rgba(17, 17, 17, 0.6);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-            .button h2 {
-                font-size: 14px !important;
-                background: rgba(17, 17, 17, 0.85);
-                backdrop-filter: blur(6px);
-                color: #ffffff;
-                width: 100%;
-                text-align: center;
-                margin: 0;
-                padding: 8px 0;
-                font-weight: 700;
-                letter-spacing: 0.3px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                transition: background 0.3s ease;
-            }
+        .pin-button { top: 12px !important; right: 12px !important; }
+        .download-button { top: 12px !important; left: 12px !important; }
+    </style>
 
-            .button:hover h2 {
-                background: rgba(0, 0, 0, 0.95);
-            }
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
+                    console.log('service worker initalised! scope:', registration.scope);
 
-            .pin-button, .download-button {
-                position: absolute !important;
-                z-index: 3;
-                background: rgba(17, 17, 17, 0.6);
-                backdrop-filter: blur(4px);
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                border-radius: 50%;
-                padding: 6px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s;
-            }
-
-            .pin-button {
-                top: 12px !important;
-                right: 12px !important;
-            }
-
-            .download-button {
-                top: 12px !important;
-                left: 12px !important;
-            }
-
-            .pin-button:hover, .download-button:hover {
-                transform: scale(1.2) rotate(10deg);
-                background: rgba(0, 0, 0, 0.85);
-            }
-
-            .ripple {
-                position: absolute;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.4);
-                transform: scale(0);
-                animation: ripple-effect 0.6s linear;
-                pointer-events: none;
-            }
-
-            @keyframes ripple-effect {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        </style>
-
-        <script>
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                    navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
-                        console.log('service worker initalised! scope:', registration.scope);
-
-                        navigator.serviceWorker.addEventListener('message', function(event) {
-                            if (event.data === 'cached') {
-                                document.getElementById('cache-status').style.display = 'block';
-                            }
-                        });
-                    }, function(error) {
-                        console.log('ack, error with serviceworker! ', error);
+                    navigator.serviceWorker.addEventListener('message', function(event) {
+                        if (event.data === 'cached') {
+                            document.getElementById('cache-status').style.display = 'block';
+                        }
                     });
-                });
-            }
-
-            document.addEventListener('DOMContentLoaded', () => {
-                const gameLinks = document.querySelectorAll('.button-container > a');
-                const layoutOptions = ['size-standard', 'size-standard', 'size-standard', 'size-standard', 'size-wide'];
-
-                gameLinks.forEach((link, index) => {
-                    const randomLayout = layoutOptions[Math.abs(Math.sin(index * 13.37) * layoutOptions.length) | 0];
-                    link.classList.add(randomLayout);
-                });
-
-                const buttons = document.querySelectorAll('.button');
-                buttons.forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        const rect = btn.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-
-                        const ripple = document.createElement('span');
-                        ripple.classList.add('ripple');
-                        ripple.style.left = `${x}px`;
-                        ripple.style.top = `${y}px`;
-                        
-                        btn.appendChild(ripple);
-                        setTimeout(() => ripple.remove(), 600);
-                    });
+                }, function(error) {
+                    console.log('ack, error with serviceworker! ', error);
                 });
             });
-        </script>
-    </head>
-    <body>
+        }
 
-        <!-- Top Header Navigation (Roblox Style Layout) -->
-        <div class="top-navbar">
-            <a href="../index.html" class="brand-logo">GAMINGLAND</a>
-            <div class="top-nav-buttons">
-                <a href="settings.html" class="nav-pill-btn">Settings</a>
-                <a href="account.html" class="nav-pill-btn">Account</a>
-            </div>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allLinks = document.querySelectorAll('.button-container > a, .pinned-container > a');
+            const layoutOptions = ['size-standard', 'size-standard', 'size-standard', 'size-standard', 'size-wide'];
+
+            allLinks.forEach((link, index) => {
+                const randomLayout = layoutOptions[Math.abs(Math.sin(index * 13.37) * layoutOptions.length) | 0];
+                link.classList.add(randomLayout);
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <div class="top-navbar">
+        <a href="../index.html" class="brand-logo">GAMINGLAND</a>
+        <div class="top-nav-buttons">
+            <a href="settings.html" class="nav-pill-btn">Settings</a>
+            <a href="account.html" class="nav-pill-btn">Account</a>
         </div>
+    </div>
 
-        <!-- Controls Layout -->
-        <div class="controls-wrapper">
-            <input type="text" id="search" placeholder="⌕ Search games..." autocomplete="off">
-            <select id="genreDropdown">
-                <option value="all">All Genres</option>
-                <option value="adventure">Adventure</option>
-                <option value="arcade">Arcade</option>
-                <option value="mobile">Mobile Friendly</option>
-                <option value="platformer">Platformer</option>
-                <option value="puzzle">Puzzle</option>
-                <option value="simulation">Simulation</option>
-            </select>
-            <button id="random-game-btn">Play Random Game</button>
-        </div>
+    <div class="controls-wrapper">
+        <input type="text" id="search" placeholder="⌕ Search games..." autocomplete="off">
+        <select id="genreDropdown">
+            <option value="all">All Genres</option>
+            <option value="adventure">Adventure</option>
+            <option value="arcade">Arcade</option>
+            <option value="mobile">Mobile Friendly</option>
+            <option value="platformer">Platformer</option>
+            <option value="puzzle">Puzzle</option>
+            <option value="simulation">Simulation</option>
+        </select>
+        <button id="random-game-btn">Play Random Game</button>
+    </div>
 
-        <!-- Secondary Navigation Links -->
-        <p class="linkp">
-            <a href="https://github.com/GamingIand" target="_blank">github</a> • 
-            <a href="https://discord.gg/aZJyeDMXuy" target="_blank">discord</a> • 
-            <a id="openBlankLink" style="cursor: pointer;">open blank</a>
-        </p>
+    <p class="linkp">
+        <a href="https://github.com/GamingIand" target="_blank">github</a> • 
+        <a href="https://discord.gg/aZJyeDMXuy" target="_blank">discord</a> • 
+        <a id="openBlankLink" style="cursor: pointer;">open blank</a>
+    </p>
 
-        <h2 class="pinned-header">Stared games</h2>
-        <div class="pinned-container">
-            <!-- Pinned items go here -->
-        </div>
-        
-        <h2 class="allgames-header">All games</h2>
+    <h2 class="pinned-header">Stared games</h2>
+    <div class="pinned-container"></div>
+    
+    <h2 class="allgames-header">All games</h2>
+    <div class="button-container"></div>
             
             <a target="_blank" href="slope/index.html">
                 <div class="button" style="background-image: url('../images/thumbnails/slope.jpg');" data-genre="platformer">
