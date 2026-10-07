@@ -22,7 +22,7 @@
         <meta property="og:description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
         
         <style>
-            /* Modern Theme Additions (Rectangle Button Style) */
+            /* Modern Theme Additions */
             :root {
                 --card-bg: rgba(20, 20, 30, 0.85);
                 --card-border: rgba(0, 242, 254, 0.4);
@@ -35,6 +35,7 @@
                 font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
                 margin: 0;
                 padding: 0;
+                scroll-behavior: smooth;
             }
 
             /* Top Right Topbar Button Group */
@@ -83,63 +84,44 @@
                 box-shadow: 0 0 15px var(--card-glow);
             }
 
-            /* Rectangle Button Grid Layout */
-            .button-container {
+            /* Scroll down indicator replacing the games button */
+            .scroll-indicator {
+                margin: 40px 0 20px 0;
                 display: flex;
-                justify-content: center;
+                flex-direction: column;
                 align-items: center;
-                gap: 20px;
-                flex-wrap: wrap;
-                margin: 30px 0;
-            }
-
-            /* Sleek Rectangle Card Styling */
-            .gamesbutton {
-                position: relative;
-                width: 160px;
-                height: 100px;
-                background: var(--card-bg);
-                border-radius: 12px;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-                gap: 12px;
-                cursor: pointer;
-                transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-                border: 1px solid var(--card-border);
-                padding: 10px 15px;
-                box-sizing: border-box;
-            }
-
-            .gamesbutton img {
-                width: 32px;
-                height: 32px;
-                object-fit: contain;
-                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-            }
-
-            .gamesbutton a {
+                gap: 8px;
                 text-decoration: none;
-                display: flex;
-                align-items: center;
+                color: #a0a0b0;
+                transition: color 0.3s ease, transform 0.3s ease;
+                cursor: pointer;
             }
 
-            .button-text p {
-                margin: 0;
-                font-size: 14px;
+            .scroll-indicator:hover {
+                color: #00f2fe;
+                transform: translateY(4px);
+            }
+
+            .scroll-indicator span {
+                font-size: 13px;
                 font-weight: 600;
                 text-transform: uppercase;
                 letter-spacing: 1px;
-                color: #e0e0e0;
             }
 
-            /* Rectangle Hover Glow & Lift */
-            .gamesbutton:hover {
-                transform: translateY(-4px) scale(1.03);
-                background: rgba(30, 30, 45, 0.95);
-                border-color: #00f2fe;
-                box-shadow: 0 0 20px var(--card-glow);
+            .scroll-arrow {
+                width: 20px;
+                height: 20px;
+                border-right: 2px solid currentColor;
+                border-bottom: 2px solid currentColor;
+                transform: rotate(45deg);
+                animation: bounce 2s infinite;
+            }
+
+            @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
+                40% { transform: translateY(-6px) rotate(45deg); }
+                60% { transform: translateY(-3px) rotate(45deg); }
             }
 
             /* Blackout & Popup Modernisation */
@@ -186,6 +168,75 @@
                 background: #4facfe;
             }
 
+            /* First-time login prompt modal */
+            #loginPopup {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 90%;
+                max-width: 400px;
+                background: #151621;
+                border: 1px solid var(--card-border);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+                border-radius: 16px;
+                padding: 30px;
+                z-index: 1001;
+                text-align: center;
+                box-sizing: border-box;
+            }
+
+            #loginPopup h3 {
+                margin-top: 0;
+                font-size: 22px;
+                color: #ffffff;
+            }
+
+            #loginPopup p {
+                color: #a0a0b0;
+                font-size: 14px;
+                margin-bottom: 25px;
+            }
+
+            .login-popup-actions {
+                display: flex;
+                gap: 15px;
+                justify-content: center;
+            }
+
+            .login-btn-yes {
+                background: #00f2fe;
+                color: #0d0e15;
+                border: none;
+                padding: 10px 24px;
+                font-weight: bold;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background 0.2s, transform 0.2s;
+            }
+
+            .login-btn-yes:hover {
+                background: #4facfe;
+                transform: scale(1.05);
+            }
+
+            .login-btn-no {
+                background: rgba(255, 255, 255, 0.1);
+                color: #ffffff;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                padding: 10px 24px;
+                font-weight: bold;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background 0.2s, transform 0.2s;
+            }
+
+            .login-btn-no:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: scale(1.05);
+            }
+
             /* Layout container alignment */
             .content-side {
                 display: flex;
@@ -211,7 +262,8 @@
             /* Trending Section Layout */
             .trending-section {
                 width: 100%;
-                margin-top: 40px;
+                margin-top: 60px;
+                scroll-margin-top: 40px;
             }
 
             .trending-header {
@@ -281,25 +333,36 @@
     <body>
 
        <div class="top-right-bar">
-           <a class="topbar-btn" href="account.html" title="Account">
-               <img src="images/other/controller.png" alt="Account">
-               <span>Account</span>
-           </a>
-           <a class="topbar-btn" href="settings.html" title="Settings">
-               <img src="images/other/settings.png" alt="Settings">
-               <span>Settings</span>
-           </a>
-           <a class="topbar-btn" href="premium.html" title="Premium">
-               <img src="images/icons/star.png" alt="Premium">
-               <span>Premium</span>
-           </a>
-           <a class="topbar-btn" href="events.html" title="Events">
-               <img src="images/other/apps.png" alt="Events">
-               <span>Events</span>
-           </a>
+            <a class="topbar-btn" href="account.html" title="Account">
+                <img src="images/other/controller.png" alt="Account">
+                <span>Account</span>
+            </a>
+            <a class="topbar-btn" href="settings.html" title="Settings">
+                <img src="images/other/settings.png" alt="Settings">
+                <span>Settings</span>
+            </a>
+            <a class="topbar-btn" href="premium.html" title="Premium">
+                <img src="images/icons/star.png" alt="Premium">
+                <span>Premium</span>
+            </a>
+            <a class="topbar-btn" href="events.html" title="Events">
+                <img src="images/other/apps.png" alt="Events">
+                <span>Events</span>
+            </a>
        </div>
 
        <div id="blackout"></div>
+
+       <!-- First Time Visitor Login Popup -->
+       <div id="loginPopup">
+           <h3>Welcome to Gamingland!</h3>
+           <p>Would you like to log in to your account?</p>
+           <div class="login-popup-actions">
+               <button class="login-btn-yes" id="loginYesBtn">Yes</button>
+               <button class="login-btn-no" id="loginNoBtn">No</button>
+           </div>
+       </div>
+
        <div id="updPopup">
           <img src="/images/other/v10image.jpg" style="width: 90%; border-radius: 8px;">
           <br><br>
@@ -420,28 +483,25 @@
             <h1 class="typewriter"><span id="cursor"></span></h1>
             <br>
 
-            <div class="button-container">
-               <div class="gamesbutton" onclick="window.location='games/index.html';">
-                   <img src="images/other/controller.png" alt="Games">
-                   <div class="button-text">
-                       <p>Games</p>
-                   </div>
-               </div>
-            </div>
+            <!-- Scroll Down Indicator taking you to games -->
+            <a href="#trendingGames" class="scroll-indicator">
+                <span>Explore Games</span>
+                <div class="scroll-arrow"></div>
+            </a>
 
             <br>
 
-            <div class="trending-section">
+            <div class="trending-section" id="trendingGames">
                 <div class="trending-header">
                     <h2>Games to get you started</h2>
-                    <p>Simple controls, maximum fun</p>
+                    <p>Scroll down for all games!</p>
                 </div>
                 <div class="trending-grid">
-                    <div class="trending-card" onclick="window.location='games/snowrider3d/index.html';">
+                    <div class="trending-card" onclick="window.location='games/spacewaves/index.html';">
                         <div class="trending-thumb" style="background: linear-gradient(135deg, #2b1055, #7597de);"></div>
                         <div class="trending-info">
-                            <h3 class="trending-title">snow rider 3d</h3>
-                            <p class="trending-desc">Endless runner</p>
+                            <h3 class="trending-title">space waves</h3>
+                            <p class="trending-desc">NOT GD TRUST!!!</p>
                         </div>
                     </div>
                     <div class="trending-card" onclick="window.location='games/drivemad/index.html';">
@@ -462,7 +522,7 @@
             </div>
        </div>
 
-       <script>
+        <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
@@ -478,23 +538,47 @@
                 });
             });
         }
-       </script>
+        </script>
 
-       <script>
+        <script>
         document.addEventListener('DOMContentLoaded', function () {
-            if (!localStorage.getItem('v10-update')) {
+            // First time visitor check for login popup
+            if (!localStorage.getItem('hasVisitedGamingland')) {
+                localStorage.setItem('hasVisitedGamingland', 'true');
+                document.getElementById('blackout').style.display = 'block';
+                document.getElementById('loginPopup').style.display = 'block';
+            } else if (!localStorage.getItem('v10-update')) {
+                // Show update popup if they visited before but haven't seen v10 update
                 document.getElementById('blackout').style.display = 'block';
                 document.getElementById('updPopup').style.display = 'block';
                 localStorage.setItem('v10-update', 'true');
             }
+
+            // Login popup actions
+            document.getElementById('loginYesBtn').addEventListener('click', function () {
+                window.location.href = 'account.html';
+            });
+
+            document.getElementById('loginNoBtn').addEventListener('click', function () {
+                document.getElementById('loginPopup').style.display = 'none';
+                
+                // Chain into update popup if needed
+                if (!localStorage.getItem('v10-update')) {
+                    document.getElementById('updPopup').style.display = 'block';
+                    localStorage.setItem('v10-update', 'true');
+                } else {
+                    document.getElementById('blackout').style.display = 'none';
+                }
+            });
+
             document.getElementById('updConfirm').addEventListener('click', function () {
                 document.getElementById('blackout').style.display = 'none';
                 document.getElementById('updPopup').style.display = 'none';
             });
         });
-       </script>
+        </script>
 
-       <script>
+        <script>
         const text = "GAMINGLAND";
         const typingDelay = 500; 
         const initialDelay = 100; 
@@ -515,50 +599,52 @@
         }
 
         type();
-       </script>
+        </script>
 
-       <script>
+        <script>
         document.addEventListener('DOMContentLoaded', function() {
             var openBlankLink = document.getElementById('openBlankLink');
 
-            openBlankLink.addEventListener('click', function(event) {
-                event.preventDefault();
+            if (openBlankLink) {
+                openBlankLink.addEventListener('click', function(event) {
+                    event.preventDefault();
 
-                var newTab = window.open('about:blank', '_blank');
+                    var newTab = window.open('about:blank', '_blank');
 
-                if (newTab) {
-                    var newTabBody = newTab.document.body;
-                    newTabBody.style.padding = '0';
-                    newTabBody.style.margin = '0';
-                    newTabBody.style.border = 'hidden';
+                    if (newTab) {
+                        var newTabBody = newTab.document.body;
+                        newTabBody.style.padding = '0';
+                        newTabBody.style.margin = '0';
+                        newTabBody.style.border = 'hidden';
 
-                    var iframe = document.createElement('iframe');
-                    iframe.src = window.location.href;
-                    iframe.style.width = '100%';
-                    iframe.style.height = '100%';
-                    iframe.style.border = 'hidden';
+                        var iframe = document.createElement('iframe');
+                        iframe.src = window.location.href;
+                        iframe.style.width = '100%';
+                        iframe.style.height = '100%';
+                        iframe.style.border = 'hidden';
 
-                    iframe.onload = function() {
-                        var links = iframe.contentDocument.querySelectorAll('a[target="_blank"]');
-                        links.forEach(function(link) {
-                            link.addEventListener('click', function(event) {
-                                event.preventDefault();
-                                iframe.contentWindow.location.href = link.href;
+                        iframe.onload = function() {
+                            var links = iframe.contentDocument.querySelectorAll('a[target="_blank"]');
+                            links.forEach(function(link) {
+                                link.addEventListener('click', function(event) {
+                                    event.preventDefault();
+                                    iframe.contentWindow.location.href = link.href;
+                                });
                             });
-                        });
-                    };
+                        };
 
-                    newTab.document.body.appendChild(iframe);
-                } else {
-                    alert("couldn't manage to open a new tab :(");
-                }
-            });
+                        newTab.document.body.appendChild(iframe);
+                    } else {
+                        alert("couldn't manage to open a new tab :(");
+                    }
+                });
+            }
         });
-       </script> 
+        </script> 
 
-       <script src="storage/js/cloak.js"></script>
-       <script src="storage/js/theme.js"></script>
-       <script src="storage/js/cookie.js"></script>
+        <script src="storage/js/cloak.js"></script>
+        <script src="storage/js/theme.js"></script>
+        <script src="storage/js/cookie.js"></script>
         <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -578,12 +664,9 @@
     const db = getFirestore(app);
 
     onAuthStateChanged(auth, async (user) => {
-        // Find your account link/button in your navbar. 
-        // (Make sure your account link in index.html has an id like id="account-nav-link" or adjust the selector)
         const accountLink = document.querySelector('a[href="account.html"]') || document.getElementById('account-nav-link');
         
         if (user && accountLink) {
-            // Check if we have a saved username in localStorage, otherwise fallback to email/display name
             let displayName = localStorage.getItem('username');
             
             if (!displayName) {
@@ -600,7 +683,6 @@
                 }
             }
 
-            // Replace "Account" text with the user's username
             accountLink.textContent = `👤 ${displayName}`;
         }
     });
@@ -608,7 +690,6 @@
         
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-    // Function to replace text nodes containing '✪' with an image
     function replaceStarWithImage(node) {
         if (node.nodeType === Node.TEXT_NODE) {
             if (node.textContent.includes('✪')) {
@@ -631,14 +712,12 @@
                 node.parentNode.replaceChild(fragment, node);
             }
         } else {
-            // Skip script and style tags to avoid breaking code
             if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
                 node.childNodes.forEach(child => replaceStarWithImage(child));
             }
         }
     }
 
-    // Run across the whole body content
     replaceStarWithImage(document.body);
 });
 </script>        
