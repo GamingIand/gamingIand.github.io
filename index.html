@@ -84,17 +84,19 @@
                 box-shadow: 0 0 15px var(--card-glow);
             }
 
-            /* Scroll down indicator replacing the games button */
+            /* Scroll down indicator button */
             .scroll-indicator {
-                margin: 40px 0 20px 0;
+                margin: 30px 0;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 gap: 8px;
-                text-decoration: none;
+                background: none;
+                border: none;
                 color: #a0a0b0;
                 transition: color 0.3s ease, transform 0.3s ease;
                 cursor: pointer;
+                padding: 10px;
             }
 
             .scroll-indicator:hover {
@@ -110,8 +112,8 @@
             }
 
             .scroll-arrow {
-                width: 20px;
-                height: 20px;
+                width: 16px;
+                height: 16px;
                 border-right: 2px solid currentColor;
                 border-bottom: 2px solid currentColor;
                 transform: rotate(45deg);
@@ -243,9 +245,9 @@
                 flex-direction: column;
                 align-items: flex-start;
                 justify-content: flex-start;
-                min-height: 100vh;
+                min-height: 140vh; /* Ensures page is taller than screen so scrolling works */
                 text-align: left;
-                padding: 40px;
+                padding: 60px 40px;
                 box-sizing: border-box;
             }
 
@@ -262,7 +264,7 @@
             /* Trending Section Layout */
             .trending-section {
                 width: 100%;
-                margin-top: 60px;
+                margin-top: 150px; /* Pushes it down so scrolling is required */
                 scroll-margin-top: 40px;
             }
 
@@ -483,25 +485,23 @@
             <h1 class="typewriter"><span id="cursor"></span></h1>
             <br>
 
-            <!-- Scroll Down Indicator taking you to games -->
-            <a href="#trendingGames" class="scroll-indicator">
+            <!-- Scroll Down Button -->
+            <button class="scroll-indicator" id="scrollBtn">
                 <span>Explore Games</span>
                 <div class="scroll-arrow"></div>
-            </a>
-
-            <br>
+            </button>
 
             <div class="trending-section" id="trendingGames">
                 <div class="trending-header">
                     <h2>Games to get you started</h2>
-                    <p>Scroll down for all games!</p>
+                    <p>Simple controls, maximum fun</p>
                 </div>
                 <div class="trending-grid">
-                    <div class="trending-card" onclick="window.location='games/spacewaves/index.html';">
+                    <div class="trending-card" onclick="window.location='games/snowrider3d/index.html';">
                         <div class="trending-thumb" style="background: linear-gradient(135deg, #2b1055, #7597de);"></div>
                         <div class="trending-info">
-                            <h3 class="trending-title">space waves</h3>
-                            <p class="trending-desc">NOT GD TRUST!!!</p>
+                            <h3 class="trending-title">snow rider 3d</h3>
+                            <p class="trending-desc">Endless runner</p>
                         </div>
                     </div>
                     <div class="trending-card" onclick="window.location='games/drivemad/index.html';">
@@ -541,6 +541,13 @@
         </script>
 
         <script>
+        // Smooth scroll trigger script
+        document.getElementById('scrollBtn').addEventListener('click', function() {
+            document.getElementById('trendingGames').scrollIntoView({ behavior: 'smooth' });
+        });
+        </script>
+
+        <script>
         document.addEventListener('DOMContentLoaded', function () {
             // First time visitor check for login popup
             if (!localStorage.getItem('hasVisitedGamingland')) {
@@ -548,13 +555,11 @@
                 document.getElementById('blackout').style.display = 'block';
                 document.getElementById('loginPopup').style.display = 'block';
             } else if (!localStorage.getItem('v10-update')) {
-                // Show update popup if they visited before but haven't seen v10 update
                 document.getElementById('blackout').style.display = 'block';
                 document.getElementById('updPopup').style.display = 'block';
                 localStorage.setItem('v10-update', 'true');
             }
 
-            // Login popup actions
             document.getElementById('loginYesBtn').addEventListener('click', function () {
                 window.location.href = 'account.html';
             });
@@ -562,7 +567,6 @@
             document.getElementById('loginNoBtn').addEventListener('click', function () {
                 document.getElementById('loginPopup').style.display = 'none';
                 
-                // Chain into update popup if needed
                 if (!localStorage.getItem('v10-update')) {
                     document.getElementById('updPopup').style.display = 'block';
                     localStorage.setItem('v10-update', 'true');
