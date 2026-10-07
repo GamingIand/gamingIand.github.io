@@ -38,50 +38,96 @@
                 scroll-behavior: smooth;
             }
 
-            /* Top Right Topbar Button Group */
-            .top-right-bar {
-                position: fixed;
-                top: 25px;
-                right: 25px;
+            /* Centralized Actions Area (Games Button + Square Icon Buttons Next to It) */
+            .button-container {
                 display: flex;
-                gap: 12px;
-                z-index: 100;
-            }
-
-            .topbar-btn {
-                height: 45px;
-                padding: 0 16px;
-                background: var(--card-bg);
-                border: 1px solid var(--card-border);
-                border-radius: 22.5px;
-                display: flex;
+                justify-content: center;
                 align-items: center;
-                gap: 8px;
-                cursor: pointer;
-                text-decoration: none;
-                transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+                gap: 15px;
+                flex-wrap: wrap;
+                margin: 30px 0;
             }
 
-            .topbar-btn img {
-                width: 20px;
-                height: 20px;
+            /* Sleek Rectangle Games Button */
+            .gamesbutton {
+                position: relative;
+                width: 180px;
+                height: 100px;
+                background: var(--card-bg);
+                border-radius: 12px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                cursor: pointer;
+                transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+                border: 1px solid var(--card-border);
+                padding: 10px 15px;
+                box-sizing: border-box;
+            }
+
+            .gamesbutton img {
+                width: 32px;
+                height: 32px;
                 object-fit: contain;
                 filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
             }
 
-            .topbar-btn span {
-                font-size: 13px;
+            .button-text p {
+                margin: 0;
+                font-size: 14px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #e0e0e0;
+            }
+
+            .gamesbutton:hover {
+                transform: translateY(-4px) scale(1.03);
+                background: rgba(30, 30, 45, 0.95);
+                border-color: #00f2fe;
+                box-shadow: 0 0 20px var(--card-glow);
+            }
+
+            /* Square Icon Buttons Next to Games Button */
+            .square-icon-btn {
+                width: 100px;
+                height: 100px;
+                background: var(--card-bg);
+                border: 1px solid var(--card-border);
+                border-radius: 12px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                cursor: pointer;
+                text-decoration: none;
+                transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+                box-sizing: border-box;
+            }
+
+            .square-icon-btn img {
+                width: 28px;
+                height: 28px;
+                object-fit: contain;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            }
+
+            .square-icon-btn span {
+                font-size: 11px;
                 font-weight: 600;
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
                 color: #e0e0e0;
             }
 
-            .topbar-btn:hover {
-                transform: scale(1.05);
+            .square-icon-btn:hover {
+                transform: translateY(-4px) scale(1.03);
                 background: rgba(30, 30, 45, 0.95);
                 border-color: #00f2fe;
-                box-shadow: 0 0 15px var(--card-glow);
+                box-shadow: 0 0 20px var(--card-glow);
             }
 
             /* Neater Floating Explore Games Button */
@@ -343,25 +389,6 @@
     </head>
     <body>
 
-       <div class="top-right-bar">
-            <a class="topbar-btn" href="account.html" title="Account">
-                <img src="images/other/controller.png" alt="Account">
-                <span>Account</span>
-            </a>
-            <a class="topbar-btn" href="settings.html" title="Settings">
-                <img src="images/other/settings.png" alt="Settings">
-                <span>Settings</span>
-            </a>
-            <a class="topbar-btn" href="premium.html" title="Premium">
-                <img src="images/icons/star.png" alt="Premium">
-                <span>Premium</span>
-            </a>
-            <a class="topbar-btn" href="events.html" title="Events">
-                <img src="images/other/apps.png" alt="Events">
-                <span>Events</span>
-            </a>
-       </div>
-
        <div id="blackout"></div>
 
        <!-- First Time Visitor Login Popup -->
@@ -497,6 +524,33 @@
 
        <div class="content-side">
             <h1 class="typewriter"><span id="cursor"></span></h1>
+            <br>
+
+            <div class="button-container">
+               <div class="gamesbutton" onclick="window.location='games/index.html';">
+                   <img src="images/other/controller.png" alt="Games">
+                   <div class="button-text">
+                       <p>Games</p>
+                   </div>
+               </div>
+               <a class="square-icon-btn" href="account.html" title="Account">
+                   <img src="images/other/controller.png" alt="Account">
+                   <span>Account</span>
+               </a>
+               <a class="square-icon-btn" href="settings.html" title="Settings">
+                   <img src="images/other/settings.png" alt="Settings">
+                   <span>Settings</span>
+               </a>
+               <a class="square-icon-btn" href="premium.html" title="Premium">
+                   <img src="images/icons/star.png" alt="Premium">
+                   <span>Premium</span>
+               </a>
+               <a class="square-icon-btn" href="events.html" title="Events">
+                   <img src="images/other/apps.png" alt="Events">
+                   <span>Events</span>
+               </a>
+            </div>
+
             <br>
 
             <!-- Games to get you started section -->
