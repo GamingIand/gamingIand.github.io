@@ -84,46 +84,54 @@
                 box-shadow: 0 0 15px var(--card-glow);
             }
 
-            /* Scroll down indicator button */
-            .scroll-indicator {
-                margin: 30px 0;
+            /* Neater Floating Explore Games Button */
+            .floating-scroll-indicator {
+                position: fixed;
+                bottom: 25px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--card-bg);
+                border: 1px solid var(--card-border);
+                backdrop-filter: blur(10px);
+                padding: 10px 20px;
+                border-radius: 30px;
                 display: flex;
-                flex-direction: column;
                 align-items: center;
-                gap: 8px;
-                background: none;
-                border: none;
-                color: #a0a0b0;
-                transition: color 0.3s ease, transform 0.3s ease;
+                gap: 10px;
+                color: #ffffff;
                 cursor: pointer;
-                padding: 10px;
+                z-index: 90;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+                transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             }
 
-            .scroll-indicator:hover {
-                color: #00f2fe;
-                transform: translateY(4px);
+            .floating-scroll-indicator:hover {
+                transform: translateX(-50%) translateY(-3px) scale(1.03);
+                background: rgba(30, 30, 45, 0.95);
+                border-color: #00f2fe;
+                box-shadow: 0 0 20px var(--card-glow);
             }
 
-            .scroll-indicator span {
+            .floating-scroll-indicator span {
                 font-size: 13px;
                 font-weight: 600;
                 text-transform: uppercase;
-                letter-spacing: 1px;
+                letter-spacing: 0.5px;
             }
 
-            .scroll-arrow {
-                width: 16px;
-                height: 16px;
-                border-right: 2px solid currentColor;
-                border-bottom: 2px solid currentColor;
+            .scroll-arrow-icon {
+                width: 10px;
+                height: 10px;
+                border-right: 2px solid #00f2fe;
+                border-bottom: 2px solid #00f2fe;
                 transform: rotate(45deg);
                 animation: bounce 2s infinite;
             }
 
             @keyframes bounce {
                 0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
-                40% { transform: translateY(-6px) rotate(45deg); }
-                60% { transform: translateY(-3px) rotate(45deg); }
+                40% { transform: translateY(-4px) rotate(45deg); }
+                60% { transform: translateY(-2px) rotate(45deg); }
             }
 
             /* Blackout & Popup Modernisation */
@@ -245,9 +253,9 @@
                 flex-direction: column;
                 align-items: flex-start;
                 justify-content: flex-start;
-                min-height: 140vh; /* Ensures page is taller than screen so scrolling works */
+                min-height: 150px;
                 text-align: left;
-                padding: 60px 40px;
+                padding: 60px 40px 120px 40px;
                 box-sizing: border-box;
             }
 
@@ -261,10 +269,10 @@
                 text-decoration: underline;
             }
 
-            /* Trending Section Layout */
+            /* Trending & New Section Layout */
             .trending-section {
                 width: 100%;
-                margin-top: 150px; /* Pushes it down so scrolling is required */
+                margin-top: 80px;
                 scroll-margin-top: 40px;
             }
 
@@ -311,8 +319,9 @@
             .trending-thumb {
                 width: 100%;
                 height: 140px;
-                background: #222332;
-                object-fit: cover;
+                background-size: cover;
+                background-position: center;
+                background-color: #222332;
             }
 
             .trending-info {
@@ -480,17 +489,17 @@
           <div id="updConfirmFrame"><button id="updConfirm">okay</button></div>
        </div>
 
+       <!-- Neater Floating Explore Games Button -->
+       <button class="floating-scroll-indicator" id="scrollBtn">
+           <span>Explore Games</span>
+           <div class="scroll-arrow-icon"></div>
+       </button>
 
        <div class="content-side">
             <h1 class="typewriter"><span id="cursor"></span></h1>
             <br>
 
-            <!-- Scroll Down Button -->
-            <button class="scroll-indicator" id="scrollBtn">
-                <span>Explore Games</span>
-                <div class="scroll-arrow"></div>
-            </button>
-
+            <!-- Games to get you started section -->
             <div class="trending-section" id="trendingGames">
                 <div class="trending-header">
                     <h2>Games to get you started</h2>
@@ -498,24 +507,55 @@
                 </div>
                 <div class="trending-grid">
                     <div class="trending-card" onclick="window.location='games/snowrider3d/index.html';">
-                        <div class="trending-thumb" style="background: linear-gradient(135deg, #2b1055, #7597de);"></div>
+                        <div class="trending-thumb" style="background-image: url('/images/thumbnails/snowrider3d.jpg');"></div>
                         <div class="trending-info">
                             <h3 class="trending-title">snow rider 3d</h3>
                             <p class="trending-desc">Endless runner</p>
                         </div>
                     </div>
                     <div class="trending-card" onclick="window.location='games/drivemad/index.html';">
-                        <div class="trending-thumb" style="background: linear-gradient(135deg, #1f4068, #162447);"></div>
+                        <div class="trending-thumb" style="background-image: url('/images/thumbnails/drivemad.jpg');"></div>
                         <div class="trending-info">
                             <h3 class="trending-title">Drive mad</h3>
                             <p class="trending-desc">This game makes me rage!</p>
                         </div>
                     </div>
                     <div class="trending-card" onclick="window.location='games/bitlife/index.html';">
-                        <div class="trending-thumb" style="background: linear-gradient(135deg, #e43a15, #e65245);"></div>
+                        <div class="trending-thumb" style="background-image: url('/images/thumbnails/bitlife.jpg');"></div>
                         <div class="trending-info">
                             <h3 class="trending-title">Bitlife</h3>
                             <p class="trending-desc">What more then a life sim</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Games Section -->
+            <div class="trending-section">
+                <div class="trending-header">
+                    <h2>New games</h2>
+                    <p>Check out the latest additions</p>
+                </div>
+                <div class="trending-grid">
+                    <div class="trending-card" onclick="window.location='games/subwaysurfers/index.html';">
+                        <div class="trending-thumb" style="background-image: url('/images/thumbnails/subwaysurfers.jpeg');"></div>
+                        <div class="trending-info">
+                            <h3 class="trending-title">Subway Surfers</h3>
+                            <p class="trending-desc">Dash as fast as you can!</p>
+                        </div>
+                    </div>
+                    <div class="trending-card" onclick="window.location='games/slope/index.html';">
+                        <div class="trending-thumb" style="background-image: url('/images/thumbnails/slope.jpeg');"></div>
+                        <div class="trending-info">
+                            <h3 class="trending-title">Slope</h3>
+                            <p class="trending-desc">Roll down the neon slopes</p>
+                        </div>
+                    </div>
+                    <div class="trending-card" onclick="window.location='games/flappybird/index.html';">
+                        <div class="trending-thumb" style="background-image: url('/images/thumbnails/flappybird.jpeg');"></div>
+                        <div class="trending-info">
+                            <h3 class="trending-title">Flappy Bird</h3>
+                            <p class="trending-desc">Tap to fly through the pipes</p>
                         </div>
                     </div>
                 </div>
