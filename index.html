@@ -5,7 +5,6 @@
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', 'G-7FN7LEVWXD');
         </script>
 
@@ -13,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/images/ico.ico" type="image/x-icon">
         <link rel="stylesheet" href="/storage/css/index.css">
-        <title>Home | Gamingland</title>
+        <title>Welcome | Gamingland</title>
 
         <meta name="description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
         <meta property="og:site_name" content="gamingland">
@@ -22,803 +21,230 @@
         <meta property="og:description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
         
         <style>
-            /* Modern Theme Additions */
             :root {
+                --bg-color: #0d0e15;
                 --card-bg: rgba(20, 20, 30, 0.85);
                 --card-border: rgba(0, 242, 254, 0.4);
                 --card-glow: rgba(0, 242, 254, 0.4);
+                --accent: #00f2fe;
             }
 
             body {
-                background-color: #0d0e15;
+                background-color: var(--bg-color);
                 color: #ffffff;
                 font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
                 margin: 0;
                 padding: 0;
-                scroll-behavior: smooth;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                overflow-x: hidden;
             }
 
-            /* Centralized Actions Area (Games Button + Square Icon Buttons Next to It) */
-            .button-container {
+            /* Header */
+            header {
                 display: flex;
-                justify-content: center;
+                justify-content: space-between;
                 align-items: center;
-                gap: 15px;
-                flex-wrap: wrap;
-                margin: 30px 0;
-            }
-
-            /* Sleek Rectangle Games Button */
-            .gamesbutton {
-                position: relative;
-                width: 180px;
-                height: 100px;
-                background: var(--card-bg);
-                border-radius: 12px;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-                gap: 12px;
-                cursor: pointer;
-                transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-                border: 1px solid var(--card-border);
-                padding: 10px 15px;
+                padding: 30px 50px;
+                width: 100%;
                 box-sizing: border-box;
             }
 
-            .gamesbutton img {
-                width: 32px;
-                height: 32px;
-                object-fit: contain;
-                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            .logo {
+                font-size: 20px;
+                font-weight: 800;
+                letter-spacing: 2px;
+                color: #ffffff;
+                text-decoration: none;
+                text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+                transition: text-shadow 0.2s;
             }
 
-            .button-text p {
-                margin: 0;
-                font-size: 14px;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                color: #e0e0e0;
+            .logo:hover {
+                text-shadow: 0 0 18px rgba(0, 242, 254, 0.8);
             }
 
-            .gamesbutton:hover {
-                transform: translateY(-4px) scale(1.03);
-                background: rgba(30, 30, 45, 0.95);
-                border-color: #00f2fe;
-                box-shadow: 0 0 20px var(--card-glow);
+            .about-link {
+                color: #a0a0b0;
+                text-decoration: none;
+                font-size: 15px;
+                font-weight: 500;
+                transition: color 0.2s, text-shadow 0.2s;
             }
 
-            /* Square Icon Buttons Next to Games Button */
-            .square-icon-btn {
-                width: 100px;
-                height: 100px;
-                background: var(--card-bg);
-                border: 1px solid var(--card-border);
-                border-radius: 12px;
+            .about-link:hover {
+                color: var(--accent);
+                text-shadow: 0 0 8px rgba(0, 242, 254, 0.6);
+            }
+
+            /* Hero Center Section */
+            .hero-container {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                gap: 8px;
-                cursor: pointer;
+                text-align: center;
+                padding: 20px 20px 60px 20px;
+                flex-grow: 1;
+            }
+
+            .future-text {
+                font-size: clamp(28px, 5vw, 48px);
+                font-weight: 800;
+                letter-spacing: 1px;
+                margin: 0 0 40px 0;
+                background: linear-gradient(135deg, #ffffff 30%, var(--accent) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
+            }
+
+            /* Action Buttons Container */
+            .auth-actions {
+                display: flex;
+                gap: 20px;
+                margin-bottom: 25px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .btn-sleek {
+                padding: 14px 32px;
+                border-radius: 12px;
+                font-size: 15px;
+                font-weight: 700;
                 text-decoration: none;
-                transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-                box-sizing: border-box;
-            }
-
-            .square-icon-btn img {
-                width: 28px;
-                height: 28px;
-                object-fit: contain;
-                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-            }
-
-            .square-icon-btn span {
-                font-size: 11px;
-                font-weight: 600;
-                text-transform: uppercase;
+                cursor: pointer;
+                transition: all 0.3s ease;
                 letter-spacing: 0.5px;
-                color: #e0e0e0;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
             }
 
-            .square-icon-btn:hover {
-                transform: translateY(-4px) scale(1.03);
-                background: rgba(30, 30, 45, 0.95);
-                border-color: #00f2fe;
-                box-shadow: 0 0 20px var(--card-glow);
+            .btn-primary {
+                background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+                color: #0d0e15;
+                box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3);
+                border: none;
             }
 
-            /* Neater Floating Explore Games Button */
-            .floating-scroll-indicator {
-                position: fixed;
-                bottom: 25px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: var(--card-bg);
+            .btn-primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 25px rgba(0, 242, 254, 0.5);
+            }
+
+            .btn-secondary {
+                background: rgba(20, 20, 30, 0.85);
+                color: #ffffff;
                 border: 1px solid var(--card-border);
                 backdrop-filter: blur(10px);
-                padding: 10px 20px;
-                border-radius: 30px;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                color: #ffffff;
-                cursor: pointer;
-                z-index: 90;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-                transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             }
 
-            .floating-scroll-indicator:hover {
-                transform: translateX(-50%) translateY(-3px) scale(1.03);
+            .btn-secondary:hover {
+                transform: translateY(-3px);
                 background: rgba(30, 30, 45, 0.95);
-                border-color: #00f2fe;
+                border-color: var(--accent);
                 box-shadow: 0 0 20px var(--card-glow);
             }
 
-            .floating-scroll-indicator span {
-                font-size: 13px;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
+            /* Skip / No Thanks Link */
+            .skip-container {
+                margin-top: 10px;
             }
 
-            .scroll-arrow-icon {
-                width: 10px;
-                height: 10px;
-                border-right: 2px solid #00f2fe;
-                border-bottom: 2px solid #00f2fe;
-                transform: rotate(45deg);
-                animation: bounce 2s infinite;
-            }
-
-            @keyframes bounce {
-                0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
-                40% { transform: translateY(-4px) rotate(45deg); }
-                60% { transform: translateY(-2px) rotate(45deg); }
-            }
-
-            /* Blackout & Popup Modernisation */
-            #blackout {
-                display: none;
-                position: fixed;
-                inset: 0;
-                background: rgba(0, 0, 0, 0.8);
-                backdrop-filter: blur(5px);
-                z-index: 999;
-            }
-
-            #updPopup {
-                display: none;
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 90%;
-                max-width: 600px;
-                max-height: 85vh;
-                background: #151621;
-                border: 1px solid var(--card-border);
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-                border-radius: 12px;
-                padding: 25px;
-                z-index: 1000;
-                overflow-y: auto;
-                box-sizing: border-box;
-            }
-
-            #updConfirm {
-                background: #00f2fe;
-                color: #0d0e15;
-                border: none;
-                padding: 10px 25px;
-                font-weight: bold;
-                border-radius: 6px;
-                cursor: pointer;
-                transition: background 0.2s;
-            }
-
-            #updConfirm:hover {
-                background: #4facfe;
-            }
-
-            /* First-time login prompt modal */
-            #loginPopup {
-                display: none;
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 90%;
-                max-width: 400px;
-                background: #151621;
-                border: 1px solid var(--card-border);
-                box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-                border-radius: 16px;
-                padding: 30px;
-                z-index: 1001;
-                text-align: center;
-                box-sizing: border-box;
-            }
-
-            #loginPopup h3 {
-                margin-top: 0;
-                font-size: 22px;
-                color: #ffffff;
-            }
-
-            #loginPopup p {
-                color: #a0a0b0;
+            .skip-link {
+                color: #808090;
+                text-decoration: none;
                 font-size: 14px;
-                margin-bottom: 25px;
-            }
-
-            .login-popup-actions {
-                display: flex;
-                gap: 15px;
-                justify-content: center;
-            }
-
-            .login-btn-yes {
-                background: #00f2fe;
-                color: #0d0e15;
-                border: none;
-                padding: 10px 24px;
-                font-weight: bold;
-                border-radius: 8px;
-                cursor: pointer;
-                transition: background 0.2s, transform 0.2s;
-            }
-
-            .login-btn-yes:hover {
-                background: #4facfe;
-                transform: scale(1.05);
-            }
-
-            .login-btn-no {
-                background: rgba(255, 255, 255, 0.1);
-                color: #ffffff;
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                padding: 10px 24px;
-                font-weight: bold;
-                border-radius: 8px;
-                cursor: pointer;
-                transition: background 0.2s, transform 0.2s;
-            }
-
-            .login-btn-no:hover {
-                background: rgba(255, 255, 255, 0.2);
-                transform: scale(1.05);
-            }
-
-            /* Layout container alignment */
-            .content-side {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                justify-content: flex-start;
-                min-height: 150px;
-                text-align: left;
-                padding: 60px 40px 120px 40px;
-                box-sizing: border-box;
-            }
-
-            .linkp a, .content-side > a {
-                color: #00f2fe;
+                font-weight: 500;
                 transition: color 0.2s;
             }
 
-            .linkp a:hover, .content-side > a:hover {
-                color: #4facfe;
+            .skip-link:hover {
+                color: #ffffff;
                 text-decoration: underline;
             }
 
-            /* Trending & New Section Layout */
-            .trending-section {
-                width: 100%;
-                margin-top: 80px;
-                scroll-margin-top: 40px;
-            }
-
-            .trending-header {
-                margin-bottom: 20px;
-            }
-
-            .trending-header h2 {
-                font-size: 22px;
-                margin: 0;
-                font-weight: 700;
-            }
-
-            .trending-header p {
-                font-size: 14px;
-                color: #a0a0b0;
-                margin: 5px 0 0 0;
-            }
-
-            .trending-grid {
-                display: flex;
-                gap: 20px;
-                overflow-x: auto;
-                padding-bottom: 15px;
-                width: 100%;
-            }
-
-            .trending-card {
-                min-width: 280px;
-                flex: 0 0 auto;
-                background: #151621;
-                border-radius: 12px;
-                overflow: hidden;
-                border: 1px solid rgba(255, 255, 255, 0.05);
-                transition: transform 0.2s ease, border-color 0.2s ease;
-                cursor: pointer;
-            }
-
-            .trending-card:hover {
-                transform: translateY(-4px);
-                border-color: var(--card-border);
-            }
-
-            .trending-thumb {
-                width: 100%;
-                height: 140px;
-                background-size: cover;
-                background-position: center;
-                background-color: #222332;
-            }
-
-            .trending-info {
-                padding: 15px;
-            }
-
-            .trending-title {
-                font-size: 16px;
-                font-weight: bold;
-                margin: 0 0 5px 0;
-            }
-
-            .trending-desc {
-                font-size: 12px;
-                color: #a0a0b0;
-                margin: 0;
+            /* Footer */
+            footer {
+                text-align: center;
+                padding: 20px;
+                color: #606070;
+                font-size: 13px;
             }
         </style>
     </head>
     <body>
 
-       <div id="blackout"></div>
+        <!-- Header -->
+        <header>
+            <a href="index.html" class="logo">GAMINGLAND</a>
+            <a href="about.html" class="about-link">about?</a>
+        </header>
 
-       <!-- First Time Visitor Login Popup -->
-       <div id="loginPopup">
-           <h3>Welcome to Gamingland!</h3>
-           <p>Would you like to log in to your account?</p>
-           <div class="login-popup-actions">
-               <button class="login-btn-yes" id="loginYesBtn">Yes</button>
-               <button class="login-btn-no" id="loginNoBtn">No</button>
-           </div>
-       </div>
-
-       <div id="updPopup">
-          <img src="/images/other/v10image.jpg" style="width: 90%; border-radius: 8px;">
-          <br><br>
-          <h2 style="font-size: 28px; text-decoration: underline;">version 27 / patch notes</h2>
-
-          <div id="updContent">
-              <ul style="text-align: left;">
-                <li>offline mode
-                  <ul>
-                    <li>download 200+ games from the site by clicking the download button to the left of them</li>
-                    <li>after one game is downloaded, loading the site without an internet connection will send you to an offline version on the site where you can access downloaded games</li>
-                    <li>supports ruffle/flash + works seamlessly with compatible games</li>
-                  </ul>
-                </li>
-                <li>added 132 games
-                    <ul>
-                        <li>sega genesis: comix zone, ecco the dolphin, gunstar heroes, phantasy star iv, ranger x, ristar, shining force, shinobi iii, sonic the hedgehog, sonic the hedgehog 2, streets of rage 2, vectorman, vectorman 2</li>
-                        <li>game boy: kirby’s dreamland 2, link’s awakening dx, metroid ii, super mario land 2, warioland ii, castlevania: aria of sorrow, final fantasy tactics advance, drill dozer, pokemon yellow</li>
-                        <li>nes: battle toads, castlevania iii, contra, duck tales, kid icarus, mega man 2, ninja gaiden, mike tyson’s punch out</li>
-                        <li>snes: chrono trigger, contra iii, donkey kong country 3, earthbound, final fantasy iv, f-zero, super metroid, illusion of gaia</li>
-                        <li>n64: banjo tooie, harvest moon 64, jet force gemini, mystical ninja, turok dinosaur hunter, yoshi’s story</li>
-                        <li>nintendo ds: advance wars: days of ruin, castlevania: dawn of sorrow, castlevania: order of ecclesia, mario and luigi: partners in time</li>
-                    </ul>
-                </li>
-                <li>flash games: abuda the alien, battle beavers, controlcraft 2, age of war, age of war 2, amorphous, bubble spinner, crush the castle, crush the castle 2, epic battle fantasy, epic battle fantasy 2, epic battle fantasy 3, fancy pants adventure 3, flood runner 2, flood runner 3, dragon boy 2, neon rider, pandemic 2, stick war, stick war 2, ultimate flash sonic, zombocalpyse, zombotron, zombotron 2, three line, bike champ, bike champ 2, corporation inc, shop empire fable, wubzzy’s amazing adventure</li>
-                <li>nitrome games: canopy, cave chaos, changetype(), cheese dreams, chisel, chisel 2, ditto, feed me, final ninja, frost bite, frost bite 2, ice breaker, mutiny, nitrome must die, oodlegobs, super treadmill, swindler, test subject arena, test subject complete, twin shot, twin shot 2</li>
-                <li>flipline games: cactus mccoy, cactus mccoy 2, papa louie, papa louie 2, papa louie 3, steak and jake, steak and jake: midnight march</li>
-                <li>other games: backrooms 2d, basket random, csgo clicker, doom, funny shooter 2, gun fest, infinite craft, lows adventures 2, pako highway, recoil, run 3 plus, slope city, state io, sudoku, superhero drop, balloon run, crazy tunnel 3d, eaglercraft 1.8, geometry dash sky, gold digger frvr, hexgl, house of hazards, pick crafter, precision client, subway runner, xx142-b2.exe</li>
-                <li>added 4 apps:
-                  <ul>
-                    <li>calculator: a simple calculator, allowing you to perform simple addition, subtraction, multiplication and division</li>
-                    <li>etch a sketch: create digital pixel drawings - mimicking the experience of an etch-a-sketch with quality of life features</li>
-                    <li>zip opener: directly upload and view/download individual files inside a zip archive</li>
-                    <li>godoblocks: a mimick of the 2005 roblox beta era - recreated entirely in godot</li>
-                  </ul>
-                </li>
-                <li>fixed friday night funkin & drift hunters</li>
-                <br>
-                <li>settings overhaul
-                  <ul>
-                    <li>new data management section
-                      <ul>
-                        <li>import/export data into save files, allowing for transfer over multiple sites</li>
-                        <li>clear all data off the site with the clear data button</li>
-                      </ul>
-                    </li>
-                    <li>new panic mode
-                      <ul>
-                        <li>customise a panic key (defaults to ctrl+shift+p)</li>
-                        <li>customise a panic url (defaults to https://www.desmos.com/scientific)</li>
-                        <li>perform the shortcut on any page to instantly delete all contents of the site and redirect to the panic url</li>
-                      </ul>
-                    </li>
-                    <li>custom theme updates
-                      <ul>
-                        <li>added ability to export and import custom themes directly into the site, allowing for ease of access switching + sharability</li>
-                        <li>custom themes now do not require a refresh of the page every time</li>
-                      </ul>
-                    </li>
-                    <li>new theme: ghostly - an abandoned town, said to be haunted by spirits lurking within</li>
-                    <li>added open games in same tab setting</li>
-                    <li>fixed tab cloaking not working on lots of pages, now works globally</li>
-                    <li>tab cloak and resetting auto applies now with page refresh</li>
-                    <li>removed tooltips to condense space</li>
-                    <li>significantly improved animation</li>
-                  </ul>
-                </li>
-                <li>seraphim - mobile update
-                  <ul>
-                    <li>mobile version is now detachable from seraph and can be hosted separately</li>
-                    <li>converted games and apps from buttons to app icons for a more unique interface</li>
-                    <li>blurred all theme backgrounds to help contrast content more on smaller screens</li>
-                    <li>now integratable with ios! open seraphim in safari > more > add to home page</li>
-                    <li>setting bars now stack instead of appearing next to each other</li>
-                    <li>games are now sorted in alphabetical order</li>
-                    <li>custom themes are now compatible with mobile mode</li>
-                    <li>mobile now uses new and consolidated stylesheet</li>
-                    <li>scripts on page now execute in one instead of being fragmented</li>
-                    <li>removed games/apps opening in a blank tab</li>
-                    <li>adjusted meta tags to fit the site</li>
-                  </ul>
-                </li>
-                <li>updates page
-                  <ul>
-                    <li>update log page is now a dropdown menu instead of a long page - scales down from version 10 all the way to version 1</li>
-                    <li>improved animation on page load</li>
-                    <li>fixed header glowing bug on page, making a weird background effect</li>
-                  </ul>
-                </li>
-                <li>other changes
-                  <ul>
-                    <li>homepage now has dedicated big settings button</li>
-                    <li>shrunk down app size slightly</li>
-                    <li>added update popup for whenever there is a new update - shown on the homepage</li>
-                    <li>404 page now has a previous page button</li>
-                    <li>fixed errors with 404 page styling, images and fonts</li>
-                    <li>fixed errors with 404 linkbar links redirecting to wrong parts of the site</li>
-                    <li>mobile users are now not automatically redirected to the mobile friendly version of the site on the homepage</li>
-                    <li>background image bandwidth has been significantly downgraded by 50-90%</li>
-                    <li>game thumbnails total bandwidth reduced significantly (19.2mb > 2.2mb)</li>
-                    <li>favicon is now improved to give a more rounded design</li>
-                    <li>fixed homepage size on mozilla browsers</li>
-                    <li>star/cross icon is now an image icon instead of using unicode characters</li>
-                    <li>themes.css now is used in place of having all stylesheets have different schemes</li>
-                    <li>polished readme file, adding more content to it and removing unnecessary information</li>
-                    <li>changed placeholder image (displays when there is no current thumbnail for a game)</li>
-                    <li>css stylesheets have been renamed to make it easier to sort through</li>
-                  </ul>
-                </li>
-              </ul>        
-          </div>
-          <br>
-          <div id="updConfirmFrame"><button id="updConfirm">okay</button></div>
-       </div>
-
-       <!-- Neater Floating Explore Games Button -->
-       <button class="floating-scroll-indicator" id="scrollBtn">
-           <span>Explore Games</span>
-           <div class="scroll-arrow-icon"></div>
-       </button>
-
-       <div class="content-side">
-            <h1 class="typewriter"><span id="cursor"></span></h1>
-            <br>
-
-            <div class="button-container">
-               <div class="gamesbutton" onclick="window.location='games/index.html';">
-                   <img src="images/other/controller.png" alt="Games">
-                   <div class="button-text">
-                       <p>Games</p>
-                   </div>
-               </div>
-               <a class="square-icon-btn" href="account.html" title="Account">
-                   <img src="images/other/controller.png" alt="Account">
-                   <span>Account</span>
-               </a>
-               <a class="square-icon-btn" href="settings.html" title="Settings">
-                   <img src="images/other/settings.png" alt="Settings">
-                   <span>Settings</span>
-               </a>
-               <a class="square-icon-btn" href="premium.html" title="Premium">
-                   <img src="images/icons/star.png" alt="Premium">
-                   <span>Premium</span>
-               </a>
-               <a class="square-icon-btn" href="events.html" title="Events">
-                   <img src="images/other/apps.png" alt="Events">
-                   <span>Events</span>
-               </a>
+        <!-- Main Hero Section -->
+        <main class="hero-container">
+            <h1 class="future-text">://The Future Of Gaming</h1>
+            
+            <div class="auth-actions">
+                <a href="account.html" class="btn-sleek btn-primary">Sign In</a>
+                <a href="account.html" class="btn-sleek btn-secondary">Sign Up</a>
             </div>
 
-            <br>
-
-            <!-- Games to get you started section -->
-            <div class="trending-section" id="trendingGames">
-                <div class="trending-header">
-                    <h2>Games to get you started</h2>
-                    <p>Simple controls, maximum fun</p>
-                </div>
-                <div class="trending-grid">
-                    <div class="trending-card" onclick="window.location='games/snowrider3d/index.html';">
-                        <div class="trending-thumb" style="background-image: url('/images/thumbnails/snowrider3d.jpg');"></div>
-                        <div class="trending-info">
-                            <h3 class="trending-title">snow rider 3d</h3>
-                            <p class="trending-desc">Endless runner</p>
-                        </div>
-                    </div>
-                    <div class="trending-card" onclick="window.location='games/drivemad/index.html';">
-                        <div class="trending-thumb" style="background-image: url('/images/thumbnails/drivemad.jpg');"></div>
-                        <div class="trending-info">
-                            <h3 class="trending-title">Drive mad</h3>
-                            <p class="trending-desc">This game makes me rage!</p>
-                        </div>
-                    </div>
-                    <div class="trending-card" onclick="window.location='games/bitlife/index.html';">
-                        <div class="trending-thumb" style="background-image: url('/images/thumbnails/bitlife.jpg');"></div>
-                        <div class="trending-info">
-                            <h3 class="trending-title">Bitlife</h3>
-                            <p class="trending-desc">What more then a life sim</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="skip-container">
+                <a href="home.html" class="skip-link">no thanks skip</a>
             </div>
+        </main>
 
-            <!-- New Games Section -->
-            <div class="trending-section">
-                <div class="trending-header">
-                    <h2>New games</h2>
-                    <p>Check out the latest additions</p>
-                </div>
-                <div class="trending-grid">
-                    <div class="trending-card" onclick="window.location='games/subwaysurfers/index.html';">
-                        <div class="trending-thumb" style="background-image: url('/images/thumbnails/subwaysurfers.jpeg');"></div>
-                        <div class="trending-info">
-                            <h3 class="trending-title">Subway Surfers</h3>
-                            <p class="trending-desc">Dash as fast as you can!</p>
-                        </div>
-                    </div>
-                    <div class="trending-card" onclick="window.location='games/slope/index.html';">
-                        <div class="trending-thumb" style="background-image: url('/images/thumbnails/slope.jpeg');"></div>
-                        <div class="trending-info">
-                            <h3 class="trending-title">Slope</h3>
-                            <p class="trending-desc">Roll down the neon slopes</p>
-                        </div>
-                    </div>
-                    <div class="trending-card" onclick="window.location='games/flappybird/index.html';">
-                        <div class="trending-thumb" style="background-image: url('/images/thumbnails/flappybird.jpeg');"></div>
-                        <div class="trending-info">
-                            <h3 class="trending-title">Flappy Bird</h3>
-                            <p class="trending-desc">Tap to fly through the pipes</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-       </div>
+        <!-- Footer -->
+        <footer>
+            &copy; 2026 Gamingland. All rights reserved.
+        </footer>
 
+        <!-- Firebase & Auto-Redirect Script -->
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+            import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyA1dyRxFsWoDP_IJ1jYg8Cst0TCR_nlPy8",
+                authDomain: "gamingland-net.firebaseapp.com",
+                projectId: "gamingland-net",
+                storageBucket: "gamingland-net.firebasestorage.app",
+                messagingSenderId: "511326840492",
+                appId: "1:511326840492:web:972797366ebc3c1db46109"
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+
+            // Automatically redirect to home.html if an active account session is detected
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    window.location.href = 'home.html';
+                }
+            });
+        </script>
+
+        <!-- Service Worker Registration -->
         <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
-                    console.log('service worker initalised! scope:', registration.scope);
-
-                    navigator.serviceWorker.addEventListener('message', function(event) {
-                        if (event.data === 'cached') {
-                            document.getElementById('cache-status').style.display = 'block';
-                        }
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
+                        console.log('service worker initialized! scope:', registration.scope);
+                    }, function(error) {
+                        console.log('service worker error!', error);
                     });
-                }, function(error) {
-                    console.log('ack, error with serviceworker! ', error);
-                });
-            });
-        }
-        </script>
-
-        <script>
-        // Smooth scroll trigger script
-        document.getElementById('scrollBtn').addEventListener('click', function() {
-            document.getElementById('trendingGames').scrollIntoView({ behavior: 'smooth' });
-        });
-        </script>
-
-        <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // First time visitor check for login popup
-            if (!localStorage.getItem('hasVisitedGamingland')) {
-                localStorage.setItem('hasVisitedGamingland', 'true');
-                document.getElementById('blackout').style.display = 'block';
-                document.getElementById('loginPopup').style.display = 'block';
-            } else if (!localStorage.getItem('v10-update')) {
-                document.getElementById('blackout').style.display = 'block';
-                document.getElementById('updPopup').style.display = 'block';
-                localStorage.setItem('v10-update', 'true');
-            }
-
-            document.getElementById('loginYesBtn').addEventListener('click', function () {
-                window.location.href = 'account.html';
-            });
-
-            document.getElementById('loginNoBtn').addEventListener('click', function () {
-                document.getElementById('loginPopup').style.display = 'none';
-                
-                if (!localStorage.getItem('v10-update')) {
-                    document.getElementById('updPopup').style.display = 'block';
-                    localStorage.setItem('v10-update', 'true');
-                } else {
-                    document.getElementById('blackout').style.display = 'none';
-                }
-            });
-
-            document.getElementById('updConfirm').addEventListener('click', function () {
-                document.getElementById('blackout').style.display = 'none';
-                document.getElementById('updPopup').style.display = 'none';
-            });
-        });
-        </script>
-
-        <script>
-        const text = "GAMINGLAND";
-        const typingDelay = 500; 
-        const initialDelay = 100; 
-        const cursor = document.getElementById("cursor");
-        const h1 = document.querySelector(".typewriter");
-
-        function type() {
-            setTimeout(() => {
-                for (let i = 0; i < text.length; i++) {
-                setTimeout(() => {
-                    h1.textContent += text[i];
-                    if (i === text.length - 1) {
-                    cursor.style.display = "none"; 
-                    }
-                }, i * typingDelay);
-                }
-            }, initialDelay);
-        }
-
-        type();
-        </script>
-
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var openBlankLink = document.getElementById('openBlankLink');
-
-            if (openBlankLink) {
-                openBlankLink.addEventListener('click', function(event) {
-                    event.preventDefault();
-
-                    var newTab = window.open('about:blank', '_blank');
-
-                    if (newTab) {
-                        var newTabBody = newTab.document.body;
-                        newTabBody.style.padding = '0';
-                        newTabBody.style.margin = '0';
-                        newTabBody.style.border = 'hidden';
-
-                        var iframe = document.createElement('iframe');
-                        iframe.src = window.location.href;
-                        iframe.style.width = '100%';
-                        iframe.style.height = '100%';
-                        iframe.style.border = 'hidden';
-
-                        iframe.onload = function() {
-                            var links = iframe.contentDocument.querySelectorAll('a[target="_blank"]');
-                            links.forEach(function(link) {
-                                link.addEventListener('click', function(event) {
-                                    event.preventDefault();
-                                    iframe.contentWindow.location.href = link.href;
-                                });
-                            });
-                        };
-
-                        newTab.document.body.appendChild(iframe);
-                    } else {
-                        alert("couldn't manage to open a new tab :(");
-                    }
                 });
             }
-        });
-        </script> 
+        </script>
 
         <script src="storage/js/cloak.js"></script>
         <script src="storage/js/theme.js"></script>
         <script src="storage/js/cookie.js"></script>
-        <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-         const firebaseConfig = {
-    apiKey: "AIzaSyA1dyRxFsWoDP_IJ1jYg8Cst0TCR_nlPy8",
-    authDomain: "gamingland-net.firebaseapp.com",
-    projectId: "gamingland-net",
-    storageBucket: "gamingland-net.firebasestorage.app",
-    messagingSenderId: "511326840492",
-    appId: "1:511326840492:web:972797366ebc3c1db46109"
-  }; 
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    onAuthStateChanged(auth, async (user) => {
-        const accountLink = document.querySelector('a[href="account.html"]') || document.getElementById('account-nav-link');
-        
-        if (user && accountLink) {
-            let displayName = localStorage.getItem('username');
-            
-            if (!displayName) {
-                try {
-                    const docSnap = await getDoc(doc(db, "users", user.uid));
-                    if (docSnap.exists() && docSnap.data().username) {
-                        displayName = docSnap.data().username;
-                        localStorage.setItem('username', displayName);
-                    } else {
-                        displayName = user.displayName || user.email.split('@')[0];
-                    }
-                } catch (e) {
-                    displayName = user.email ? user.email.split('@')[0] : "Account";
-                }
-            }
-
-            accountLink.textContent = `👤 ${displayName}`;
-        }
-    });
-</script>
-        
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-    function replaceStarWithImage(node) {
-        if (node.nodeType === Node.TEXT_NODE) {
-            if (node.textContent.includes('✪')) {
-                const fragment = document.createDocumentFragment();
-                const parts = node.textContent.split('✪');
-                
-                parts.forEach((part, index) => {
-                    if (part) {
-                        fragment.appendChild(document.createTextNode(part));
-                    }
-                    if (index < parts.length - 1) {
-                        const img = document.createElement('img');
-                        img.src = '/images/icons/star.png';
-                        img.className = 'custom-star-icon';
-                        img.alt = '★';
-                        fragment.appendChild(img);
-                    }
-                });
-                
-                node.parentNode.replaceChild(fragment, node);
-            }
-        } else {
-            if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
-                node.childNodes.forEach(child => replaceStarWithImage(child));
-            }
-        }
-    }
-
-    replaceStarWithImage(document.body);
-});
-</script>        
-       
     </body>
 </html>
