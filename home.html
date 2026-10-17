@@ -1,0 +1,242 @@
+<html lang="en">
+    <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FN7LEVWXD"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-7FN7LEVWXD');
+        </script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="/images/ico.ico" type="image/x-icon">
+        <link rel="stylesheet" href="/storage/css/index.css">
+        <title>Home | Gamingland</title>
+
+        <meta name="description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
+        <meta property="og:site_name" content="gamingland">
+        <meta property="og:title" content="gamingland">
+        <meta property="og:type" content="website">
+        <meta property="og:description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
+        
+        <style>
+            :root {
+                --card-bg: rgba(20, 20, 30, 0.85);
+                --card-border: rgba(0, 242, 254, 0.4);
+                --card-glow: rgba(0, 242, 254, 0.4);
+                --accent: #00f2fe;
+            }
+
+            body {
+                background-color: #0d0e15;
+                color: #ffffff;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                margin: 0;
+                padding: 0;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* Sleek Top Navbar */
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px 40px;
+                background: rgba(15, 16, 25, 0.8);
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                position: sticky;
+                top: 0;
+                z-index: 100;
+            }
+
+            .logo {
+                font-size: 20px;
+                font-weight: 800;
+                letter-spacing: 2px;
+                color: #ffffff;
+                text-decoration: none;
+                text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+            }
+
+            .top-nav {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .nav-item {
+                color: #e0e0e0;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 600;
+                padding: 8px 16px;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                transition: all 0.2s ease;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .nav-item:hover {
+                color: #ffffff;
+                border-color: var(--accent);
+                background: rgba(0, 242, 254, 0.1);
+                box-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
+            }
+
+            /* Central Hero Area */
+            .main-content {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 60px 20px;
+            }
+
+            .hero-title {
+                font-size: clamp(32px, 6vw, 56px);
+                font-weight: 800;
+                margin: 0 0 15px 0;
+                letter-spacing: 1px;
+                background: linear-gradient(135deg, #ffffff 40%, var(--accent) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+                color: #a0a0b0;
+                margin-bottom: 40px;
+                max-width: 500px;
+            }
+
+            /* Explore Games Call-To-Action Button */
+            .explore-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                padding: 18px 42px;
+                font-size: 16px;
+                font-weight: 700;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                color: #0d0e15;
+                background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+                border-radius: 14px;
+                text-decoration: none;
+                box-shadow: 0 4px 25px rgba(0, 242, 254, 0.4);
+                transition: all 0.3s ease;
+            }
+
+            .explore-btn:hover {
+                transform: translateY(-4px) scale(1.02);
+                box-shadow: 0 6px 35px rgba(0, 242, 254, 0.6);
+            }
+
+            .explore-btn img {
+                width: 24px;
+                height: 24px;
+                object-fit: contain;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- Topbar Navigation -->
+        <header>
+            <a href="home.html" class="logo">GAMINGLAND</a>
+            
+            <nav class="top-nav">
+                <a href="account.html" class="nav-item" id="account-nav-link">
+                    👤 Account
+                </a>
+                <a href="settings.html" class="nav-item">
+                    ⚙️ Settings
+                </a>
+            </nav>
+        </header>
+
+        <!-- Main Hero Section -->
+        <main class="main-content">
+            <h1 class="hero-title">Welcome Back</h1>
+            <p class="hero-subtitle">Ready to jump into your favorite games and utilities?</p>
+
+            <!-- EXPLORE GAMES Button -->
+            <a href="games/index.html" class="explore-btn">
+                <img src="images/other/controller.png" alt="Controller">
+                EXPLORE GAMES
+            </a>
+        </main>
+
+        <!-- Firebase Auth & User Dynamic Name Handling -->
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+            import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+            import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyA1dyRxFsWoDP_IJ1jYg8Cst0TCR_nlPy8",
+                authDomain: "gamingland-net.firebaseapp.com",
+                projectId: "gamingland-net",
+                storageBucket: "gamingland-net.firebasestorage.app",
+                messagingSenderId: "511326840492",
+                appId: "1:511326840492:web:972797366ebc3c1db46109"
+            }; 
+
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            const db = getFirestore(app);
+
+            onAuthStateChanged(auth, async (user) => {
+                const accountLink = document.getElementById('account-nav-link');
+                
+                if (user && accountLink) {
+                    let displayName = localStorage.getItem('username');
+                    
+                    if (!displayName) {
+                        try {
+                            const docSnap = await getDoc(doc(db, "users", user.uid));
+                            if (docSnap.exists() && docSnap.data().username) {
+                                displayName = docSnap.data().username;
+                                localStorage.setItem('username', displayName);
+                            } else {
+                                displayName = user.displayName || user.email.split('@')[0];
+                            }
+                        } catch (e) {
+                            displayName = user.email ? user.email.split('@')[0] : "Account";
+                        }
+                    }
+
+                    accountLink.textContent = `👤 ${displayName}`;
+                }
+            });
+        </script>
+
+        <!-- Service Worker & Utility Scripts -->
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
+                        console.log('service worker initialized! scope:', registration.scope);
+                    }, function(error) {
+                        console.log('service worker error!', error);
+                    });
+                });
+            }
+        </script>
+
+        <script src="storage/js/cloak.js"></script>
+        <script src="storage/js/theme.js"></script>
+        <script src="storage/js/cookie.js"></script>
+
+    </body>
+</html>
