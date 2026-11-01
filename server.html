@@ -1,0 +1,253 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GamingLand | play.gamingland.net</title>
+<link rel="icon" href="images/ico.ico">
+<style>
+  :root {
+    --bg: #111111;
+    --tile: #1c1c1c;
+    --pill: #222222;
+    --logo-bg: #00b4ff;
+    --text: #ffffff;
+    --gap: 1.1vw;
+    --radius: 2.2vw;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    padding: 3.3vw;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: grid;
+    gap: var(--gap);
+  }
+
+  .row { display: grid; gap: var(--gap); }
+
+  /* proportions copied from the donutsmp layout */
+  .row.top {
+    grid-template-columns: 580fr 1067fr 440fr;
+    aspect-ratio: 2183 / 600;
+  }
+  .row.bottom {
+    grid-template-columns: 1fr 1fr;
+    aspect-ratio: 2183 / 600;
+  }
+
+  .tile {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--tile);
+    min-height: 0;
+  }
+
+  .tile img.bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .35s ease;
+  }
+  a.tile:hover img.bg { transform: scale(1.04); }
+
+  .tile .label {
+    position: absolute;
+    top: 1.4vw;
+    left: 1.5vw;
+    font-size: clamp(22px, 2.9vw, 44px);
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0,0,0,.45);
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+  }
+
+  /* left column: logo + IP pill */
+  .left {
+    display: grid;
+    grid-template-rows: 460fr 113fr;
+    gap: var(--gap);
+    min-height: 0;
+  }
+
+  .logo {
+    background: var(--logo-bg);
+    display: grid;
+    place-items: center;
+  }
+  .logo img {
+    width: 62%;
+    height: auto;
+    max-height: 80%;
+    object-fit: contain;
+  }
+
+  .ip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.8vw;
+    border: 0;
+    border-radius: 999px;
+    background: var(--pill);
+    color: var(--text);
+    font-family: inherit;
+    font-size: clamp(14px, 1.9vw, 30px);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s ease;
+  }
+  .ip:hover { background: #2c2c2c; }
+  .ip svg { width: 1.9vw; min-width: 18px; height: auto; flex: none; }
+
+  /* discord tile */
+  .discord {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2vw;
+    text-align: center;
+    padding: 1vw;
+    transition: background .2s ease;
+  }
+  .discord:hover { background: #5865f2; }
+  .discord svg { width: 36%; height: auto; }
+  .discord .big {
+    font-size: clamp(18px, 2.4vw, 36px);
+    font-weight: 700;
+  }
+  .discord .small {
+    font-size: clamp(12px, 1.3vw, 20px);
+    opacity: .85;
+  }
+
+  /* mobile: stack everything */
+  @media (max-width: 800px) {
+    body { padding: 16px; }
+    :root { --gap: 12px; --radius: 22px; }
+    .row.top, .row.bottom {
+      aspect-ratio: auto;
+      grid-template-columns: 1fr;
+    }
+    .left { grid-template-rows: auto auto; }
+    .logo { aspect-ratio: 580 / 460; }
+    .ip { padding: 20px; gap: 14px; }
+    .ip svg { width: 22px; }
+    .tile.photo { aspect-ratio: 16 / 9; }
+    .discord { padding: 36px 16px; gap: 14px; }
+    .discord svg { width: 90px; }
+    .tile .label { top: 16px; left: 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tile img.bg, .ip, .discord { transition: none; }
+    a.tile:hover img.bg { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<main class="wrap">
+
+  <div class="row top">
+
+    <div class="left">
+      <div class="tile logo">
+        <img src="images/ico.ico" alt="GamingLand logo">
+      </div>
+      <button class="ip" id="copy-ip" type="button" aria-label="Copy server address play.gamingland.net">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="7" width="13" height="14" rx="1.5"/>
+          <path d="M8 7V3.5A.5.5 0 0 1 8.5 3H20.5a.5.5 0 0 1 .5.5V17a.5.5 0 0 1-.5.5H16"/>
+        </svg>
+        <span id="ip-text">PLAY.GAMINGLAND.NET</span>
+      </button>
+    </div>
+
+    <a class="tile photo" href="store.html">
+      <img class="bg" src="images/shop.png" alt="">
+      <span class="label">Store</span>
+    </a>
+
+    <a class="tile discord" href="https://discord.gg/gamingland" target="_blank" rel="noopener">
+      <svg viewBox="0 0 127.14 96.36" fill="#5865f2" aria-hidden="true" class="discord-icon">
+        <path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0 105.89 105.89 0 0 0 19.39 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15ZM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69Zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69Z"/>
+      </svg>
+      <span class="big">Join our Discord</span>
+      <span class="small">discord.gg/gamingland</span>
+    </a>
+
+  </div>
+
+  <div class="row bottom">
+
+    <a class="tile photo" href="me.html">
+      <img class="bg" src="images/account.png" alt="">
+      <span class="label">Account</span>
+    </a>
+
+    <!-- Add Server: no link was given yet, change href when you have one -->
+    <a class="tile photo" href="#">
+      <img class="bg" src="images/add.png" alt="">
+      <span class="label">Add Server</span>
+    </a>
+
+  </div>
+
+</main>
+
+<script>
+  (function () {
+    var btn = document.getElementById('copy-ip');
+    var text = document.getElementById('ip-text');
+    var ip = 'play.gamingland.net';
+    var original = text.textContent;
+    var timer;
+
+    function done() {
+      text.textContent = 'COPIED!';
+      clearTimeout(timer);
+      timer = setTimeout(function () { text.textContent = original; }, 1500);
+    }
+
+    btn.addEventListener('click', function () {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(ip).then(done, fallback);
+      } else {
+        fallback();
+      }
+    });
+
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = ip;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  })();
+</script>
+
+</body>
+</html>
