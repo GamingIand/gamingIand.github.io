@@ -26,6 +26,9 @@
                 --card-border: rgba(0, 242, 254, 0.4);
                 --card-glow: rgba(0, 242, 254, 0.4);
                 --accent: #00f2fe;
+                --btn-blue-light: #2563eb;
+                --btn-blue-dark: #1d4ed8;
+                --gold-flash: rgba(255, 200, 55, 0.22);
             }
 
             body {
@@ -37,6 +40,81 @@
                 min-height: 100vh;
                 display: flex;
                 flex-direction: column;
+                overflow-x: hidden;
+                position: relative;
+            }
+
+            /* Windows OOBE Style Ambient Gold Flashes */
+            .ambient-glow {
+                position: fixed;
+                inset: 0;
+                pointer-events: none;
+                z-index: 0;
+                overflow: hidden;
+            }
+
+            .gold-orb {
+                position: absolute;
+                border-radius: 50%;
+                background: radial-gradient(circle, var(--gold-flash) 0%, rgba(255, 180, 0, 0.08) 45%, transparent 70%);
+                filter: blur(70px);
+                opacity: 0;
+                will-change: opacity, transform;
+            }
+
+            .orb-1 {
+                width: 650px;
+                height: 650px;
+                top: -15%;
+                left: 10%;
+                animation: windowsFlash 11s ease-in-out infinite;
+            }
+
+            .orb-2 {
+                width: 550px;
+                height: 550px;
+                bottom: -10%;
+                right: 8%;
+                animation: windowsFlash 14s ease-in-out 4.5s infinite;
+            }
+
+            .orb-3 {
+                width: 450px;
+                height: 450px;
+                top: 35%;
+                left: 45%;
+                transform: translate(-50%, -50%);
+                animation: windowsFlashCenter 16s ease-in-out 9s infinite;
+            }
+
+            @keyframes windowsFlash {
+                0%, 100% {
+                    opacity: 0;
+                    transform: scale(0.85) translate(0, 0);
+                }
+                35% {
+                    opacity: 0.9;
+                    transform: scale(1.12) translate(25px, -15px);
+                }
+                65% {
+                    opacity: 0.35;
+                    transform: scale(1.02) translate(-10px, 10px);
+                }
+            }
+
+            @keyframes windowsFlashCenter {
+                0%, 100% {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(0.8);
+                }
+                40% {
+                    opacity: 0.75;
+                    transform: translate(-50%, -50%) scale(1.2);
+                }
+                75% {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) scale(0.95);
+                }
             }
 
             /* Sleek Top Navbar */
@@ -45,9 +123,9 @@
                 justify-content: space-between;
                 align-items: center;
                 padding: 20px 40px;
-                background: rgba(15, 16, 25, 0.8);
-                backdrop-filter: blur(10px);
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                background: rgba(15, 16, 25, 0.75);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
                 position: sticky;
                 top: 0;
                 z-index: 100;
@@ -99,6 +177,8 @@
                 justify-content: center;
                 text-align: center;
                 padding: 60px 20px;
+                position: relative;
+                z-index: 10;
             }
 
             .hero-title {
@@ -118,7 +198,7 @@
                 max-width: 500px;
             }
 
-            /* Explore Games Call-To-Action Button */
+            /* Blue Explore Games Call-To-Action Button */
             .explore-btn {
                 display: inline-flex;
                 align-items: center;
@@ -129,27 +209,38 @@
                 font-weight: 700;
                 letter-spacing: 1.5px;
                 text-transform: uppercase;
-                color: #0d0e15;
-                background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+                color: #ffffff;
+                background: linear-gradient(135deg, var(--btn-blue-light) 0%, var(--btn-blue-dark) 100%);
+                border: 1px solid rgba(96, 165, 250, 0.4);
                 border-radius: 14px;
                 text-decoration: none;
-                box-shadow: 0 4px 25px rgba(0, 242, 254, 0.4);
+                box-shadow: 0 4px 25px rgba(37, 99, 235, 0.5);
                 transition: all 0.3s ease;
             }
 
             .explore-btn:hover {
                 transform: translateY(-4px) scale(1.02);
-                box-shadow: 0 6px 35px rgba(0, 242, 254, 0.6);
+                background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+                box-shadow: 0 8px 35px rgba(59, 130, 246, 0.75);
+                border-color: rgba(147, 197, 253, 0.8);
             }
 
             .explore-btn img {
                 width: 24px;
                 height: 24px;
                 object-fit: contain;
+                filter: brightness(0) invert(1);
             }
         </style>
     </head>
     <body>
+
+        <!-- Ambient Windows-Style Gold Flashes -->
+        <div class="ambient-glow" aria-hidden="true">
+            <div class="gold-orb orb-1"></div>
+            <div class="gold-orb orb-2"></div>
+            <div class="gold-orb orb-3"></div>
+        </div>
 
         <!-- Topbar Navigation -->
         <header>
@@ -224,7 +315,6 @@
             });
         </script>
 
-        <!-- Service Worker & Utility Scripts -->
         <script>
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', function() {
