@@ -22,14 +22,14 @@
 
         <style>
             :root {
-                --bg-color: #0d1117;
-                --panel-bg: rgba(22, 27, 34, 0.75);
-                --accent-color: #58a6ff;
-                --accent-gradient: linear-gradient(135deg, #238636 0%, #2ea043 100%);
+                --bg-color: #000000;
+                --panel-bg: rgba(14, 14, 14, 0.85);
+                --gold-accent: #f5c542;
+                --gold-gradient: linear-gradient(135deg, #d4a017 0%, #f5c542 100%);
                 --danger-gradient: linear-gradient(135deg, #da3633 0%, #f85149 100%);
-                --text-main: #c9d1d9;
+                --text-main: #e6edf3;
                 --text-muted: #8b949e;
-                --border-color: rgba(240, 246, 252, 0.12);
+                --border-color: rgba(245, 197, 66, 0.18);
             }
 
             body {
@@ -38,63 +38,102 @@
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 margin: 0;
                 padding: 40px 20px;
+                min-height: 100vh;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 overflow-x: hidden;
+                position: relative;
+            }
+
+            /* Subtle Ambient Gold Flashes in Background */
+            body::before,
+            body::after {
+                content: "";
+                position: fixed;
+                width: 450px;
+                height: 450px;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(245, 197, 66, 0.14) 0%, rgba(212, 160, 23, 0.04) 45%, transparent 70%);
+                pointer-events: none;
+                z-index: -1;
+                filter: blur(40px);
+            }
+
+            body::before {
+                top: -10%;
+                left: 10%;
+                animation: goldFlashOne 9s ease-in-out infinite alternate;
+            }
+
+            body::after {
+                bottom: -10%;
+                right: 10%;
+                animation: goldFlashTwo 12s ease-in-out infinite alternate;
+            }
+
+            @keyframes goldFlashOne {
+                0% { opacity: 0.15; transform: translate(0, 0) scale(0.9); }
+                50% { opacity: 0.75; transform: translate(60px, 40px) scale(1.15); }
+                100% { opacity: 0.2; transform: translate(-20px, 80px) scale(0.95); }
+            }
+
+            @keyframes goldFlashTwo {
+                0% { opacity: 0.2; transform: translate(0, 0) scale(1); }
+                50% { opacity: 0.8; transform: translate(-70px, -50px) scale(1.2); }
+                100% { opacity: 0.1; transform: translate(30px, -20px) scale(0.85); }
             }
 
             #content-side {
                 background: var(--panel-bg);
-                backdrop-filter: blur(12px);
+                backdrop-filter: blur(14px);
                 border: 1px solid var(--border-color);
                 border-radius: 24px;
                 padding: 40px;
                 width: 100%;
                 max-width: 650px;
-                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(245, 197, 66, 0.05);
                 box-sizing: border-box;
                 display: flex;
                 flex-direction: column;
-                gap: 20px;
+                gap: 22px;
             }
 
             h1 {
-                margin: 0 0 5px 0;
+                margin: 0 0 6px 0;
                 font-size: 28px;
                 font-weight: 800;
                 letter-spacing: -0.5px;
-                color: #ffffff;
-                background: linear-gradient(135deg, #ffffff 30%, #8b949e 100%);
+                background: linear-gradient(135deg, #ffffff 30%, #f5c542 100%);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }
 
             h2 {
-                font-size: 14px !important;
+                font-size: 13px !important;
                 font-weight: 700 !important;
-                color: var(--text-muted) !important;
+                color: var(--gold-accent) !important;
                 text-transform: uppercase;
                 letter-spacing: 1.5px;
-                margin: 15px 0 8px 0 !important;
+                margin: 0 0 12px 0 !important;
                 border-bottom: 1px solid var(--border-color);
-                padding-bottom: 6px;
+                padding-bottom: 8px;
             }
 
             a {
-                color: var(--accent-color);
+                color: var(--gold-accent);
                 text-decoration: none;
                 transition: color 0.2s;
             }
 
             a:hover {
                 text-decoration: underline;
-                color: #79c0ff;
+                color: #ffe082;
             }
 
             /* Form Elements Styling */
             select, input[type="text"], input[type="url"] {
-                background: rgba(13, 17, 23, 0.6);
+                background: rgba(10, 10, 10, 0.8);
                 border: 1px solid var(--border-color);
                 color: var(--text-main);
                 padding: 12px 16px;
@@ -107,14 +146,23 @@
             }
 
             select:focus, input[type="text"]:focus, input[type="url"]:focus {
-                border-color: var(--accent-color);
-                box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2);
-                background: rgba(13, 17, 23, 0.9);
+                border-color: var(--gold-accent);
+                box-shadow: 0 0 0 3px rgba(245, 197, 66, 0.2);
+                background: #000000;
             }
 
-            /* Custom Styled Buttons with Satisfying Press Feel */
+            /* Clean Button Row Alignment */
+            .button-group {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            /* Custom Styled Buttons */
             button {
-                background: rgba(33, 38, 45, 0.8);
+                background: rgba(28, 28, 28, 0.9);
                 border: 1px solid var(--border-color);
                 color: var(--text-main);
                 padding: 10px 18px;
@@ -123,43 +171,49 @@
                 font-weight: 600;
                 cursor: pointer;
                 transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-                margin: 4px 4px 4px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+                margin: 0;
                 position: relative;
                 overflow: hidden;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 40px;
             }
 
             button:hover {
                 transform: translateY(-2px);
-                background: rgba(48, 54, 61, 0.9);
-                border-color: var(--accent-color);
+                background: rgba(42, 38, 24, 0.95);
+                border-color: var(--gold-accent);
                 color: #ffffff;
-                box-shadow: 0 6px 15px rgba(88, 166, 255, 0.15);
+                box-shadow: 0 6px 16px rgba(245, 197, 66, 0.2);
             }
 
             button:active {
                 transform: scale(0.96);
-                box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
             }
 
             #saveButton, #apply-theme, #apply-custom-theme {
-                background: var(--accent-gradient);
+                background: var(--gold-gradient);
                 border: none;
-                color: white;
+                color: #000000;
+                font-weight: 700;
             }
 
             #saveButton:hover, #apply-theme:hover, #apply-custom-theme:hover {
-                opacity: 0.92;
-                box-shadow: 0 6px 18px rgba(35, 134, 54, 0.4);
+                opacity: 0.95;
+                color: #000000;
+                box-shadow: 0 6px 18px rgba(245, 197, 66, 0.4);
             }
 
             /* Theme Customization Grid */
             #custom-theme-settings {
-                background: rgba(13, 17, 23, 0.4);
+                background: rgba(0, 0, 0, 0.55);
                 border: 1px solid var(--border-color);
                 border-radius: 16px;
                 padding: 18px;
-                margin-top: 10px;
+                margin-top: 14px;
                 display: flex;
                 flex-direction: column;
                 gap: 12px;
@@ -213,19 +267,20 @@
             }
 
             input[type="radio"] {
-                accent-color: var(--accent-color);
+                accent-color: var(--gold-accent);
                 width: 16px;
                 height: 16px;
             }
 
             p[id*="success"] {
-                background: rgba(35, 134, 54, 0.15);
-                border: 1px solid rgba(46, 160, 67, 0.4);
-                color: #7ee787;
+                background: rgba(245, 197, 66, 0.12);
+                border: 1px solid rgba(245, 197, 66, 0.4);
+                color: #ffe082;
                 padding: 8px 12px;
                 border-radius: 8px;
                 font-size: 13px;
-                margin-top: 6px;
+                margin-top: 10px;
+                margin-bottom: 0;
             }
 
             /* Ripple Effect Element for Click Satisfaction */
@@ -293,19 +348,17 @@
             
             <div>
                 <h2>tab cloaking</h2>
-                <div style="display: flex; gap: 10px; margin-bottom: 8px;">
-                    <select id="presetSelect">
-                        <option value="google">google</option>
-                        <option value="googleclassroom">google classroom</option>
-                        <option value="googledrive">google drive</option>
-                        <option value="chrometab">chrome new tab</option>
-                        <option value="gmail">gmail</option>
-                        <option value="bing">bing</option>
-                        <option value="desmos">desmos calculator</option>
-                        <option value="wikipedia">wikipedia</option>
-                    </select>
-                </div>
-                <div>
+                <select id="presetSelect">
+                    <option value="google">google</option>
+                    <option value="googleclassroom">google classroom</option>
+                    <option value="googledrive">google drive</option>
+                    <option value="chrometab">chrome new tab</option>
+                    <option value="gmail">gmail</option>
+                    <option value="bing">bing</option>
+                    <option value="desmos">desmos calculator</option>
+                    <option value="wikipedia">wikipedia</option>
+                </select>
+                <div class="button-group">
                     <button id="saveButton">select cloak</button>
                     <button id="resetButton">reset cloak</button>
                 </div>
@@ -314,22 +367,20 @@
             
             <div>
                 <h2>themes</h2>
-                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                    <select id="theme-select">
-                        <option value="seraph">gamingland</option>
-                        <option value="azurite">azurite</option>
-                        <option value="retro">retro</option>
-                        <option value="cosmic">cosmic</option>
-                        <option value="molten">molten</option>
-                        <option value="amethyst">amethyst</option>
-                        <option value="ethereal">Cristian!</option>
-                        <option value="subzero">subzero</option>
-                        <option value="metro">metro</option>
-                        <option value="ghostly">ghostly</option>
-                        <option value="custom">custom</option>
-                    </select>
-                </div>
-                <div>
+                <select id="theme-select">
+                    <option value="seraph">gamingland</option>
+                    <option value="azurite">azurite</option>
+                    <option value="retro">retro</option>
+                    <option value="cosmic">cosmic</option>
+                    <option value="molten">molten</option>
+                    <option value="amethyst">amethyst</option>
+                    <option value="ethereal">Cristian!</option>
+                    <option value="subzero">subzero</option>
+                    <option value="metro">metro</option>
+                    <option value="ghostly">ghostly</option>
+                    <option value="custom">custom</option>
+                </select>
+                <div class="button-group">
                     <button id="apply-theme">apply theme</button>
                 </div>
             
@@ -375,21 +426,21 @@
                         <input type="color" id="text-glow">
                     </div>
             
-                    <div style="margin-top: 6px;">
+                    <div class="button-group">
                         <button id="apply-custom-theme">apply settings</button>
-                        <button id="import-theme" style="width: 100px;">import</button>
-                        <button id="export-theme" style="width: 100px;">export</button>
+                        <button id="import-theme">import</button>
+                        <button id="export-theme">export</button>
                     </div>
                 </div>
             </div>
 
             <div>
                 <h2>panic mode</h2>
-                <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px;">
+                <div style="display: flex; flex-direction: column; gap: 8px;">
                     <input type="text" id="panicKey" placeholder="choose a key combination" readonly>
                     <input type="url" id="panicUrl" placeholder="https://www.google.com">
                 </div>
-                <div>
+                <div class="button-group">
                     <button onclick="saveSettings()">set panic key</button>
                 </div>
                 <p id="success-panic" style="display: none;">success message here</p>
@@ -397,16 +448,16 @@
 
             <div>
                 <h2>data management</h2>
-                <div>
+                <div class="button-group">
                     <button onclick="importData()">import data</button>
                     <button onclick="exportData()">export data</button>
-                    <button onclick="clearData()" style="color: #f85149; border-color: rgba(248,81,73,0.3);">clear data</button>
+                    <button onclick="clearData()" style="color: #f85149; border-color: rgba(248, 81, 73, 0.35);">clear data</button>
                 </div>
             </div>
 
             <div>
                 <h2>other</h2>
-                <p style="font-size: 13px; color: var(--text-muted); margin: 6px 0 10px 0;">link behaviour</p>
+                <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0;">link behaviour</p>
                 <div style="display: flex; flex-direction: column; gap: 8px;">
                     <label>
                         <input type="radio" name="openBlankSetting" value="true"> open links in new tab
@@ -422,42 +473,41 @@
         <script src="storage/js/data.js"></script>
         <script src="/storage/js/settings.js"></script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-    // Function to replace text nodes containing '✪' with an image
-    function replaceStarWithImage(node) {
-        if (node.nodeType === Node.TEXT_NODE) {
-            if (node.textContent.includes('✪')) {
-                const fragment = document.createDocumentFragment();
-                const parts = node.textContent.split('✪');
-                
-                parts.forEach((part, index) => {
-                    if (part) {
-                        fragment.appendChild(document.createTextNode(part));
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                // Function to replace text nodes containing '✪' with an image
+                function replaceStarWithImage(node) {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        if (node.textContent.includes('✪')) {
+                            const fragment = document.createDocumentFragment();
+                            const parts = node.textContent.split('✪');
+                            
+                            parts.forEach((part, index) => {
+                                if (part) {
+                                    fragment.appendChild(document.createTextNode(part));
+                                }
+                                if (index < parts.length - 1) {
+                                    const img = document.createElement('img');
+                                    img.src = 'images/icons/star.png'; // Path to your star image
+                                    img.className = 'custom-star-icon';
+                                    img.alt = '★';
+                                    fragment.appendChild(img);
+                                }
+                            });
+                            
+                            node.parentNode.replaceChild(fragment, node);
+                        }
+                    } else {
+                        // Skip script and style tags to avoid breaking code
+                        if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
+                            node.childNodes.forEach(child => replaceStarWithImage(child));
+                        }
                     }
-                    if (index < parts.length - 1) {
-                        const img = document.createElement('img');
-                        img.src = 'images/icons/star.png'; // Path to your star image
-                        img.className = 'custom-star-icon';
-                        img.alt = '★';
-                        fragment.appendChild(img);
-                    }
-                });
-                
-                node.parentNode.replaceChild(fragment, node);
-            }
-        } else {
-            // Skip script and style tags to avoid breaking code
-            if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
-                node.childNodes.forEach(child => replaceStarWithImage(child));
-            }
-        }
-    }
+                }
 
-    // Run across the whole body content
-    replaceStarWithImage(document.body);
-});
-</script>
-        
+                // Run across the whole body content
+                replaceStarWithImage(document.body);
+            });
+        </script>
     </body>
 </html>
