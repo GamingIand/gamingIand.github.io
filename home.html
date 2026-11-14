@@ -23,12 +23,31 @@
         <style>
             :root {
                 --card-bg: rgba(20, 20, 30, 0.85);
-                --card-border: rgba(0, 242, 254, 0.4);
-                --card-glow: rgba(0, 242, 254, 0.4);
-                --accent: #00f2fe;
-                --btn-blue-light: #2563eb;
-                --btn-blue-dark: #1d4ed8;
+                --card-border: rgba(255, 215, 0, 0.4);
+                --card-glow: rgba(255, 215, 0, 0.3);
+                --accent: #ffd700;
                 --gold-flash: rgba(255, 200, 55, 0.22);
+            }
+
+            /* Apple Intelligence Style Animated Rainbow Edge Border */
+            body::before {
+                content: '';
+                position: fixed;
+                inset: 0;
+                pointer-events: none;
+                border: 4px solid transparent;
+                border-image: linear-gradient(60deg, #ff2a2a, #ff7f00, #ffe600, #00f2fe, #7f00ff, #ff007f, #ff2a2a) 1;
+                z-index: 9999;
+                animation: rainbowBorderRotate 8s linear infinite;
+            }
+
+            @keyframes rainbowBorderRotate {
+                0% {
+                    filter: hue-rotate(0deg);
+                }
+                100% {
+                    filter: hue-rotate(360deg);
+                }
             }
 
             body {
@@ -137,7 +156,7 @@
                 letter-spacing: 2px;
                 color: #ffffff;
                 text-decoration: none;
-                text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
             }
 
             .top-nav {
@@ -164,8 +183,8 @@
             .nav-item:hover {
                 color: #ffffff;
                 border-color: var(--accent);
-                background: rgba(0, 242, 254, 0.1);
-                box-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
+                background: rgba(255, 215, 0, 0.1);
+                box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
             }
 
             /* Central Hero Area */
@@ -198,7 +217,7 @@
                 max-width: 500px;
             }
 
-            /* Blue Explore Games Call-To-Action Button */
+            /* Fully Transparent Explore Games Call-To-Action Button with Gold Border & Text */
             .explore-btn {
                 display: inline-flex;
                 align-items: center;
@@ -209,27 +228,28 @@
                 font-weight: 700;
                 letter-spacing: 1.5px;
                 text-transform: uppercase;
-                color: #ffffff;
-                background: linear-gradient(135deg, var(--btn-blue-light) 0%, var(--btn-blue-dark) 100%);
-                border: 1px solid rgba(212, 175, 55, 1);
+                color: #ffd700;
+                background: transparent;
+                border: 2px solid #ffd700;
                 border-radius: 14px;
                 text-decoration: none;
-                box-shadow: 0 4px 25px rgba(255, 215, 0, 1);
+                box-shadow: 0 4px 25px rgba(255, 215, 0, 0.2);
                 transition: all 0.3s ease;
             }
 
             .explore-btn:hover {
                 transform: translateY(-4px) scale(1.02);
-                background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 100%);
-                box-shadow: 0 8px 35px rgba(59, 130, 246, 0.75);
-                border-color: rgba(147, 197, 253, 0.8);
+                background: rgba(255, 215, 0, 0.1);
+                box-shadow: 0 8px 35px rgba(255, 215, 0, 0.4);
+                border-color: #ffea75;
+                color: #ffea75;
             }
 
             .explore-btn img {
                 width: 24px;
                 height: 24px;
                 object-fit: contain;
-                filter: brightness(0) invert(1);
+                filter: invert(84%) sepia(51%) saturate(1514%) hue-rotate(358deg) brightness(103%) contrast(105%);
             }
         </style>
     </head>
