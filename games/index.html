@@ -34,15 +34,18 @@
             --gold-flash: rgba(255, 200, 55, 0.22);
         }
 
-        /* Apple Intelligence Style Animated Rainbow Edge Border */
-        body::before {
-            content: '';
+        /* Apple Intelligence Style Animated Rainbow Edge Border - Perfectly anchored to screen viewport */
+        .rainbow-screen-border {
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
             border: 4px solid transparent;
             border-image: linear-gradient(60deg, #ff2a2a, #ff7f00, #ffe600, #00f2fe, #7f00ff, #ff007f, #ff2a2a) 1;
-            z-index: 9999;
+            z-index: 99999;
+            box-sizing: border-box;
             animation: rainbowBorderRotate 8s linear infinite;
         }
 
@@ -388,7 +391,25 @@
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
         }
 
-        /* Quick Links Grid (Before Games Header) */
+        /* Add Quick Link Button */
+        .add-quick-link-btn {
+            background: transparent;
+            border: 1px dashed var(--accent-color);
+            color: var(--accent-color);
+            padding: 6px 14px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .add-quick-link-btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-1px);
+        }
+
+        /* Quick Links Grid */
         .quick-links-container {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -417,6 +438,7 @@
             height: 120px;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
 
         .quick-link-card:hover {
@@ -442,7 +464,7 @@
             text-align: center;
         }
 
-        /* 5 Games Per Row (Scales down to 4 on smaller monitors) */
+        /* 5 Games Per Row */
         .pinned-container, .button-container {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -552,12 +574,6 @@
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
                     console.log('service worker initialized! scope:', registration.scope);
-                    navigator.serviceWorker.addEventListener('message', function(event) {
-                        if (event.data === 'cached') {
-                            var cacheStatus = document.getElementById('cache-status');
-                            if(cacheStatus) cacheStatus.style.display = 'block';
-                        }
-                    });
                 }, function(error) {
                     console.log('error with serviceworker: ', error);
                 });
@@ -565,6 +581,42 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Load saved custom quick links from localStorage
+            loadQuickLinks();
+
+            // Add Quick Link button handler
+            const addLinkBtn = document.getElementById('add-quick-link-btn');
+            if (addLinkBtn) {
+                addLinkBtn.addEventListener('click', () => {
+                    const name = prompt("Enter site name (e.g., Netflix):");
+                    if (!name) return;
+                    const url = prompt("Enter site URL (e.g., https://www.netflix.com):");
+                    if (!url) return;
+
+                    let formattedUrl = url.trim();
+                    if (!formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
+                        formattedUrl = 'https://' + formattedUrl;
+                    }
+
+                    let domain = '';
+                    try {
+                        domain = new URL(formattedUrl).hostname;
+                    } catch (e) {
+                        domain = formattedUrl;
+                    }
+
+                    const iconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+
+                    const newLink = { name: name.trim(), url: formattedUrl, icon: iconUrl };
+                    
+                    let customLinks = JSON.parse(localStorage.getItem('gamingland_quick_links') || '[]');
+                    customLinks.push(newLink);
+                    localStorage.setItem('gamingland_quick_links', JSON.stringify(customLinks));
+
+                    renderCustomQuickLink(newLink);
+                });
+            }
+
             // Ripple Animation
             const buttons = document.querySelectorAll('.button');
             buttons.forEach(btn => {
@@ -582,48 +634,43 @@
                     setTimeout(() => ripple.remove(), 600);
                 });
             });
-
-            // Tab / Category Switcher Script
-            const genreButtons = document.querySelectorAll('.genre-tab');
-            genreButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    genreButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    
-                    const genre = button.getAttribute('data-genre');
-                    filterGames(genre, document.getElementById('search').value);
-                });
-            });
-
-            // Search Filter Script
-            const searchInput = document.getElementById('search');
-            searchInput.addEventListener('input', (e) => {
-                const activeGenre = document.querySelector('.genre-tab.active')?.getAttribute('data-genre') || 'all';
-                filterGames(activeGenre, e.target.value);
-            });
-
-            function filterGames(genre, searchQuery) {
-                const gameCards = document.querySelectorAll('.button-container a');
-                const query = searchQuery.toLowerCase().trim();
-
-                gameCards.forEach(card => {
-                    const cardGenre = card.getAttribute('data-genre') || '';
-                    const title = card.innerText.toLowerCase();
-
-                    const matchesGenre = (genre === 'all' || cardGenre === genre);
-                    const matchesSearch = title.includes(query);
-
-                    if (matchesGenre && matchesSearch) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            }
         });
+
+        function loadQuickLinks() {
+            const container = document.getElementById('quick-links-grid');
+            if (!container) return;
+
+            let customLinks = JSON.parse(localStorage.getItem('gamingland_quick_links') || '[]');
+            customLinks.forEach(link => {
+                renderCustomQuickLink(link, false);
+            });
+        }
+
+        function renderCustomQuickLink(link, prepend = true) {
+            const container = document.getElementById('quick-links-grid');
+            if (!container) return;
+
+            const card = document.createElement('a');
+            card.href = link.url;
+            card.target = '_blank';
+            card.className = 'quick-link-card';
+            card.innerHTML = `
+                <img src="${link.icon}" alt="${link.name}" onerror="this.src='https://www.google.com/s2/favicons?domain=google.com&sz=128'">
+                <span>${link.name}</span>
+            `;
+
+            if (prepend) {
+                container.appendChild(card);
+            } else {
+                container.appendChild(card);
+            }
+        }
     </script>
 </head>
 <body>
+
+    <!-- Locked Screen Rainbow Border -->
+    <div class="rainbow-screen-border" aria-hidden="true"></div>
 
     <!-- Ambient Windows-Style Gold Flashes -->
     <div class="ambient-glow" aria-hidden="true">
@@ -721,11 +768,12 @@
         <!-- Main Content Area -->
         <main class="content-container">
 
-            <!-- Quick Links Section -->
+            <!-- Quick Links Section with Add Button -->
             <div class="section-header">
                 <h2 class="section-title">Quick Links</h2>
+                <button id="add-quick-link-btn" class="add-quick-link-btn">+ Add Quick Link</button>
             </div>
-            <div class="quick-links-container">
+            <div class="quick-links-container" id="quick-links-grid">
                 <a href="https://www.xbox.com" target="_blank" class="quick-link-card">
                     <img src="https://www.google.com/s2/favicons?domain=xbox.com&sz=128" alt="Xbox">
                     <span>Xbox</span>
